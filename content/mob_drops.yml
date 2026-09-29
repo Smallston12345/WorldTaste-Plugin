@@ -2,9 +2,9 @@ WT_JUSHILIJI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&6&l巨尸里脊'
+    name: '&6&l巨屍里肌'
     lore:
-    - '&7巨尸身上最嫩的一块'
+    - '&7巨屍身上最嫩的一塊'
     material_type: skull_hash
     material: d2f854b156d1924735b8cbabe0a098ddb211d95c52fe5fa2cd43e6c785f5cd
     amount: 1
@@ -14,9 +14,9 @@ WT_ZHUTI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&d&l猪蹄'
+    name: '&d&l豬蹄'
     lore:
-    - '&7美容养颜'
+    - '&7美容養顏'
     material_type: skull_hash
     material: 604faebefd0a8f721403e3142efecb83fbf4b7d1f705d0c9b44d91f0bf40127b
     amount: 1
@@ -28,7 +28,7 @@ WT_RENTI:
   item:
     name: '&4&l人蹄'
     lore:
-    - '&7别让拔叔失望'
+    - '&7別讓拔叔失望'
     material_type: skull_hash
     material: 2e5c9b65b7bd7de14ae26189c2690357a960cc197f3ef68d3f4584e7ae9a242e
     amount: 1
@@ -38,9 +38,9 @@ WT_CHIZHUSHOUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l炽足兽肉'
+    name: '&4&l熾足獸肉'
     lore:
-    - '&7吃起来自带辣椒'
+    - '&7吃起來自帶辣椒'
     material_type: skull_hash
     material: f580feee9e063a51dc4e98ba2fcdd14a837e4f248e4c3bfa0f4cb97d6039316b
     amount: 1
@@ -50,9 +50,9 @@ WT_MOYINGLONGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&8&l末影龙肉'
+    name: '&8&l終界龍肉'
     lore:
-    - '&7这会好吃吗？'
+    - '&7這會好吃嗎？'
     material_type: skull_hash
     material: fc2c57a97d9fcb42c1fed4994af7b3774c1ba9f12c0f1ef7636c0fe3561dc9
     amount: 1
@@ -62,9 +62,9 @@ WT_MOYINGLONGZHANG:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&8&l末影龙掌'
+    name: '&8&l終界龍掌'
     lore:
-    - '&7厚实且有嚼劲'
+    - '&7厚實且有嚼勁'
     material_type: skull_hash
     material: a49c9941e907b9d8b25719eebdccb2a4bef473d2adfaf7fe2d989a7705e42
     amount: 1
@@ -88,7 +88,7 @@ WT_GOUROU:
   item:
     name: '&c&l狗肉'
     lore:
-    - '&7烹饪起来挺难的'
+    - '&7烹飪起來挺難的'
     material_type: skull_hash
     material: 893c0a843a4c14093da81a87222106971a4e4473f8b418eb8df23a58e26d913f
     amount: 1
@@ -98,9 +98,9 @@ WT_XUEHUAZHUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l雪花猪肉'
+    name: '&f&l雪花豬肉'
     lore:
-    - '&7鲜嫩美味'
+    - '&7鮮嫩美味'
     material_type: skull_hash
     material: 4f193ce2e3236a5b15f01b38c550ca0b19d2326b8df212c2816df72aeac6949
     amount: 1
@@ -110,9 +110,9 @@ WT_XIUTANSHOUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l嗅探兽肉'
+    name: '&4&l嗅探獸肉'
     lore:
-    - '&7因为它找不到种子？'
+    - '&7因為它找不到種子？'
     material_type: skull_hash
     material: 971485d78c44fa9f97e603c367bfc26ea28d395191aebf8454f36661efcd5578
     amount: 1
@@ -122,7 +122,7 @@ WT_TUOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&c&l驼肉'
+    name: '&c&l駝肉'
     lore:
     - '&7沙漠中的美味'
     material_type: skull_hash
@@ -134,9 +134,9 @@ WT_YINGWUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&6&l鹦鹉肉'
+    name: '&6&l鸚鵡肉'
     lore:
-    - '&7在丛林中找不到食物？'
+    - '&7在叢林中找不到食物？'
     material_type: skull_hash
     material: d12c19b9b84b4f59456058086c7523a8dad4ac90719fa242b207db32bbae8f5d
     amount: 1
@@ -148,7 +148,7 @@ WT_WAROU:
   item:
     name: '&a&l蛙肉'
     lore:
-    - '&7红烧好吃！'
+    - '&7紅燒好吃！'
     material_type: skull_hash
     material: 928cbcc500ac91ecf06327d541df8e671835632874585f5359f802295d7944a8
     amount: 1
@@ -158,9 +158,9 @@ WT_JIELUESHOUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l劫掠兽肉'
+    name: '&4&l劫掠獸肉'
     lore:
-    - '&7谁才是掠夺者？'
+    - '&7誰才是掠奪者？'
     material_type: skull_hash
     material: db8754617a6d978e50f11cb163fe07b6aba90068ed3cd746ff0fc055d1ef328d
     amount: 1
@@ -170,9 +170,9 @@ WT_YUELINGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&b&l悦灵肉'
+    name: '&b&l悦靈肉'
     lore:
-    - '&7灵体残存下来的一丝...美味？'
+    - '&7靈體殘存下來的一絲...美味？'
     material_type: skull_hash
     material: d30531e731b721d69440f1e3b268240f1fd86b2ab1c58b8a0f36f1b00e485689
     amount: 1
@@ -182,9 +182,9 @@ WT_JIANSHOUZHEXINZANG:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&b&l监守者心脏'
+    name: '&b&l監守者心臟'
     lore:
-    - '&7这是个错误的决定'
+    - '&7這是個錯誤的決定'
     material_type: skull_hash
     material: c6c0bac5d00badaf457a3d619f7e8739e73c2a898d86af0565149aaa92a24223
     amount: 1
@@ -194,9 +194,9 @@ WT_QIANYINGBEIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&d&l潜影贝肉'
+    name: '&d&l潛影貝肉'
     lore:
-    - '&7鲜美！好吃！'
+    - '&7鮮美！好吃！'
     material_type: skull_hash
     material: f8c9657d237773c3596e2c743c94a5be3849ebc28e1d4667b7accd93a48b04ab
     amount: 1
@@ -206,9 +206,9 @@ WT_SHOUWEIZHEYAN:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&b&l守卫者之眼'
+    name: '&b&l守衞者之眼'
     lore:
-    - '&7我感觉有什么东西在视监我'
+    - '&7我感覺有什麼東西在視監我'
     material_type: skull_hash
     material: b55ec925cfed9246bbef55a9c2573031b352f6cb1a815bd58dda61d73b28c164
     amount: 1
@@ -218,9 +218,9 @@ WT_ZHUXIN:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l猪心'
+    name: '&4&l豬心'
     lore:
-    - '&7极大考验烹饪手法'
+    - '&7極大考驗烹飪手法'
     material_type: skull_hash
     material: d45f4d139c9e89262ec06b27aaad73fa488ab49290d2ccd685a2554725373c9b
     amount: 1
@@ -230,16 +230,16 @@ WT_YGSHOUWEIZHE:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&8&l远古守卫者肉'
+    name: '&8&l遠古守衞者肉'
     lore:
-    - '&7凝聚了复杂的鲜味'
+    - '&7凝聚了複雜的鮮味'
     material_type: skull_hash
     material: bfca43cb34e9d4b60459789a5220e032ec64cda2240325f8f7cb1901eeea6106
     amount: 1
   entity: ELDER_GUARDIAN
   chance: 35
 
-# 非材料肉类
+# 非材料肉類
 WT_RENROU:
   lateInit: false
   item_group: ws_roulei
@@ -264,7 +264,7 @@ WT_LVROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生驴肉排'
+    name: '&f&l生驢肉排'
     material_type: skull_hash
     material: d807f20942d84a3b733a1a2d66de475bf416c2e6c55421367742b17706ba2159
     amount: 2
@@ -274,7 +274,7 @@ WT_FAGUANGYOUYU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生发光鱿鱼'
+    name: '&f&l生髮光魷魚'
     material_type: skull_hash
     material: f5dd16eab51a10f8dec307f86b53c04e031ef275f1d4b3104e95ebc0c3f8c6ae
     amount: 1
@@ -284,7 +284,7 @@ WT_MAROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生马肉排'
+    name: '&f&l生馬肉排'
     material_type: skull_hash
     material: 71d7c816fc8c636d7f50a93a0ba7aaeff06c96a561645e9eb1bef391655c531
     amount: 2
@@ -294,7 +294,7 @@ WT_LUOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生骡肉排'
+    name: '&f&l生騾肉排'
     material_type: skull_hash
     material: c25025873e3c5e75f9acfbcdd08d315e48359c587b87ed3fcca2ceef0c479331
     amount: 2
@@ -331,7 +331,7 @@ WT_KULOUMA:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l骷髅马肋骨'
+    name: '&f&l骷髏馬肋骨'
     material_type: skull_hash
     material: d7fca8664864a246eb765fc72497e8b1c9162246140e08e8ed7ca04d82de60c3
     amount: 1
@@ -341,7 +341,7 @@ WT_CHIZHUSHOUTUIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生炽足兽腿肉'
+    name: '&f&l生熾足獸腿肉'
     material_type: skull_hash
     material: 5cb28abed54cb475b197be10c940e2b2ce2edae3acedff2b6e1f623fa2b52a0
     amount: 2
@@ -361,7 +361,7 @@ WT_HAIGUISHOUROUPAI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生海龟肉排'
+    name: '&f&l生海龜肉排'
     material_type: skull_hash
     material: a87af4adadde62b35243e8ee1e783e22e3be07e95b27748b36da0c28dbad8a17
     amount: 1
@@ -401,7 +401,7 @@ WT_MAOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生猫肉'
+    name: '&f&l生貓肉'
     material_type: mc
     material: MUTTON
     amount: 1
@@ -412,7 +412,7 @@ WT_BAOMAOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生豹猫肉'
+    name: '&f&l生豹貓肉'
     material_type: mc
     material: PORKCHOP
     amount: 1
@@ -489,7 +489,7 @@ WT_TIEKUILEIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生铁傀儡肉排'
+    name: '&f&l生鐵傀儡肉排'
     material_type: skull_hash
     material: 8142e7882757e0f33bf744b6e2ac7e7b85f5f1e6f2e2cd6558ef0873ba46a8f1
     amount: 1
@@ -499,7 +499,7 @@ WT_YANGTUOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生羊驼肉排'
+    name: '&f&l生羊駝肉排'
     material_type: mc
     material: MUTTON
     amount: 1
@@ -509,7 +509,7 @@ WT_XIONGMAOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生熊猫肉排'
+    name: '&f&l生熊貓肉排'
     material_type: mc
     material: BEEF
     amount: 2
@@ -520,7 +520,7 @@ WT_BEIJIXIONGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生北极熊肉排'
+    name: '&f&l生北極熊肉排'
     material_type: mc
     material: BEEF
     amount: 2
@@ -530,7 +530,7 @@ WT_XINGSHANGYANGTUOROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生行商羊驼肉排'
+    name: '&f&l生行商羊駝肉排'
     material_type: mc
     material: MUTTON
     amount: 1
@@ -540,7 +540,7 @@ WT_SHOUWEIZHEROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生守卫者肉'
+    name: '&f&l生守衞者肉'
     material_type: skull_hash
     material: a0bf34a71e7715b6ba52d5dd1bae5cb85f773dc9b0d457b4bfc5f9dd3cc7c94
     amount: 1
@@ -570,7 +570,7 @@ WT_MOYINGMAN:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生末影螨肉'
+    name: '&f&l生終界蟎肉'
     material_type: skull_hash
     material: 1730127e3ac7677122422df0028d9e7368bd157738c8c3cddecc502e896be01c
     amount: 1
@@ -580,7 +580,7 @@ WT_HUANMOZHEROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生唤魔者肉排'
+    name: '&f&l生喚魔者肉排'
     material_type: mc
     material: PORKCHOP
     amount: 1
@@ -591,7 +591,7 @@ WT_EHUNCUSHOU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生恶魂触手肉'
+    name: '&f&l生惡魂觸手肉'
     material_type: skull_hash
     material: 91823db152476116715c46c70b3f6ca90ce6d404af4712f724b17341d5d2a
     amount: 2
@@ -601,7 +601,7 @@ WT_YOUZHUSHOUROUPAI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生疣猪兽肉排'
+    name: '&f&l生疙瘩豬獸肉排'
     material_type: mc
     material: RABBIT
     amount: 1
@@ -612,7 +612,7 @@ WT_SHIKEROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生尸壳肉'
+    name: '&f&l生屍殼肉'
     material_type: skull_hash
     material: 10307f493fdda76858e5daa511e3fdb4b7ed241f7d3a7a22656ed5c6bacbf52
     amount: 1
@@ -632,7 +632,7 @@ WT_ZHULINGMANBINGROUPAI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生猪灵蛮兵肉排'
+    name: '&f&l生豬靈蠻兵肉排'
     material_type: mc
     material: PORKCHOP
     glow: true
@@ -643,7 +643,7 @@ WT_ZHULINGROUPAI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生猪灵肉排'
+    name: '&f&l生豬靈肉排'
     material_type: mc
     material: PORKCHOP
     glow: false
@@ -654,7 +654,7 @@ WT_LUODUOZHEROUPAI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生掠夺者肉排'
+    name: '&f&l生掠奪者肉排'
     material_type: mc
     material: BEEF
     amount: 1
@@ -664,7 +664,7 @@ WT_DUCHONGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生蠹虫肉'
+    name: '&f&l生蠹蟲肉'
     material_type: skull_hash
     material: 92ec2c3cb95ab77f7a60fb4d160bced4b879329b62663d7a9860642e588ab210
     amount: 1
@@ -684,7 +684,7 @@ WT_WEIDAOSHIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生卫道士肉排'
+    name: '&f&l生衞道士肉排'
     material_type: mc
     material: PORKCHOP
     amount: 1
@@ -694,7 +694,7 @@ WT_JIANSHOUZHEROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生监守者肉排'
+    name: '&f&l生監守者肉排'
     material_type: skull_hash
     material: c8db78046198114d6d87cb0afc5ad6f85caa76b80bece795a8bbae753e5d61d9
     amount: 1
@@ -715,7 +715,7 @@ WT_JSYOUZHUSHOUROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生僵尸疣猪兽肉排'
+    name: '&f&l生殭屍疙瘩豬獸肉排'
     material_type: skull_hash
     material: a80f168d16c9431a8ec5dd211a0919718de3233398897baddde4f65717ab9bcf
     amount: 2
@@ -725,7 +725,7 @@ WT_DIAOLINGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生凋灵肉排'
+    name: '&f&l生凋靈肉排'
     material_type: skull_hash
     material: 9bcc1c5b0825b9521ce032e31c5f2cd5d906a5e61a1c8248004515e748b2a6c4
     amount: 1
@@ -735,7 +735,7 @@ WT_JIANGSHIMAROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生僵尸马肉排'
+    name: '&f&l生殭屍馬肉排'
     material_type: skull_hash
     material: 7d6647113ae249d2d1a36ebc61fbd376ecca1f60570fab2477377d50a3aee146
     amount: 2
@@ -745,7 +745,7 @@ WT_JIANGSHICUNMINGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生僵尸村民肉排'
+    name: '&f&l生殭屍村民肉排'
     material_type: mc
     material: ROTTEN_FLESH
     amount: 1
@@ -755,7 +755,7 @@ WT_NISHIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生溺尸肉排'
+    name: '&f&l生溺屍肉排'
     material_type: mc
     material: ROTTEN_FLESH
     amount: 1
@@ -765,7 +765,7 @@ WT_JIANGSHIZHULINGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生僵尸猪灵肉排'
+    name: '&f&l生殭屍豬靈肉排'
     material_type: mc
     material: ROTTEN_FLESH
     amount: 1
@@ -775,7 +775,7 @@ WT_HUANSHUSHIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生幻术师肉排'
+    name: '&f&l生幻術師肉排'
     material_type: mc
     material: BEEF
     amount: 1
@@ -786,7 +786,7 @@ WT_NAOGUIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生恼鬼肉'
+    name: '&f&l生惱鬼肉'
     material_type: mc
     material: LIGHT_BLUE_DYE
     amount: 1
@@ -797,7 +797,7 @@ WT_DIAOLINGKULOULEIGU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生凋灵骷髅脆骨'
+    name: '&f&l生凋靈骷髏脆骨'
     material_type: skull_hash
     material: 895a05992afa37b3806b81f0003ca617b3c1cbb9170a2309115b9c6a03eb73af
     amount: 1
@@ -807,7 +807,7 @@ WT_MOYINGRENCUIGU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生末影人脆骨'
+    name: '&f&l生終界人脆骨'
     material_type: skull_hash
     material: 78cf2596fb4cca004ee79561a062819c247cb4ba711d9540970e4398d9dbac43
     amount: 1
@@ -847,7 +847,7 @@ WT_SHILAIMUNI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&a&l史莱姆泥'
+    name: '&a&l史萊姆泥'
     material_type: skull_hash
     material: a9cbd8748582dc68526b0a29955f58f7e6cbda480a0455e86534c6d210651713
     amount: 1
@@ -857,7 +857,7 @@ WT_YANJIANGGUAINI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l岩浆怪泥'
+    name: '&4&l岩漿怪泥'
     material_type: skull_hash
     material: 819d40b827c8d244226e8319b1326c9dfce42fdfda4b6d00fbba30e848b250b9
     amount: 1
@@ -894,7 +894,7 @@ WT_XUANFENGROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生旋风肉'
+    name: '&f&l生旋風肉'
     material_type: skull_hash
     material: a275728af7e6a29c88125b675a39d88ae9919bb61fdc200337fed6ab0c49d65c
     amount: 1
@@ -907,7 +907,7 @@ WT_XUANFENGROU_V:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生旋风肉'
+    name: '&f&l生旋風肉'
     material_type: skull_hash
     material: a275728af7e6a29c88125b675a39d88ae9919bb61fdc200337fed6ab0c49d65c
     amount: 1
@@ -921,7 +921,7 @@ WT_ZHAOHAITAIXIAN:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生沼骸苔藓'
+    name: '&f&l生沼骸苔蘚'
     material_type: mc
     material: MOSS_BLOCK
     amount: 1
@@ -935,7 +935,7 @@ WT_ZHAOHAITAIXIAN_V:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生沼骸苔藓'
+    name: '&f&l生沼骸苔蘚'
     material_type: mc
     material: MOSS_BLOCK
     amount: 1
@@ -977,7 +977,7 @@ WT_KLEHROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生快乐恶魂肉'
+    name: '&f&l生快樂惡魂肉'
     material_type: mc
     material: WHITE_DYE
     glow: true
@@ -991,7 +991,7 @@ WT_KLEHROU_V:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生快乐恶魂肉'
+    name: '&f&l生快樂惡魂肉'
     material_type: mc
     material: WHITE_DYE
     glow: true
@@ -1006,7 +1006,7 @@ WT_TKLROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生铜傀儡肉'
+    name: '&f&l生銅傀儡肉'
     material_type: skull_hash
     material: 467c5e8c3a208da7f780b340cef22642d55e00472d3693b3486d7145d49970bb
     amount: 1
@@ -1019,7 +1019,7 @@ WT_TKLROU_V:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&f&l生铜傀儡肉'
+    name: '&f&l生銅傀儡肉'
     material_type: skull_hash
     material: 467c5e8c3a208da7f780b340cef22642d55e00472d3693b3486d7145d49970bb
     amount: 1
@@ -1061,7 +1061,7 @@ WT_MUSEEHUNDAN:
   lateInit: false
   item_group: ws_dongwu
   item:
-    name: '&f&l暮色恶魂蛋'
+    name: '&f&l暮色惡魂蛋'
     material_type: skull_hash
     material: a13b3cca3fdc6b9777edf3678bad3ec290eb48b8d2b4fb59b527ac1737d53f8b
     amount: 1
@@ -1071,9 +1071,9 @@ WT_LONGJIROU:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&d&l龙脊肉'
+    name: '&d&l龍脊肉'
     lore:
-    - '&7大块又鲜美'
+    - '&7大塊又鮮美'
     material_type: skull_hash
     material: 38ef330682918978813fc17ef3f39dbbbb9997619aba9a0d3c212bd261385139
     amount: 1
@@ -1083,9 +1083,9 @@ WT_LONGXIN:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&4&l龙心'
+    name: '&4&l龍心'
     lore:
-    - '&7一种及其珍贵的食材'
+    - '&7一種及其珍貴的食材'
     material_type: skull_hash
     material: 11c51b946cb484b9c76b2c5bf5eab0c74c9ced95f35aa81e699bd5d9b57e20f
     amount: 1
@@ -1095,9 +1095,9 @@ WT_JIANSHOUZHEPI:
   lateInit: false
   item_group: ws_roulei
   item:
-    name: '&b&l监守者皮'
+    name: '&b&l監守者皮'
     lore:
-    - '&7具有极高的韧性'
+    - '&7具有極高的韌性'
     material_type: skull_hash
     material: bb132ecdcfc91e5b20e3ac43ff31bff4fd5b9fea8f7300e2cb0bed4b39a92632
     amount: 1
@@ -1108,9 +1108,9 @@ WT_ZHENGZHIZHU:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只猪'
+    name: '&f&l整隻豬'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: b6a0249a78a999037ff7806338bc0b3c8dbac6793dc312c376d7e9ddf46bc614
     amount: 1
@@ -1120,9 +1120,9 @@ WT_ZHENGZHIJI:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只鸡'
+    name: '&f&l整隻雞'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: 13ca80781f6f2e73464a7e53bbb51609b2f5db51894431c39293cd51af33c19b
     amount: 1
@@ -1132,9 +1132,9 @@ WT_ZHENGZHIYANG:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只羊'
+    name: '&f&l整隻羊'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: f9719ec9ee6f53c17b1f6f747866b3121401d35f77a39859f122d472863e48e
     amount: 1
@@ -1144,9 +1144,9 @@ WT_ZHENGZHINIU:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只牛'
+    name: '&f&l整隻牛'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: c3a61df5441afdd4fb247c4463d538ddcecfa529cab200f849ed28b682a538c6
     amount: 1
@@ -1156,9 +1156,9 @@ WT_ZHENGZHIWANJIA:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只玩家'
+    name: '&f&l整隻玩家'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: 40397c36325545802db52057a107dc7806d6d2d0c3d2db36fb421aba3e044489
     amount: 1
@@ -1168,20 +1168,20 @@ WT_ZHENGZHICUNMING:
   lateInit: false
   item_group: ws_tuzai
   item:
-    name: '&f&l整只村民'
+    name: '&f&l整隻村民'
     lore:
-    - '&7需要放入屠宰机中屠宰'
+    - '&7需要放入屠宰機中屠宰'
     material_type: skull_hash
     material: 80bb6eff6863a4598bee9c2bd496a08da938d0ff3f54075d31da267c3f223baf
     amount: 1
   entity: VILLAGER
   chance: 30
-# 鱼籽
+# 魚籽
 WT_SHOUWEIZHE_ROE:
   lateInit: false
   item_group: ws_xinglugubuchong
   item:
-    name: '&f&l守卫者鱼籽'
+    name: '&f&l守衞者魚籽'
     material_type: mc
     material: CYAN_DYE
     amount: 1
@@ -1191,7 +1191,7 @@ WT_YUANGUSHOUWEIZHE_ROE:
   lateInit: false
   item_group: ws_xinglugubuchong
   item:
-    name: '&f&l远古守卫者鱼籽'
+    name: '&f&l遠古守衞者魚籽'
     material_type: mc
     material: GRAY_DYE
     amount: 1

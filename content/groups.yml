@@ -4,7 +4,7 @@ worldtaste:
   item:
     material_type: skull_hash
     material: 1591b61529d25a7ecd6bec00948e6fe155e3007f2d7fe559f3a83c6f808e434d
-    name: '&7&kll{#D9D919}尘{#856363}世{#FF1CAE}百{#CD7F32}味&7&kll'
+    name: '&7&kll{#D9D919}塵{#856363}世{#FF1CAE}百{#CD7F32}味&7&kll'
   tier: 0
 ws_zwf_1:
   lateInit: false
@@ -30,7 +30,7 @@ ws_cfzs:
   item:
     material_type: skull_hash
     material: f4d376a23bc1c1cf6b4b51a7aaa61949aea43b83e3c46c284317ff208d91002d
-    name: '&e&l厨房与门店装饰'
+    name: '&e&l廚房與門店裝飾'
   parent: worldtaste
 ws_zhongzi:
   lateInit: false
@@ -38,7 +38,7 @@ ws_zhongzi:
   item:
     material_type: skull_hash
     material: 7aadb37dd556f9eefbb8ea54943e1f657fac45409e34cd99c810d4dd461bc633
-    name: '&a&l作物种子'
+    name: '&a&l作物種子'
   parent: worldtaste
 ws_zwf_5:
   lateInit: false
@@ -55,7 +55,7 @@ ws_zhishi:
   item:
     material_type: skull_hash
     material: cbaf68a657d3dac6209018f0671947aefc473d07bdf89cf6fe586efe34e4cdfc
-    name: '&e&l发酵食品'
+    name: '&e&l發酵食品'
   parent: worldtaste
 ws_yan:
   lateInit: false
@@ -63,7 +63,7 @@ ws_yan:
   item:
     material_type: skull_hash
     material: 6698af7bebc636de1798d3639cc30c3117647101e272e1b1c19bf00bd082cc44
-    name: '&d&l香烟'
+    name: '&d&l香煙'
   parent: worldtaste
 ws_hongbei:
   lateInit: false
@@ -104,7 +104,7 @@ ws_jiqi:
   item:
     material_type: skull_hash
     material: da88ab0af11230d3a4683e033354c428115d52a9588c93f3263512e440214600
-    name: '&6&l厨房用具'
+    name: '&6&l廚房用具'
   parent: worldtaste
 ws_zuowu:
   lateInit: false
@@ -145,7 +145,7 @@ ws_tang:
   item:
     material_type: skull_hash
     material: 6e1c7ac436c0e4972d093a8f63306409e3fa5321db4bf106f4ef1d80cc360774
-    name: '&b&l汤与炖菜'
+    name: '&b&l湯與燉菜'
   parent: worldtaste
 ws_kaorou:
   lateInit: false
@@ -161,7 +161,7 @@ ws_tieshi:
   item:
     material_type: skull_hash
     material: d53f0c9a652897eecabc21a45ddda77464f2a62509b481a6a3b53120ad0e7815
-    name: '&e&l贴士'
+    name: '&e&l貼士'
   parent: worldtaste
 ws_zwf_10:
   lateInit: false
@@ -186,7 +186,7 @@ ws_roulei:
   item:
     material_type: skull_hash
     material: d600fd1add1c1473bccc8158d87f0432d91fa27aa8545b486ead9a8e32e45e97
-    name: '&4&l肉类与海鲜'
+    name: '&4&l肉類與海鮮'
   parent: worldtaste
 ws_zwf_11:
   lateInit: false
@@ -203,7 +203,7 @@ ws_bingjiling:
   item:
     material_type: skull_hash
     material: 35ed19c0802e9b485242ab9a18aa37570df7df05ed5edef402df26156c85ba08
-    name: '&d&l冰激凌与糖'
+    name: '&d&l冰激凌與糖'
   parent: worldtaste
 ws_riliao:
   lateInit: false
@@ -261,7 +261,7 @@ ws_dongwu:
   item:
     material_type: skull_hash
     material: fe68647011ff22479fa83a38c247e95abff6de212a317603b8915dc8403a954a
-    name: '&a&l动物与卵'
+    name: '&a&l動物與卵'
   parent: worldtaste
 ws_zwf_17:
   lateInit: false
@@ -278,7 +278,7 @@ ws_yingliao:
   item:
     material_type: skull_hash
     material: 94ae151e73602882b250dedcde5df6a9d5ff16470e39f9118b42f250f937f52b
-    name: '&6&l饮品'
+    name: '&6&l飲品'
   parent: worldtaste
 ws_dacan:
   lateInit: false
@@ -304,7 +304,7 @@ ws_guoqie:
     material: 393f34d6ed944fe40924d22313c37e1bc19c9773bbcb4ec68b96c96f149a130
     name: '&6&l果切'
   parent: worldtaste
-# 尘世百味第二页 主题餐饮
+# 塵世百味第二頁 主題餐飲
 ws_zwf_2_1:
   lateInit: false
   type: button
@@ -347,7 +347,7 @@ ws_zwf_2_5:
   item:
     material_type: skull_hash
     material: d01afe973c5482fdc71e6aa10698833c79c437f21308ea9a1a095746ec274a0f
-    name: '&6&l主题餐饮'
+    name: '&6&l主題餐飲'
   parent: worldtaste
   actions:
    'none'
@@ -396,12 +396,12 @@ ws_zwf_2_10:
   parent: worldtaste
   actions:
    'none'
-# 愚人节
+# 愚人節
 ws_yurenjie:
   type: sub
   parent: worldtaste
   item:
-    name: "&6&k&ld&a&l“毒薯管理员”&6&k&ld"
+    name: "&6&k&ld&a&l“毒薯管理員”&6&k&ld"
     material: POISONOUS_POTATO
     glow: true
 # 肝帝月
@@ -425,31 +425,31 @@ ws_hetun:
   type: sub
   parent: worldtaste
   item:
-    name: "&6&k&ld&c&l河豚钓鱼佬&6&k&ld"
+    name: "&6&k&ld&c&l河豚釣魚佬&6&k&ld"
     material: PUFFERFISH
     glow: true
-# 罐头食品
+# 罐頭食品
 ws_guantou:
   type: sub
   parent: worldtaste
   item:
-    name: "&b&k&ld&f&l罐头食品&b&k&ld"
+    name: "&b&k&ld&f&l罐頭食品&b&k&ld"
     material_type: skull_hash
     material: d497d9f1493f8dd2765094703435a5321e28f5fe0fa02253e5aea6dbdcd48e82
-# 月饼
+# 月餅
 ws_yuebing:
   type: sub
   parent: worldtaste
   item:
-    name: "&c&k&ld&e&l中秋节月饼&c&k&ld"
+    name: "&c&k&ld&e&l中秋節月餅&c&k&ld"
     material_type: skull_hash
     material: f484c435aa0dca82c29ebf4a5354c32948061a76c7ecb0535f4e9ba2403d0c36
-# 逻辑食品
+# 邏輯食品
 ws_luojishipin:
   type: sub
   parent: worldtaste
   item:
-    name: "&e&k&ld&d&l逻辑食品&e&k&ld"
+    name: "&e&k&ld&d&l邏輯食品&e&k&ld"
     material_type: mc
     material: AMETHYST_BLOCK
     glow: true
@@ -476,15 +476,15 @@ ws_chagongyi:
   type: sub
   parent: worldtaste
   item:
-    name: "&f&k&ld&a&l焙茶工艺&f&k&ld"
+    name: "&f&k&ld&a&l焙茶工藝&f&k&ld"
     material_type: skull_hash
     material: 2bbfff4d0aafdfe75e6aeedd070e2a487751cf499028670da704ae3aafb5b11b
-# 酿造工艺
+# 釀造工藝
 ws_niangzaogongyi:
   type: sub
   parent: worldtaste
   item:
-    name: "&6&k&ld&6&l酿造工艺&6&k&ld"
+    name: "&6&k&ld&6&l釀造工藝&6&k&ld"
     material_type: mc
     material: CAULDRON
 ws_zwf_2_25:
@@ -622,11 +622,11 @@ ws_zwf_2_34:
   parent: worldtaste
   actions:
    'none'
-# 生日蛋糕 季节性分类
+# 生日蛋糕 季節性分類
 ws_shengri:
   type: seasonal
   month: 12
   item:
-    name: "&7&k&ld&6&l生日快乐&7&k&ld"
+    name: "&7&k&ld&6&l生日快樂&7&k&ld"
     material_type: skull_hash
     material: 185484498537f510f17da60558b0cff50e671a7d239b816bab63e82706736ea8

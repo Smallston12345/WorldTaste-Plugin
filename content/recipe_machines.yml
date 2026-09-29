@@ -1,12 +1,12 @@
 WT_ZHONGZIJDY:
   item:
-    name: "&e&l种子分析仪"
+    name: "&e&l種子分析儀"
     lore: 
       - ""
-      - "&7用于分析未鉴定的种子"
+      - "&7用於分析未鑑定的種子"
       - ""
-      - '&b机器'
-      - '&8⇨ &e⚡&7 1000 J 可存储'
+      - '&b機器'
+      - '&8⇨ &e⚡&7 1000 J 可存儲'
       - '&8⇨ &e⚡&7 15 J/s'
     material_type: skull_hash
     material: cde017ff05bff237c4b18b9f2ea6804e3d84c2bc7446f28e5d6f449139f560ab
@@ -1344,13 +1344,13 @@ WT_ZHONGZIJDY:
     35, 40, 41, 42, 43, 44, 49, 50, 51, 52, 53]
 WT_NGZHONGZIJDY:
   item:
-    name: "&e&l农耕种子分析仪"
+    name: "&e&l農耕種子分析儀"
     lore: 
       - ""
-      - "&7用于分析未鉴定的农耕种子"
+      - "&7用於分析未鑑定的農耕種子"
       - ""
-      - '&b机器'
-      - '&8⇨ &e⚡&7 2000 J 可存储'
+      - '&b機器'
+      - '&8⇨ &e⚡&7 2000 J 可存儲'
       - '&8⇨ &e⚡&7 100 J/s'
     material_type: skull_hash
     material: fd880f423cc25aa86208115f57740e6627d695e71bb33fec381e4c66b20ffd72
@@ -1945,7 +1945,7 @@ WT_NGZHONGZIJDY:
        - "hasplugin Cultivation"
 WT_FUHUASHI:
   item:
-    lore: ['', §7将蛋孵化成动物，需要投入饲料, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储, §8⇨ §e⚡§7 80 J/s]
+    lore: ['', §7將蛋孵化成動物，需要投入飼料, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲, §8⇨ §e⚡§7 80 J/s]
     name: §d§l孵化室
     amount: 1
     material_type: skull_hash
@@ -2417,8 +2417,8 @@ WT_FUHUASHI:
     35, 40, 41, 42, 43, 44, 49, 50, 51, 52, 53]
 WT_JIYINFENXIYI:
   item:
-    lore: ['', §7用于鉴定石蛋, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储, §8⇨ §e⚡§7 100 J/s]
-    name: §6§l基因分析仪
+    lore: ['', §7用於鑑定石蛋, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲, §8⇨ §e⚡§7 100 J/s]
+    name: §6§l基因分析儀
     amount: 1
     material_type: skull_hash
     material: 80610148387fbf0b66f7f3df42125dfb9cc5a6dca6b9f5fc2761e41325b87502
@@ -2555,8 +2555,8 @@ WT_JIYINFENXIYI:
     32, 33, 34, 35, 39, 40, 41, 42, 43, 44, 48, 49, 50, 51, 52, 53]
 WT_HWSCPCLJ:
   item:
-    lore: ['', §7用于处理水产品, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储, §8⇨ §e⚡§7 60 J/s]
-    name: §c§l恒温水产品处理机
+    lore: ['', §7用於處理水產品, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲, §8⇨ §e⚡§7 60 J/s]
+    name: §c§l恆温水產品處理機
     amount: 1
     material_type: skull_hash
     material: e2da8d6aff4ba2eef5df16209b6f74bde67a8e57f23dc13b4c017eabb78c4ece
@@ -3330,9 +3330,9 @@ WT_HWSCPCLJ:
     32, 33, 34, 35, 39, 40, 41, 42, 43, 44, 48, 49, 50, 51, 52, 53]
 WT_XIELONG:
   item:
-    lore: ['', §7可使用饵料捕获水产品, '', §b机器, §8⇨ §e⚡§7 200 J 可存储,
+    lore: ['', §7可使用餌料捕獲水產品, '', §b機器, §8⇨ §e⚡§7 200 J 可存儲,
       §8⇨ §e⚡§7 100 J/s]
-    name: §6§l蟹笼
+    name: §6§l蟹籠
     amount: 1
     material_type: skull_hash
     material: 642b57103afabc3eed8ca8e0cd029de9cd083eae61f65f90dc01983bd38018c
@@ -3529,9 +3529,9 @@ WT_XIELONG:
     52, 53]
 WT_DIANDONGBUSHUJIA:
   item:
-    lore: ['', §7使用奶酪捕捉老鼠, '', §b机器, §8⇨ §e⚡§7 50 J 可存储,
+    lore: ['', §7使用奶酪捕捉老鼠, '', §b機器, §8⇨ §e⚡§7 50 J 可存儲,
       §8⇨ §e⚡§7 20 J/s]
-    name: §e§l电动捕鼠夹
+    name: §e§l電動捕鼠夾
     amount: 1
     material_type: skull_hash
     material: 615df199737203cd5ac6b8794eae60a6b6906389570c09e70997203af09247be
@@ -3590,7 +3590,7 @@ WT_DIANDONGBUSHUJIA:
   output: [16, 33, 34, 24, 25, 42, 43, 15]
 WT_SHUIZUXIANG:
   item:
-    lore: ['', §7用于养殖鱼类，生产鱼籽, §7鱼在生产过程中不会被消耗, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储, §8⇨
+    lore: ['', §7用於養殖魚類，生產魚籽, §7魚在生產過程中不會被消耗, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲, §8⇨
         §e⚡§7 30 J/s]
     name: §f§l水族箱
     amount: 1
@@ -4892,9 +4892,9 @@ WT_SHUIZUXIANG:
   output: [40]
 WT_BUYUWANG:
   item:
-    lore: ['', §7用于替代美食家附属的捕鱼网, §7耗时更少，效率更高，性能更好, §7还可以用来猎取部分肉类, '', §8⇨ §e⚡§7 10 J 可存储, §8⇨ §e⚡§7
+    lore: ['', §7用於替代美食家附屬的捕魚網, §7耗時更少，效率更高，性能更好, §7還可以用來獵取部分肉類, '', §8⇨ §e⚡§7 10 J 可存儲, §8⇨ §e⚡§7
         10 J/s]
-    name: §b§l百味捕鱼野猎网
+    name: §b§l百味捕魚野獵網
     amount: 1
     material_type: mc
     material: IRON_BARS
@@ -5189,8 +5189,8 @@ WT_BUYUWANG:
 
 WT_TONGCANG:
   item:
-    lore: ['', §7用于获取肥料与食物原料, §7磨粉效率更高, '', §8⇨ §e⚡§7 100 J 可存储, §8⇨ §e⚡§7 14 J/s]
-    name: §c§l筒仓
+    lore: ['', §7用於獲取肥料與食物原料, §7磨粉效率更高, '', §8⇨ §e⚡§7 100 J 可存儲, §8⇨ §e⚡§7 14 J/s]
+    name: §c§l筒倉
     amount: 1
     material_type: mc
     material: BARREL
@@ -5467,8 +5467,8 @@ WT_TONGCANG:
   output: [40]
 WT_DIANFANBAO:
   item:
-    lore: ['', §7煮饭神器, '', §8⇨ §e⚡§7 100 J 可存储, §8⇨ §e⚡§7 10 J/s]
-    name: §f§l电饭煲
+    lore: ['', §7煮飯神器, '', §8⇨ §e⚡§7 100 J 可存儲, §8⇨ §e⚡§7 10 J/s]
+    name: §f§l電飯煲
     amount: 1
     material_type: skull_hash
     material: 78a4a1815b59867c9d2790c44ea5da544629242599cdf830b1491c7ff303755
@@ -5535,9 +5535,9 @@ WT_DIANFANBAO:
   output: [40]
 WT_SHIPINYLJGJ:
   item:
-    lore: ['', §7集发酵，和面，打发，破壁一体的机器, §7可生产基础食品原料, '', §8⇨ §e⚡§7 500 J 可存储, §8⇨ §e⚡§7
+    lore: ['', §7集發酵，和麵，打發，破壁一體的機器, §7可生產基礎食品原料, '', §8⇨ §e⚡§7 500 J 可存儲, §8⇨ §e⚡§7
         30 J/s]
-    name: §f§l食品原料加工机
+    name: §f§l食品原料加工機
     amount: 1
     material_type: skull_hash
     material: 82c68e9fc68ca4bca3f16e62302ed3dfe28df4e426dfdf1f01fcc5844fe5b2de
@@ -5812,8 +5812,8 @@ WT_SHIPINYLJGJ:
   output: [33, 34, 24, 25]
 WT_BEICHALU:
   item:
-    lore: ['', §7用于烘制奶茶粉和茶叶, '', §8⇨ §e⚡§7 200 J 可存储, §8⇨ §e⚡§7 20 J/s]
-    name: §f§l焙茶炉
+    lore: ['', §7用於烘製奶茶粉和茶葉, '', §8⇨ §e⚡§7 200 J 可存儲, §8⇨ §e⚡§7 20 J/s]
+    name: §f§l焙茶爐
     amount: 1
     material_type: skull_hash
     material: 31a52b2c808695d8649d2336d4f4603a5e68291848cf4885ff5e971557887f92
@@ -6355,8 +6355,8 @@ WT_BEICHALU:
   output: [40]
 WT_DIANCHAHU:
   item:
-    lore: ['', §7用于煮茶, '', §8⇨ §e⚡§7 150 J 可存储, §8⇨ §e⚡§7 10 J/s]
-    name: §f§l电茶壶
+    lore: ['', §7用於煮茶, '', §8⇨ §e⚡§7 150 J 可存儲, §8⇨ §e⚡§7 10 J/s]
+    name: §f§l電茶壺
     amount: 1
     material_type: skull_hash
     material: 2bbfff4d0aafdfe75e6aeedd070e2a487751cf499028670da704ae3aafb5b11b
@@ -6891,8 +6891,8 @@ WT_DIANCHAHU:
   output: [40]
 WT_SHUICHANPEIYUJI:
   item:
-    lore: ['', §7用于培育变种水产品, '', §8⇨ §e⚡§7 3000 J 可存储, §8⇨ §e⚡§7 300 J/s]
-    name: §b§l水产培育机
+    lore: ['', §7用於培育變種水產品, '', §8⇨ §e⚡§7 3000 J 可存儲, §8⇨ §e⚡§7 300 J/s]
+    name: §b§l水產培育機
     amount: 1
     material_type: skull_hash
     material: 168cb7346f34bb8b2fde8e4d69c382976eb7bba906d9ea2a4bc6cfccf60364d9

@@ -1,7 +1,7 @@
 WT_KAOMAOROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤猫肉"
+    name: "&f&l烤貓肉"
     material: COOKED_MUTTON
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -16,7 +16,7 @@ WT_KAOMAOROU:
 WT_KAOBAOMAOROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤豹猫肉"
+    name: "&f&l烤豹貓肉"
     material: COOKED_PORKCHOP
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -61,7 +61,7 @@ WT_KAOHULIROU:
 WT_KAOYANGTUOROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤羊驼肉排"
+    name: "&f&l烤羊駝肉排"
     material: COOKED_MUTTON
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -76,7 +76,7 @@ WT_KAOYANGTUOROU:
 WT_KAOXIONGMAOROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤熊猫肉排"
+    name: "&f&l烤熊貓肉排"
     material: COOKED_BEEF
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -91,7 +91,7 @@ WT_KAOXIONGMAOROU:
 WT_KAOBEIJIXIONGROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤北极熊肉排"
+    name: "&f&l烤北極熊肉排"
     material: COOKED_BEEF
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -106,7 +106,7 @@ WT_KAOBEIJIXIONGROU:
 WT_KAOXSYANGTUOROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤行商羊驼肉排"
+    name: "&f&l烤行商羊駝肉排"
     material: COOKED_MUTTON
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -121,7 +121,7 @@ WT_KAOXSYANGTUOROU:
 WT_KAOHUANMOZHEROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤唤魔者肉排"
+    name: "&f&l烤喚魔者肉排"
     material: COOKED_PORKCHOP
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -136,7 +136,7 @@ WT_KAOHUANMOZHEROU:
 WT_KAOYOUZHUSHOUROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤疣猪兽肉排"
+    name: "&f&l烤疙瘩豬獸肉排"
     material: COOKED_RABBIT
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -151,7 +151,7 @@ WT_KAOYOUZHUSHOUROU:
 WT_KAOZHULINGMANBINGROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤猪灵蛮兵肉排"
+    name: "&f&l烤豬靈蠻兵肉排"
     material: COOKED_PORKCHOP
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -166,7 +166,7 @@ WT_KAOZHULINGMANBINGROU:
 WT_KAOZHULINGROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤猪灵肉排"
+    name: "&f&l烤豬靈肉排"
     material: COOKED_PORKCHOP
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -181,7 +181,7 @@ WT_KAOZHULINGROU:
 WT_KAOLUEDUOZHEROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤掠夺者肉排"
+    name: "&f&l烤掠奪者肉排"
     material: COOKED_BEEF
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -196,7 +196,7 @@ WT_KAOLUEDUOZHEROU:
 WT_KAOWEIDAOSHIROU:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤卫道士肉排"
+    name: "&f&l烤衞道士肉排"
     material: COOKED_PORKCHOP
     glow: false
   recipe_type: WUWEI_JYKRL
@@ -226,7 +226,7 @@ WT_KAONVWUROU:
 WT_KAOJSCMR:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤僵尸村民肉排"
+    name: "&f&l烤殭屍村民肉排"
     material: ROTTEN_FLESH
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -241,7 +241,7 @@ WT_KAOJSCMR:
 WT_KAONSR:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤溺尸肉排"
+    name: "&f&l烤溺屍肉排"
     material: ROTTEN_FLESH
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -256,7 +256,7 @@ WT_KAONSR:
 WT_KAOJSZLR:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤僵尸猪灵肉排"
+    name: "&f&l烤殭屍豬靈肉排"
     material: ROTTEN_FLESH
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -271,7 +271,7 @@ WT_KAOJSZLR:
 WT_KHSSR:
   item_group: ws_kaorou
   item:
-    name: "&f&l烤幻术师肉排"
+    name: "&f&l烤幻術師肉排"
     material: COOKED_BEEF
     glow: true
   recipe_type: WUWEI_JYKRL
@@ -283,14 +283,14 @@ WT_KHSSR:
     1:
       material_type: slimefun
       material: WT_HUANSHUSHIROU
-# 愚人节
+# 愚人節
 WT_FMDPTT:
   item_group: ws_yurenjie
   item:
-    name: "&f&l附魔毒普忒头"
+    name: "&f&l附魔毒普忒頭"
     lore: 
       - ""
-      - "§7我建议你给老鼠吃这个"
+      - "§7我建議你給老鼠吃這個"
     material: POISONOUS_POTATO
     glow: true
   recipe_type: MAGIC_WORKBENCH
@@ -313,10 +313,10 @@ WT_JIANGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l生姜汁'
+    name: '&f&l生薑汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "203,161,101"
@@ -335,7 +335,7 @@ WT_YUNI:
     name: '&f&l芋泥'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "130,100,87"
@@ -354,7 +354,7 @@ WT_MOYUNI:
     name: '&f&l魔芋泥'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "116,81,46"
@@ -373,7 +373,7 @@ WT_SUANNI:
     name: '&f&l蒜泥'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "205,186,166"
@@ -389,10 +389,10 @@ WT_ZIGANLANZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l紫甘蓝汁'
+    name: '&f&l紫甘藍汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "72,29,47"
@@ -408,10 +408,10 @@ WT_XIHONGSHIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l西红柿汁'
+    name: '&f&l西紅柿汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "144,69,8"
@@ -427,10 +427,10 @@ WT_HPYANGCONGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l黄皮洋葱汁'
+    name: '&f&l黃皮洋葱汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "151,107,96"
@@ -449,7 +449,7 @@ WT_RIBENNANGUAZHI:
     name: '&f&l日本南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "29,49,4"
@@ -465,10 +465,10 @@ WT_SGLUOBOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l水果萝卜汁'
+    name: '&f&l水果蘿蔔汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "141,115,85"
@@ -484,10 +484,10 @@ WT_CHELIZIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l车厘子汁'
+    name: '&f&l櫻桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "112,21,12"
@@ -506,7 +506,7 @@ WT_MGLZ:
     name: '&f&l玫瑰梨汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,128,98"
@@ -522,10 +522,10 @@ WT_MHTZ:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l猕猴桃汁'
+    name: '&f&l獼猴桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "74,65,0"
@@ -544,7 +544,7 @@ WT_MEIZIZHI:
     name: '&f&l西梅汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "71,6,26"
@@ -560,10 +560,10 @@ WT_HONGZAOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l红枣汁'
+    name: '&f&l紅棗汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "166,61,0"
@@ -582,7 +582,7 @@ WT_SANGSHENZHI:
     name: '&f&l桑葚汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "29,27,58"
@@ -601,7 +601,7 @@ WT_CULIZHI:
     name: '&f&l醋栗汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "108,120,36"
@@ -617,10 +617,10 @@ WT_LANCULIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l蓝醋栗汁'
+    name: '&f&l藍醋栗汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "15,23,51"
@@ -639,7 +639,7 @@ WT_HEICULIZHI:
     name: '&f&l黑醋栗汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "41,33,49"
@@ -658,7 +658,7 @@ WT_QINGTIZHI:
     name: '&f&l青提汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "211,230,123"
@@ -677,7 +677,7 @@ WT_GANXIAZHI:
     name: '&f&l甘夏汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,165,2"
@@ -693,10 +693,10 @@ WT_SHILIUZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l软籽石榴汁'
+    name: '&f&l軟籽石榴汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "121,28,40"
@@ -715,7 +715,7 @@ WT_PIPAZHI:
     name: '&f&l枇杷汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,185,1"
@@ -734,7 +734,7 @@ WT_WENBOZHI:
     name: '&f&l榅桲汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "234,205,0"
@@ -753,7 +753,7 @@ WT_XSCZHI:
     name: '&f&l像素橙汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "206,67,21"
@@ -772,7 +772,7 @@ WT_SHIZIZHI:
     name: '&f&l柿子汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "159,60,19"
@@ -791,7 +791,7 @@ WT_PANTAOZHI:
     name: '&f&l蟠桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "215,195,145"
@@ -810,7 +810,7 @@ WT_KUGUAZHI:
     name: '&f&l苦瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "115,190,4"
@@ -826,10 +826,10 @@ WT_SIGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l丝瓜汁'
+    name: '&f&l絲瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "134,173,36"
@@ -848,7 +848,7 @@ WT_DIEDOUHUAZHI:
     name: '&f&l蝶豆花汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "74,96,252"
@@ -867,7 +867,7 @@ WT_DONGQINGGUOZHI:
     name: '&f&l冬青果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "230,31,31"
@@ -883,10 +883,10 @@ WT_YEYINGMEIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l野樱莓汁'
+    name: '&f&l野櫻莓汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "40,30,55"
@@ -905,7 +905,7 @@ WT_HEIXINMEIZHI:
     name: '&f&l黑心果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "9,22,8"
@@ -924,7 +924,7 @@ WT_SHANZHAZHI:
     name: '&f&l山楂汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "192,27,23"
@@ -940,10 +940,10 @@ WT_BOLUOMEIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l菠萝莓汁'
+    name: '&f&l菠蘿莓汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "243,219,221"
@@ -962,7 +962,7 @@ WT_BAITAOZHI:
     name: '&f&l白桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "251,205,184"
@@ -978,10 +978,10 @@ WT_DENGLONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l灯笼果汁'
+    name: '&f&l燈籠果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,252,158"
@@ -1000,7 +1000,7 @@ WT_TIANSHIGUOZHI:
     name: '&f&l天使果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,252,252"
@@ -1019,7 +1019,7 @@ WT_KUCHENGZHI:
     name: '&f&l苦橙汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "234,225,55"
@@ -1038,7 +1038,7 @@ WT_SHATANGJUZHI:
     name: '&f&l砂糖橘汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,158,100"
@@ -1057,7 +1057,7 @@ WT_QPTGZHI:
     name: '&f&l青皮甜瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "190,212,133"
@@ -1073,10 +1073,10 @@ WT_JINSIGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l金丝瓜汁'
+    name: '&f&l金絲瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "251,212,0"
@@ -1092,10 +1092,10 @@ WT_XINGHONGTIANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l猩红甜瓜汁'
+    name: '&f&l猩紅甜瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "227,134,123"
@@ -1111,10 +1111,10 @@ WT_MABOGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l马瓟瓜汁'
+    name: '&f&l馬瓟瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "231,198,55"
@@ -1130,10 +1130,10 @@ WT_YGLGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l荧光绿瓜汁'
+    name: '&f&l熒光綠瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "168,230,142"
@@ -1149,10 +1149,10 @@ WT_HONGDOUJIANG:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l红豆浆'
+    name: '&f&l紅豆漿'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "207,42,49"
@@ -1168,10 +1168,10 @@ WT_LVDOUJIANG:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l绿豆浆'
+    name: '&f&l綠豆漿'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "110,110,0"
@@ -1187,10 +1187,10 @@ WT_HEIDOUJIANG:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l黑豆浆'
+    name: '&f&l黑豆漿'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "70,66,63"
@@ -1206,10 +1206,10 @@ WT_HUANGDOUJIANG:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l豆浆'
+    name: '&f&l豆漿'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "241,228,182"
@@ -1225,10 +1225,10 @@ WT_LANDOUJIANG:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l蓝豆浆'
+    name: '&f&l藍豆漿'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "67,129,195"
@@ -1244,10 +1244,10 @@ WT_YUNMEIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l云莓汁'
+    name: '&f&l雲莓汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "241,187,41"
@@ -1266,7 +1266,7 @@ WT_TIANMEIZHI:
     name: '&f&l天莓汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "211,228,252"
@@ -1282,10 +1282,10 @@ WT_HUANGJINGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l黄晶果汁'
+    name: '&f&l黃晶果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,224,14"
@@ -1301,10 +1301,10 @@ WT_YANGTAOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l杨桃汁'
+    name: '&f&l楊桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "218,136,34"
@@ -1320,10 +1320,10 @@ WT_QINGYANGTAOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l青杨桃汁'
+    name: '&f&l青楊桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "151,217,57"
@@ -1339,10 +1339,10 @@ WT_QINGNINGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l青柠汁'
+    name: '&f&l青檸汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "101,173,62"
@@ -1358,10 +1358,10 @@ WT_MAMEIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l马梅果汁'
+    name: '&f&l馬梅果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "217,93,48"
@@ -1380,7 +1380,7 @@ WT_BAJIAOZHI:
     name: '&f&l芭蕉汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "67,178,41"
@@ -1399,7 +1399,7 @@ WT_KEKEGUOZHI:
     name: '&f&l可可果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "201,140,82"
@@ -1418,7 +1418,7 @@ WT_SHEPIGUOZHI:
     name: '&f&l蛇皮果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "115,67,28"
@@ -1437,7 +1437,7 @@ WT_FEIZHOULIZHI:
     name: '&f&l非洲梨汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "111,66,109"
@@ -1456,7 +1456,7 @@ WT_MANGGUOZHI:
     name: '&f&l芒果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "216,143,25"
@@ -1475,7 +1475,7 @@ WT_SUANJIAOZHI:
     name: '&f&l刺果番荔枝汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "116,160,57"
@@ -1491,10 +1491,10 @@ WT_LIULIANZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l榴莲汁'
+    name: '&f&l榴蓮汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "172,147,0"
@@ -1510,10 +1510,10 @@ WT_QNLIULIANZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l青尼榴莲汁'
+    name: '&f&l青尼榴蓮汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "98,148,43"
@@ -1532,7 +1532,7 @@ WT_MIYOUZHI:
     name: '&f&l蜜柚汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "180,200,66"
@@ -1551,7 +1551,7 @@ WT_FANSHILIUZHI:
     name: '&f&l番石榴汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "172,199,56"
@@ -1570,7 +1570,7 @@ WT_XUECHENGZHI:
     name: '&f&l血橙汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "241,109,54"
@@ -1586,10 +1586,10 @@ WT_WUHUAGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l无花果汁'
+    name: '&f&l無花果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "58,38,89"
@@ -1605,10 +1605,10 @@ WT_BOLUOMIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l菠萝蜜汁'
+    name: '&f&l菠蘿蜜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "130,126,4"
@@ -1627,7 +1627,7 @@ WT_HAIMIGUAZHI:
     name: '&f&l哈密瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "223,230,183"
@@ -1646,7 +1646,7 @@ WT_MUGUAZHI:
     name: '&f&l木瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "139,93,3"
@@ -1665,7 +1665,7 @@ WT_RENXINGUOZHI:
     name: '&f&l人心果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "115,86,48"
@@ -1681,10 +1681,10 @@ WT_SHUFANQIEZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l树番茄汁'
+    name: '&f&l樹番茄汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "159,96,31"
@@ -1700,10 +1700,10 @@ WT_HUANGLONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l黄龙果汁'
+    name: '&f&l黃龍果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "219,173,9"
@@ -1719,10 +1719,10 @@ WT_QINGLONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l青龙果汁'
+    name: '&f&l青龍果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "169,176,75"
@@ -1738,10 +1738,10 @@ WT_TIANLONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l天龙果汁'
+    name: '&f&l天龍果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "144,232,211"
@@ -1760,7 +1760,7 @@ WT_XIAOXIGUAZHI:
     name: '&f&l小西瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "158,31,26"
@@ -1779,7 +1779,7 @@ WT_TIANGUAZHI:
     name: '&f&l甜瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "182,131,80"
@@ -1795,10 +1795,10 @@ WT_QIGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l齐瓜汁'
+    name: '&f&l齊瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "44,67,234"
@@ -1817,7 +1817,7 @@ WT_BAIXIANGGUOZHI:
     name: '&f&l百香果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "229,189,40"
@@ -1833,10 +1833,10 @@ WT_EMOGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l恶魔果汁'
+    name: '&f&l惡魔果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "133,13,39"
@@ -1852,10 +1852,10 @@ WT_GUIYIGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l诡异果汁'
+    name: '&f&l詭異果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "250,138,190"
@@ -1874,7 +1874,7 @@ WT_SGSGZHI:
     name: '&f&l上古水果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "4,137,141"
@@ -1890,10 +1890,10 @@ WT_LONGSHELANZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l龙舌兰汁'
+    name: '&f&l龍舌蘭汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "47,164,130"
@@ -1909,10 +1909,10 @@ WT_DIAOLINGGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l凋灵瓜汁'
+    name: '&f&l凋靈瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "53,53,53"
@@ -1928,10 +1928,10 @@ WT_EMOGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l恶魔瓜汁'
+    name: '&f&l惡魔瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "65,39,94"
@@ -1950,7 +1950,7 @@ WT_SADANGUOZHI:
     name: '&f&l撒旦果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "87,20,20"
@@ -1966,10 +1966,10 @@ WT_ZISONGYEZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l紫颂椰汁'
+    name: '&f&l紫頌椰汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "188,159,183"
@@ -1985,10 +1985,10 @@ WT_MODIGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l末地果汁'
+    name: '&f&l終界果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "118,54,96"
@@ -2007,7 +2007,7 @@ WT_MOFAGUOZHI:
     name: '&f&l魔法果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "68,114,163"
@@ -2023,10 +2023,10 @@ WT_MOYINGLONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l末影龙果汁'
+    name: '&f&l終界龍果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "107,71,134"
@@ -2042,10 +2042,10 @@ WT_AIQINGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l爱琴果汁'
+    name: '&f&l愛琴果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "133,60,99"
@@ -2061,10 +2061,10 @@ WT_MONENGPINGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l魔能苹果汁'
+    name: '&f&l魔能蘋果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "230,26,245"
@@ -2080,10 +2080,10 @@ WT_ZHANHUAJIANGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l绽花浆果汁'
+    name: '&f&l綻花漿果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,101,111"
@@ -2099,10 +2099,10 @@ WT_ZISONGGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l紫颂瓜汁'
+    name: '&f&l紫頌瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "235,167,235"
@@ -2118,10 +2118,10 @@ WT_ZSHLBZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l钻石胡萝卜汁'
+    name: '&f&l鑽石胡蘿蔔汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "6,164,162"
@@ -2137,10 +2137,10 @@ WT_TIEHLBZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l铁胡萝卜汁'
+    name: '&f&l鐵胡蘿蔔汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "159,159,159"
@@ -2156,10 +2156,10 @@ WT_ZSNGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l钻石南瓜汁'
+    name: '&f&l鑽石南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "48,121,164"
@@ -2178,7 +2178,7 @@ WT_QJSXJZHI:
     name: '&f&l青金石香蕉汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "24,37,158"
@@ -2194,10 +2194,10 @@ WT_MATONGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l马桶汁'
+    name: '&f&l馬桶汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,252,252"
@@ -2216,7 +2216,7 @@ WT_SHENGNANGUAZHI:
     name: '&f&l生南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "192,205,21"
@@ -2232,10 +2232,10 @@ WT_HAIMIANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l海绵瓜汁'
+    name: '&f&l海綿瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "0,252,234"
@@ -2254,7 +2254,7 @@ WT_BINGNANGUAZHI:
     name: '&f&l霜瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "158,163,176"
@@ -2273,7 +2273,7 @@ WT_NAIYOUNANGUAZHI:
     name: '&f&l奶油南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "221,194,143"
@@ -2289,10 +2289,10 @@ WT_HUANGNANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l黄南瓜汁'
+    name: '&f&l黃南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "255,237,85"
@@ -2308,10 +2308,10 @@ WT_KEAINANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l可爱南瓜汁'
+    name: '&f&l可愛南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "232,143,73"
@@ -2330,7 +2330,7 @@ WT_XIANGZINANGUAZHI:
     name: '&f&l橡子南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "60,65,50"
@@ -2346,10 +2346,10 @@ WT_NANGUA2ZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l难瓜汁'
+    name: '&f&l難瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "237,232,223"
@@ -2365,10 +2365,10 @@ WT_LANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l蓝瓜汁'
+    name: '&f&l藍瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "164,182,176"
@@ -2387,7 +2387,7 @@ WT_JINANNAGUAZHI:
     name: '&f&l金南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "247,198,0"
@@ -2406,7 +2406,7 @@ WT_NANGUA3ZHI:
     name: '&f&l萳瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "243,166,143"
@@ -2425,7 +2425,7 @@ WT_XIANGJIAONANGUAZHI:
     name: '&f&l香蕉南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "233,206,183"
@@ -2444,7 +2444,7 @@ WT_HABODENANGUAZHI:
     name: '&f&l哈伯德南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "202,202,202"
@@ -2463,7 +2463,7 @@ WT_FUHUANANGUAZHI:
     name: '&f&l腐化南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "105,80,116"
@@ -2482,7 +2482,7 @@ WT_NANGUA4ZHI:
     name: '&f&l喃瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "84,46,119"
@@ -2498,10 +2498,10 @@ WT_FUGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l辐瓜汁'
+    name: '&f&l輻瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "90,100,66"
@@ -2518,10 +2518,10 @@ WT_CANGBAINANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l苍白南瓜汁'
+    name: '&f&l蒼白南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "155,136,125"
@@ -2537,10 +2537,10 @@ WT_LANGUA2ZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l烂瓜汁'
+    name: '&f&l爛瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "214,137,36"
@@ -2556,10 +2556,10 @@ WT_HONGLINANGUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l红栗南瓜汁'
+    name: '&f&l紅慄南瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "239,96,0"
@@ -2578,7 +2578,7 @@ WT_XIANRENZHANGGUOZHI:
     name: '&f&l仙人掌果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "224,46,81"
@@ -2597,7 +2597,7 @@ WT_SHANZHUZHI:
     name: '&f&l山竹汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "71,44,64"
@@ -2616,7 +2616,7 @@ WT_YOUNIGUOZHI:
     name: '&f&l幽匿果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "8,109,103"
@@ -2635,7 +2635,7 @@ WT_XIASHUIDAOGUOZHI:
     name: '&f&l下水道果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "18,65,8"
@@ -2651,10 +2651,10 @@ WT_LANPINGGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l烂苹果汁'
+    name: '&f&l爛蘋果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "132,48,27"
@@ -2670,10 +2670,10 @@ WT_LIANHUAZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l莲花汁'
+    name: '&f&l蓮花汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "252,250,197"
@@ -2689,10 +2689,10 @@ WT_LUHUIZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l芦荟汁'
+    name: '&f&l蘆薈汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "0,218,0"
@@ -2708,10 +2708,10 @@ WT_GUISUGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l归宿果汁'
+    name: '&f&l歸宿果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "167,219,207"
@@ -2730,7 +2730,7 @@ WT_QGZSSCZ:
     name: '&f&l奇怪的紫色生菜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "150,82,237"
@@ -2750,7 +2750,7 @@ WT_GANZHEZHI:
     name: '&f&l甘蔗汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "221,210,79"
@@ -2766,10 +2766,10 @@ WT_ZISONGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l紫颂果汁'
+    name: '&f&l紫頌果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "119,88,119"
@@ -2788,7 +2788,7 @@ WT_TIANCAIGENZHI:
     name: '&f&l甜菜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "180,71,75"
@@ -2804,10 +2804,10 @@ WT_JINHULUOBOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&e&l金胡萝卜汁'
+    name: '&e&l金胡蘿蔔汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "231,235,86"
@@ -2823,10 +2823,10 @@ WT_SSDXGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&e&l闪烁的西瓜汁'
+    name: '&e&l閃爍的西瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "241,202,1"
@@ -2842,11 +2842,11 @@ WT_FUMOJINPINGGUOZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&e&l附魔金苹果汁'
+    name: '&e&l附魔金蘋果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
-      - §7§o饮用后可获得强力药水效果
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
+      - §7§o飲用後可獲得強力藥水效果
     material_type: mc
     material: POTION
     color: "254,206,122"
@@ -2863,10 +2863,10 @@ WT_BAIHUASHUZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l白桦树汁'
+    name: '&f&l白樺樹汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "234,231,228"
@@ -2885,7 +2885,7 @@ WT_NIBAZHI:
     name: '&f&l泥巴汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "69,63,61"
@@ -2904,7 +2904,7 @@ WT_QINGCAOHI:
     name: '&f&l青草汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "77,117,66"
@@ -2923,7 +2923,7 @@ WT_HAICAOZHI:
     name: '&f&l海草汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "79,147,40"
@@ -2942,7 +2942,7 @@ WT_JUEZHI:
     name: '&f&l蕨汁'
     lore:
       - ''
-      - §7§o恢复 §b§o1.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o1.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "51,81,44"
@@ -2954,7 +2954,7 @@ WT_JUEZHI:
       material_type: mc
       material: FERN
       amount: 1
-# 美食家和异域果汁
+# 美食家和異域果汁
 WT_NIUYOUGUOZHI:
   lateInit: false
   item_group: ws_yingliao
@@ -2962,7 +2962,7 @@ WT_NIUYOUGUOZHI:
     name: '&f&l牛油果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "207,215,109"
@@ -2978,10 +2978,10 @@ WT_JIANGHUANGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l姜黄汁'
+    name: '&f&l薑黃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "184,99,48"
@@ -3000,7 +3000,7 @@ WT_GNHAMIGUAZHI:
     name: '&f&l美食家哈密瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "242,178,58"
@@ -3019,7 +3019,7 @@ WT_GNXIANGGUAZHI:
     name: '&f&l美食家香瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "225,182,91"
@@ -3038,7 +3038,7 @@ WT_XIANGCAOZHI:
     name: '&f&l香草汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "24,121,33"
@@ -3057,7 +3057,7 @@ WT_LIZHIZHI:
     name: '&f&l荔枝汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "248,230,223"
@@ -3076,7 +3076,7 @@ WT_XIANGJIAOZHI:
     name: '&f&l香蕉汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "232,198,9"
@@ -3095,7 +3095,7 @@ WT_JUECAIZHI:
     name: '&f&l蕨菜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "62,147,2"
@@ -3114,7 +3114,7 @@ WT_WOGUAZHI:
     name: '&f&l倭瓜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "205,168,144"
@@ -3133,7 +3133,7 @@ WT_XIANGCAIZHI:
     name: '&f&l香菜汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "110,203,2"
@@ -3145,15 +3145,15 @@ WT_XIANGCAIZHI:
       material_type: slimefun
       material: CILANTRO
       amount: 1
-# 农耕
+# 農耕
 WT_NGXJZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕香蕉汁'
+    name: '&f&l農耕香蕉汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "247,205,64"
@@ -3172,10 +3172,10 @@ WT_NGNMZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕柠檬汁'
+    name: '&f&l農耕檸檬汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "250,212,13"
@@ -3194,10 +3194,10 @@ WT_NGJZZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕橘子汁'
+    name: '&f&l農耕橘子汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "230,138,42"
@@ -3216,10 +3216,10 @@ WT_NGQPGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕青苹果汁'
+    name: '&f&l農耕青蘋果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "68,168,8"
@@ -3238,10 +3238,10 @@ WT_NGBLZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕菠萝汁'
+    name: '&f&l農耕菠蘿汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "247,150,48"
@@ -3260,10 +3260,10 @@ WT_NGMGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕芒果汁'
+    name: '&f&l農耕芒果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "243,177,0"
@@ -3282,10 +3282,10 @@ WT_NGTZZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕桃子汁'
+    name: '&f&l農耕桃子汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "229,191,96"
@@ -3304,10 +3304,10 @@ WT_NGXZZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕杏子汁'
+    name: '&f&l農耕杏子汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "233,145,30"
@@ -3326,10 +3326,10 @@ WT_NGLZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕梨汁'
+    name: '&f&l農耕梨汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "175,238,25"
@@ -3348,10 +3348,10 @@ WT_NGYTZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕樱桃汁'
+    name: '&f&l農耕櫻桃汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "169,6,29"
@@ -3370,10 +3370,10 @@ WT_NGQYGZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕奇异果汁'
+    name: '&f&l農耕奇異果汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "126,184,72"
@@ -3392,10 +3392,10 @@ WT_NGSCZHI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l农耕酸橙汁'
+    name: '&f&l農耕酸橙汁'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
     material_type: mc
     material: POTION
     color: "141,188,62"
@@ -3415,11 +3415,11 @@ WT_LUOTUONAI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l骆驼奶'
+    name: '&f&l駱駝奶'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
-      - '&8用空桶右键骆驼挤取'
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
+      - '&8用空桶右鍵駱駝擠取'
     material_type: mc
     material: MILK_BUCKET
     amount: 1
@@ -3429,11 +3429,11 @@ WT_MANAI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l马奶'
+    name: '&f&l馬奶'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
-      - '&8用空桶右键马挤取'
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
+      - '&8用空桶右鍵馬擠取'
     material_type: mc
     material: MILK_BUCKET
     amount: 1
@@ -3446,8 +3446,8 @@ WT_YANGNAI:
     name: '&f&l羊奶'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
-      - '&8用空桶右键羊挤取'
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
+      - '&8用空桶右鍵羊擠取'
     material_type: mc
     material: MILK_BUCKET
     amount: 1
@@ -3457,11 +3457,11 @@ WT_LVNAI:
   lateInit: false
   item_group: ws_yingliao
   item:
-    name: '&f&l驴奶'
+    name: '&f&l驢奶'
     lore:
       - ''
-      - §7§o恢复 §b§o3.0 §7§o点饥饿值和饱和度
-      - '&8用空桶右键驴挤取'
+      - §7§o恢復 §b§o3.0 §7§o點飢餓值和飽和度
+      - '&8用空桶右鍵驢擠取'
     material_type: mc
     material: MILK_BUCKET
     amount: 1
@@ -3472,7 +3472,7 @@ WT_LVNAI:
 WT_YONGHENGNIUROU:
   item_group: ws_gandi
   item:
-    name: "&6&l永恒牛肉"
+    name: "&6&l永恆牛肉"
     material_type: mc
     material: BEEF
     glow: true
@@ -3493,7 +3493,7 @@ WT_YONGHENGNIUROU:
 WT_YONGHENGNIUPAI:
   item_group: ws_gandi
   item:
-    name: "&6&l永恒牛排"
+    name: "&6&l永恆牛排"
     material_type: mc
     material: COOKED_BEEF
     glow: true

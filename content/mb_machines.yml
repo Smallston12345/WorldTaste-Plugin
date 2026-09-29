@@ -1,11 +1,11 @@
 WUWEI_JYKRL:
   item_group: ws_jiqi
   item:
-    name: "&f&l简易烤肉炉"
+    name: "&f&l簡易烤肉爐"
     lore:
-    - '&7既可以用来烤各式各样的生肉'
-    - '&7也可以用来烤原版食物'
-    - '&7比如马铃薯、紫颂果等'
+    - '&7既可以用來烤各式各樣的生肉'
+    - '&7也可以用來烤原版食物'
+    - '&7比如馬鈴薯、紫頌果等'
     material: FURNACE
   recipe:
     2:
@@ -949,7 +949,7 @@ WUWEI_JYKRL:
 WUWEI_CHUFANG:
   item_group: ws_jiqi
   item:
-    name: "&#2afb49&l五&#34c376&l味&#3e8aa3&l厨&#4752d0&l房"
+    name: "&#2afb49&l五&#34c376&l味&#3e8aa3&l廚&#4752d0&l房"
     material: BLAST_FURNACE
   recipe:
     1:
@@ -14113,7 +14113,7 @@ WUWEI_CHUFANG:
 WUWEI_FAJIAO:
   item_group: ws_jiqi
   item:
-    name: "&a&l发酵箱"
+    name: "&a&l發酵箱"
     material: COMPOSTER
   recipe:
     1:
@@ -17645,7 +17645,7 @@ WUWEI_FAJIAO:
 WUWEI_MIANBAO:
   item_group: ws_jiqi
   item:
-    name: "&6&l烘焙炉"
+    name: "&6&l烘焙爐"
     material: SMOKER
   recipe:
     1:
@@ -23594,7 +23594,7 @@ WUWEI_MIANBAO:
 WUWEI_WAGUO:
   item_group: ws_jiqi
   item:
-    name: "&b&l瓦锅"
+    name: "&b&l瓦鍋"
     material: CAULDRON
   recipe:
     4:
@@ -30763,7 +30763,7 @@ WUWEI_WAGUO:
 WUWEI_ZHAGUO:
   item_group: ws_jiqi
   item:
-    name: "&6&l炸锅"
+    name: "&6&l炸鍋"
     material: CAMPFIRE
   recipe:
     1:
@@ -31891,7 +31891,7 @@ WUWEI_ZHAGUO:
 WUWEI_YINGLIAOJI:
   item_group: ws_jiqi
   item:
-    name: "&f&l饮料机"
+    name: "&f&l飲料機"
     material: BREWING_STAND
   recipe:
     1:
@@ -42154,7 +42154,7 @@ WUWEI_YINGLIAOJI:
 WUWEI_DANGAO:
   item_group: ws_jiqi
   item:
-    name: "&c&l平炉"
+    name: "&c&l平爐"
     material: CAKE
   recipe:
     1:
@@ -57293,7 +57293,7 @@ WUWEI_DANGAO:
 WUWEI_BINGZHEN:
   item_group: ws_jiqi
   item:
-    name: "&b&l冰镇柜"
+    name: "&b&l冰鎮櫃"
     material: BLUE_ICE
   recipe:
     1:
@@ -65225,7 +65225,7 @@ WUWEI_BINGZHEN:
 WUWEI_LIEQI:
   item_group: ws_jiqi
   item:
-    name: "&d&l猎奇厨房"
+    name: "&d&l獵奇廚房"
     material: SCULK_SENSOR
   recipe:
     1:
@@ -67827,7 +67827,7 @@ WUWEI_LIEQI:
 WUWEI_JUANYAN:
   item_group: ws_jiqi
   item:
-    name: "&6&l卷烟台"
+    name: "&6&l捲煙台"
     material: BARREL
   recipe:
     1:
@@ -68275,10 +68275,10 @@ WUWEI_JUANYAN:
 WUWEI_GZJ:
   item_group: ws_jiqi
   item:
-    name: "&f&l罐装机"
+    name: "&f&l罐裝機"
     lore:
-    - '&7可以将原版的蘑菇煲等汤类食品'
-    - '&7压缩成罐装'
+    - '&7可以將原版的蘑菇煲等湯類食品'
+    - '&7壓縮成罐裝'
     material: TINTED_GLASS
   recipe:
     2:
@@ -68968,7 +68968,7 @@ WUWEI_GZJ:
         amount: 1
 WT_CHUFANGGUITAI:
   item:
-    name: §f§l厨房柜台
+    name: §f§l廚房櫃枱
     amount: 1
     material_type: mc
     material: QUARTZ_BRICKS
@@ -69582,7 +69582,7 @@ WT_CHUFANGGUITAI:
 
 WT_ZHENKONGYASUOJI:
   item:
-    name: §6§l真空压缩机
+    name: §6§l真空壓縮機
     amount: 1
     material_type: mc
     material: PISTON
@@ -74565,7 +74565,7 @@ WT_ZHENKONGYASUOJI:
         amount: 1
 WT_DANHUANGJIANGJI:
   item:
-    name: §e§l蛋黄酱机
+    name: §e§l蛋黃醬機
     amount: 1
     material_type: mc
     material: EGG

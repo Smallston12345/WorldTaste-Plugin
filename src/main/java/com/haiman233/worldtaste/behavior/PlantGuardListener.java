@@ -21,7 +21,7 @@ import org.bukkit.inventory.ItemStack;
  * 種植與放置保護（統一走 {@link BlockPlaceEvent}，不依賴 Slimefun 內部放置流程）：
  * <ol>
  *   <li>所有作物種子（{@link CropBlock}）放置校驗：顯式 plantOn 或按材質推斷的種植要求
- *       （耕地/靈魂沙/叢林原木/末地石等原版機制），不滿足則取消放置並提示。
+ *       （耕地/靈魂沙/叢林原木/終界石等原版機制），不滿足則取消放置並提示。
  *       方向性作物（COCOA 等需側面附着的）必須以側面附着方式放置且附着方塊符合要求，
  *       地面式放置（如點在原木頂面）無效。</li>
  *   <li>食物（{@link ConsumableItem}）：普通右鍵=食用（此時取消放置，避免"吃+放"雙消耗），

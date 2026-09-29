@@ -1,11 +1,11 @@
 WT_QIEDPTTJ:
   item:
-    name: '§a§l切毒普忒头机'
+    name: '§a§l切毒普忒頭機'
     lore:
       - ''
-      - '&7切菜还是砍菜'
+      - '&7切菜還是砍菜'
       - ''
-      - '&8⇨ &e⚡&7 100 J 可存储'
+      - '&8⇨ &e⚡&7 100 J 可存儲'
       - '&8⇨ &e⚡&7 30 J/s'
     material: STONECUTTER
   item_group: ws_yurenjie
@@ -141,12 +141,12 @@ WT_QIEDPTTJ:
   output: [33, 34, 24, 25]
 WT_PTTJLJ:
   item:
-    name: '§2§l普忒头精炼机'
+    name: '§2§l普忒頭精煉機'
     lore:
       - ''
-      - '&7取其糟粕，去之精华'
+      - '&7取其糟粕，去之精華'
       - ''
-      - '&8⇨ &e⚡&7 100 J 可存储'
+      - '&8⇨ &e⚡&7 100 J 可存儲'
       - '&8⇨ &e⚡&7 20 J/s'
     material: FURNACE
   item_group: ws_yurenjie
@@ -216,11 +216,11 @@ WT_ZYCHUGUO:
   item:
     lore:       
       - ''
-      - '&7肝帝认证厨具'
+      - '&7肝帝認證廚具'
       - ''
-      - '&8⇨ &e⚡&7 100000 J 可存储'
+      - '&8⇨ &e⚡&7 100000 J 可存儲'
       - '&8⇨ &e⚡&7 20000 J/s'
-    name: §7§l§kd§d§l终焉厨锅§7§l§kd
+    name: §7§l§kd§d§l終焉廚鍋§7§l§kd
     amount: 1
     material_type: skull_hash
     material: 1f5701da4d50dd447e683dd90077ca22d6b4612e5da10803e3c486c52987feef
@@ -2622,8 +2622,8 @@ WT_ZYCHUGUO:
        - "hasplugin InfinityExpansion"
 WT_HWCHENNIANGMIN:
   item:
-    lore: ['', §7用于酿造美酒, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储, §8⇨ §e⚡§7 50 J/s]
-    name: §6§l恒温陈酿皿
+    lore: ['', §7用於釀造美酒, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲, §8⇨ §e⚡§7 50 J/s]
+    name: §6§l恆温陳釀皿
     amount: 1
     material_type: skull_hash
     material: a8270c8ac25a07ae2a71dbd061b6dee1056bf625f8b881a1f2ef464f7053aca8

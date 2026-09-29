@@ -1,8 +1,8 @@
 WT_CHANLUANSHI:
   item:
-    lore: ['', §7让动物产卵，动物越多，一次性产的越多, §7无法使暮色恶魂和末影龙产卵, '', §b机器, §8⇨ §e⚡§7 1000 J 可存储,
+    lore: ['', §7讓動物產卵，動物越多，一次性產的越多, §7無法使暮色惡魂和終界龍產卵, '', §b機器, §8⇨ §e⚡§7 1000 J 可存儲,
       §8⇨ §e⚡§7 200 J/s]
-    name: §c§l产卵室
+    name: §c§l產卵室
     amount: 1
     material_type: skull_hash
     material: 430105fb00421e32181d75ba4779bc915abf8b6881f0ce5857920e640e48484c
@@ -393,9 +393,9 @@ WT_CHANLUANSHI:
     32, 33, 34, 35, 39, 40, 41, 42, 43, 44, 48, 49, 50, 51, 52, 53]
 WT_TUZAIJI:
   item:
-    lore: ['', §7用于屠宰整只动物, §7也可给生物头颅放血, '', §b机器, §8⇨ §e⚡§7 100 J 可存储,
+    lore: ['', §7用於屠宰整隻動物, §7也可給生物頭顱放血, '', §b機器, §8⇨ §e⚡§7 100 J 可存儲,
       §8⇨ §e⚡§7 100 J/s]
-    name: §4§l屠宰机
+    name: §4§l屠宰機
     amount: 1
     material_type: skull_hash
     material: d2fb2afc844220e016f1457c39e7c80e8f9c3b33da6d47e2939ecdd5f67b8762

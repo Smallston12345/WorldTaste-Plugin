@@ -1,32 +1,32 @@
-# 榨汁盆配置表（WT_ZHAPEN，机器位于 酿造工艺 分组）
+# 榨汁盆配置表（WT_ZHAPEN，機器位於 釀造工藝 分組）
 #
-# ===== 全局设置 =====
-# 是否在踩踏产物的 lore 末尾追加榨汁信息；false = 不追加
+# ===== 全局設置 =====
+# 是否在踩踏產物的 lore 末尾追加榨汁信息；false = 不追加
 player-names: true
-# 榨汁信息 lore 行格式（player-names: true 时生效，支持 & 颜色代码）
-# 占位符：%playername% = 参与榨汁的玩家名（多人以「、」分隔），%time% = 榨好时间
-player-names-format: '&7里面有 &b%playername% 的味道'
-# 是否启用铁砧损耗：false = 铁砧砸落后永不损坏（留在盆顶，可回收再用）
-#                   true  = 每次砸落按下方概率降低铁砧耐久（ANVIL→CHIPPED→DAMAGED→碎裂）
+# 榨汁信息 lore 行格式（player-names: true 時生效，支持 & 顏色代碼）
+# 佔位符：%playername% = 參與榨汁的玩家名（多人以「、」分隔），%time% = 榨好時間
+player-names-format: '&7裏面有 &b%playername% 的味道'
+# 是否啓用鐵砧損耗：false = 鐵砧砸落後永不損壞（留在盆頂，可回收再用）
+#                   true  = 每次砸落按下方概率降低鐵砧耐久（ANVIL→CHIPPED→DAMAGED→碎裂）
 anvil-damage: true
-# 铁砧损耗概率（1~10，数字越大越容易损坏，实际概率 = 数值/10，每次砸落判定一次）
+# 鐵砧損耗概率（1~10，數字越大越容易損壞，實際概率 = 數值/10，每次砸落判定一次）
 anvil-damage-chance: 3
-# 糖分→酒精度转化比率（酒窖酿造：最终酒精度 = 总糖分 × 比率 + 酒曲加成）
+# 糖分→酒精度轉化比率（酒窖釀造：最終酒精度 = 總糖分 × 比率 + 酒麴加成）
 sugar-alcohol-ratio: 0.3
-# 陈化每游戏日（24 分钟）酒精度增长百分比区间，格式 min~max（实际增长 = 当前酒精度 × 随机区间值）
+# 陳化每遊戲日（24 分鐘）酒精度增長百分比區間，格式 min~max（實際增長 = 當前酒精度 × 隨機區間值）
 aging-growth: 0.05~0.15
-# 陈酿果酒 lore 信息行格式（&颜色代码；占位符 %players% 榨汁玩家、%contents% 组成果汁、%alcohol% 酒精度）
+# 陳釀果酒 lore 信息行格式（&顏色代碼；佔位符 %players% 榨汁玩家、%contents% 組成果汁、%alcohol% 酒精度）
 wine-lore-format: '&7| &b%contents% &7| &c酒精度: &e%alcohol%°' 
-# 成品酒（通用陈酿果酒 + 所有配方酒）的组成物品是否显示在 lore 中
+# 成品酒（通用陳釀果酒 + 所有配方酒）的組成物品是否顯示在 lore 中
 wine-show-contents: true
-# 组成物品显示方向：true = 竖向（每个材料单独一行，前置 • 列表符）；false = 横向（顿号分隔一行）
+# 組成物品顯示方向：true = 豎向（每個材料單獨一行，前置 • 列表符）；false = 橫向（頓號分隔一行）
 wine-contents-vertical: true
 
 # ===== 可混合配置 =====
-# recipes: 可混合材料列表（材质名或粘液物品 id）。配方全部不匹配时，盆内全部为可混合
-#          材料的组合会进入混合榨汁（同样需要踩踏 progress 次），水量恒为 3 份。
-# 瓶子（玻璃瓶）每次接取 1 份，含水等级 -1；桶仅满盆时可一次接取全部并清空，
-# 未满时提示「这个盆不是满的」。混合产物 lore 标注内容物（含数量）；桶装产物禁止倒出。
+# recipes: 可混合材料列表（材質名或粘液物品 id）。配方全部不匹配時，盆內全部為可混合
+#          材料的組合會進入混合榨汁（同樣需要踩踏 progress 次），水量恆為 3 份。
+# 瓶子（玻璃瓶）每次接取 1 份，含水等級 -1；桶僅滿盆時可一次接取全部並清空，
+# 未滿時提示「這個盆不是滿的」。混合產物 lore 標註內容物（含數量）；桶裝產物禁止倒出。
 mix:
   recipes:
     - APPLE
@@ -107,24 +107,24 @@ mix:
   bottle:
     material: POTION
     name: '&f&l混合果汁'
-    lore: ['&7多种水果混合榨取']
+    lore: ['&7多種水果混合榨取']
   bucket:
     material: WATER_BUCKET
     name: '&f&l混合果汁桶'
-    lore: ['&7满满一桶混合果汁']
+    lore: ['&7滿滿一桶混合果汁']
 
-# ===== 配方（多材料 + 数量）=====
-#   ingredient  投入物列表，每行「id:数量」（id 为材质名或粘液物品 id，数量缺省 1）
-#   type        压榨方式（支持逗号分隔多值）：player = 玩家站在盆内跳跃踩踏（每次 +1）；
-#               anvil = 铁砧砸在盆顶（每次 +4）；player,anvil = 两种方式均可
-#   progress    总进度（动作栏显示 当前/总进度）
-#   yield       配方单份的接取份数（1~3，默认 3；配方按投入数量的整数倍成比例产出：
-#               例「1 苹果 yield 1」→ 投 2 个苹果榨出 2 水位 2 份苹果汁；
-#               非(倍)数匹配且全部可混合时走混合配方）
-#   result      每份产物：与 items.yml 的 item 段同构（material_type/material/name/lore/amount）
+# ===== 配方（多材料 + 數量）=====
+#   ingredient  投入物列表，每行「id:數量」（id 為材質名或粘液物品 id，數量缺省 1）
+#   type        壓榨方式（支持逗號分隔多值）：player = 玩家站在盆內跳躍踩踏（每次 +1）；
+#               anvil = 鐵砧砸在盆頂（每次 +4）；player,anvil = 兩種方式均可
+#   progress    總進度（動作欄顯示 當前/總進度）
+#   yield       配方單份的接取份數（1~3，默認 3；配方按投入數量的整數倍成比例產出：
+#               例「1 蘋果 yield 1」→ 投 2 個蘋果榨出 2 水位 2 份蘋果汁；
+#               非(倍)數匹配且全部可混合時走混合配方）
+#   result      每份產物：與 items.yml 的 item 段同構（material_type/material/name/lore/amount）
 #
-# 榨汁完成时按投入材料总数量掉落「果渣」（可食用，+1 饱食度）。
-# 配方在开始榨汁（首次踩踏/砸落）时才锁定，锁定后不可再投入。
+# 榨汁完成時按投入材料總數量掉落「果渣」（可食用，+1 飽食度）。
+# 配方在開始榨汁（首次踩踏/砸落）時才鎖定，鎖定後不可再投入。
 PINGGUO_ZHAPEN:
   ingredient:
     - APPLE:1
@@ -134,8 +134,8 @@ PINGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&6&l苹果汁'
-    lore: ['&7新鲜的苹果汁']
+    name: '&6&l蘋果汁'
+    lore: ['&7新鮮的蘋果汁']
     amount: 1
 
 JIANGGUO_ZHAPEN:
@@ -148,7 +148,7 @@ JIANGGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&d&l莓果汁'
-    lore: ['&7酸甜的浆果汁']
+    lore: ['&7酸甜的漿果汁']
     amount: 1
 
 BEETROOT_ZHAPEN:
@@ -161,7 +161,7 @@ BEETROOT_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&c&l甜菜汁'
-    lore: ['&7新鲜的甜菜汁']
+    lore: ['&7新鮮的甜菜汁']
     amount: 1
 
 CARROT_ZHAPEN:
@@ -173,8 +173,8 @@ CARROT_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l胡萝卜汁'
-    lore: ['&7新鲜的胡萝卜汁']
+    name: '&e&l胡蘿蔔汁'
+    lore: ['&7新鮮的胡蘿蔔汁']
     amount: 1
 
 CHORUS_FRUIT_ZHAPEN:
@@ -187,7 +187,7 @@ CHORUS_FRUIT_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&5&l紫果汁'
-    lore: ['&7新鲜的紫色果汁']
+    lore: ['&7新鮮的紫色果汁']
     amount: 1
 
 GLOW_BERRIES_ZHAPEN:
@@ -199,8 +199,8 @@ GLOW_BERRIES_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&b&l荧光果汁'
-    lore: ['&7新鲜的荧光果汁']
+    name: '&b&l熒光果汁'
+    lore: ['&7新鮮的熒光果汁']
     amount: 1
 
 GOLDEN_APPLE_ZHAPEN:
@@ -212,8 +212,8 @@ GOLDEN_APPLE_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&6&l金苹果汁'
-    lore: ['&7新鲜的金苹果汁']
+    name: '&6&l金蘋果汁'
+    lore: ['&7新鮮的金蘋果汁']
     amount: 1
 
 ENCHANTED_GOLDEN_APPLE_ZHAPEN:
@@ -225,8 +225,8 @@ ENCHANTED_GOLDEN_APPLE_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&6&l附魔金苹果汁'
-    lore: ['&7昂贵的饮料']
+    name: '&6&l附魔金蘋果汁'
+    lore: ['&7昂貴的飲料']
     amount: 1
 
 MELON_SLICE_ZHAPEN:
@@ -264,8 +264,8 @@ POISONOUS_POTATO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&f&l毒马铃薯汁'
-    lore: ['&7这可不好喝']
+    name: '&f&l毒馬鈴薯汁'
+    lore: ['&7這可不好喝']
     amount: 1
 
 WT_PIPA_ZHAPEN:
@@ -278,7 +278,7 @@ WT_PIPA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l枇杷汁'
-    lore: ['&7新鲜的枇杷汁']
+    lore: ['&7新鮮的枇杷汁']
     amount: 1
 
 WT_CZL_ZHAPEN:
@@ -290,8 +290,8 @@ WT_CZL_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l车厘子汁'
-    lore: ['&7车厘子鲜榨汁']
+    name: '&e&l櫻桃汁'
+    lore: ['&7櫻桃鮮榨汁']
     amount: 1
 
 WT_MGL_ZHAPEN:
@@ -304,7 +304,7 @@ WT_MGL_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&d&l玫瑰梨汁'
-    lore: ['&7玫瑰梨鲜榨汁']
+    lore: ['&7玫瑰梨鮮榨汁']
     amount: 1
 
 WT_MHT_ZHAPEN:
@@ -316,8 +316,8 @@ WT_MHT_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&a&l猕猴桃汁'
-    lore: ['&7猕猴桃鲜榨汁']
+    name: '&a&l獼猴桃汁'
+    lore: ['&7獼猴桃鮮榨汁']
     amount: 1
 
 WT_MEIZI_ZHAPEN:
@@ -330,7 +330,7 @@ WT_MEIZI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&5&l西梅汁'
-    lore: ['&7西梅鲜榨汁']
+    lore: ['&7西梅鮮榨汁']
     amount: 1
 
 WT_HONGZAO_ZHAPEN:
@@ -342,8 +342,8 @@ WT_HONGZAO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&6&l红枣汁'
-    lore: ['&7红枣鲜榨汁']
+    name: '&6&l紅棗汁'
+    lore: ['&7紅棗鮮榨汁']
     amount: 1
 
 WT_SANGSHEN_ZHAPEN:
@@ -356,7 +356,7 @@ WT_SANGSHEN_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&d&l桑葚汁'
-    lore: ['&7桑葚鲜榨汁']
+    lore: ['&7桑葚鮮榨汁']
     amount: 1
 
 WT_CULI_ZHAPEN:
@@ -369,7 +369,7 @@ WT_CULI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l醋栗汁'
-    lore: ['&7醋栗鲜榨汁']
+    lore: ['&7醋栗鮮榨汁']
     amount: 1
 
 WT_LANCULI_ZHAPEN:
@@ -381,8 +381,8 @@ WT_LANCULI_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&b&l蓝醋栗汁'
-    lore: ['&7蓝醋栗鲜榨汁']
+    name: '&b&l藍醋栗汁'
+    lore: ['&7藍醋栗鮮榨汁']
     amount: 1
 
 WT_HEICULI_ZHAPEN:
@@ -395,7 +395,7 @@ WT_HEICULI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&8&l黑醋栗汁'
-    lore: ['&7黑醋栗鲜榨汁']
+    lore: ['&7黑醋栗鮮榨汁']
     amount: 1
 
 WT_QINGTI_ZHAPEN:
@@ -408,7 +408,7 @@ WT_QINGTI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&a&l青提汁'
-    lore: ['&7青提鲜榨汁']
+    lore: ['&7青提鮮榨汁']
     amount: 1
 
 WT_GANXIA_ZHAPEN:
@@ -421,7 +421,7 @@ WT_GANXIA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l甘夏汁'
-    lore: ['&7甘夏鲜榨汁']
+    lore: ['&7甘夏鮮榨汁']
     amount: 1
 
 WT_SHILIU_ZHAPEN:
@@ -434,7 +434,7 @@ WT_SHILIU_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&4&l石榴汁'
-    lore: ['&7石榴鲜榨汁']
+    lore: ['&7石榴鮮榨汁']
     amount: 1
 
 WT_WENBOGUO_ZHAPEN:
@@ -447,7 +447,7 @@ WT_WENBOGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l榅桲汁'
-    lore: ['&7榅桲鲜榨汁']
+    lore: ['&7榅桲鮮榨汁']
     amount: 1
 
 WT_XSCZ_ZHAPEN:
@@ -460,7 +460,7 @@ WT_XSCZ_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l像素橙子汁'
-    lore: ['&7像素橙子鲜榨汁']
+    lore: ['&7像素橙子鮮榨汁']
     amount: 1
 
 WT_SHIZI_ZHAPEN:
@@ -473,7 +473,7 @@ WT_SHIZI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l柿子汁'
-    lore: ['&7柿子鲜榨汁']
+    lore: ['&7柿子鮮榨汁']
     amount: 1
 
 WT_PANTAO_ZHAPEN:
@@ -486,7 +486,7 @@ WT_PANTAO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&d&l蟠桃汁'
-    lore: ['&7蟠桃鲜榨汁']
+    lore: ['&7蟠桃鮮榨汁']
     amount: 1
 
 WT_DONGQINGGUO_ZHAPEN:
@@ -499,7 +499,7 @@ WT_DONGQINGGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&b&l冬青果汁'
-    lore: ['&7冬青果鲜榨汁']
+    lore: ['&7冬青果鮮榨汁']
     amount: 1
 
 WT_YEYINGMEI_ZHAPEN:
@@ -511,8 +511,8 @@ WT_YEYINGMEI_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&5&l野樱莓汁'
-    lore: ['&7野樱莓鲜榨汁']
+    name: '&5&l野櫻莓汁'
+    lore: ['&7野櫻莓鮮榨汁']
     amount: 1
 
 WT_HEIXINGUO_ZHAPEN:
@@ -525,7 +525,7 @@ WT_HEIXINGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&8&l黑心果汁'
-    lore: ['&7黑心果鲜榨汁']
+    lore: ['&7黑心果鮮榨汁']
     amount: 1
 
 WT_SHANZHA_ZHAPEN:
@@ -538,7 +538,7 @@ WT_SHANZHA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&c&l山楂汁'
-    lore: ['&7山楂鲜榨汁']
+    lore: ['&7山楂鮮榨汁']
     amount: 1
 
 WT_BOLUOMEI_ZHAPEN:
@@ -550,8 +550,8 @@ WT_BOLUOMEI_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&f&l菠萝莓汁'
-    lore: ['&7菠萝莓鲜榨汁']
+    name: '&f&l菠蘿莓汁'
+    lore: ['&7菠蘿莓鮮榨汁']
     amount: 1
 
 WT_BAITAO_ZHAPEN:
@@ -564,7 +564,7 @@ WT_BAITAO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&f&l白桃汁'
-    lore: ['&7白桃鲜榨汁']
+    lore: ['&7白桃鮮榨汁']
     amount: 1
 
 WT_DENGLONGGUO_ZHAPEN:
@@ -576,8 +576,8 @@ WT_DENGLONGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l灯笼果汁'
-    lore: ['&7灯笼果鲜榨汁']
+    name: '&e&l燈籠果汁'
+    lore: ['&7燈籠果鮮榨汁']
     amount: 1
 
 WT_TIANSHIGUO_ZHAPEN:
@@ -590,7 +590,7 @@ WT_TIANSHIGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&f&l天使果汁'
-    lore: ['&7天使果鲜榨汁']
+    lore: ['&7天使果鮮榨汁']
     amount: 1
 
 WT_KUCHENG_ZHAPEN:
@@ -603,7 +603,7 @@ WT_KUCHENG_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l苦橙汁'
-    lore: ['&7苦橙鲜榨汁']
+    lore: ['&7苦橙鮮榨汁']
     amount: 1
 
 WT_SHATANGJU_ZHAPEN:
@@ -616,7 +616,7 @@ WT_SHATANGJU_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l砂糖橘汁'
-    lore: ['&7砂糖橘鲜榨汁']
+    lore: ['&7砂糖橘鮮榨汁']
     amount: 1
 
 WT_YUNMEI_ZHAPEN:
@@ -628,8 +628,8 @@ WT_YUNMEI_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l云莓汁'
-    lore: ['&7云莓鲜榨汁']
+    name: '&e&l雲莓汁'
+    lore: ['&7雲莓鮮榨汁']
     amount: 1
 
 WT_TIANMEI_ZHAPEN:
@@ -642,7 +642,7 @@ WT_TIANMEI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&b&l天莓汁'
-    lore: ['&7天莓鲜榨汁']
+    lore: ['&7天莓鮮榨汁']
     amount: 1
 
 WT_HUANGJINGGUO_ZHAPEN:
@@ -654,8 +654,8 @@ WT_HUANGJINGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l黄晶果汁'
-    lore: ['&7黄晶果鲜榨汁']
+    name: '&e&l黃晶果汁'
+    lore: ['&7黃晶果鮮榨汁']
     amount: 1
 
 WT_YANGTAO_ZHAPEN:
@@ -667,8 +667,8 @@ WT_YANGTAO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l杨桃汁'
-    lore: ['&7杨桃鲜榨汁']
+    name: '&e&l楊桃汁'
+    lore: ['&7楊桃鮮榨汁']
     amount: 1
 
 WT_QINGYANGTAO_ZHAPEN:
@@ -680,8 +680,8 @@ WT_QINGYANGTAO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&a&l青杨桃汁'
-    lore: ['&7青杨桃鲜榨汁']
+    name: '&a&l青楊桃汁'
+    lore: ['&7青楊桃鮮榨汁']
     amount: 1
 
 WT_QINGNING_ZHAPEN:
@@ -693,8 +693,8 @@ WT_QINGNING_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&a&l青柠汁'
-    lore: ['&7青柠鲜榨汁']
+    name: '&a&l青檸汁'
+    lore: ['&7青檸鮮榨汁']
     amount: 1
 
 WT_MAMEIGUO_ZHAPEN:
@@ -706,8 +706,8 @@ WT_MAMEIGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&6&l马梅果汁'
-    lore: ['&7马梅果鲜榨汁']
+    name: '&6&l馬梅果汁'
+    lore: ['&7馬梅果鮮榨汁']
     amount: 1
 
 WT_QINGXIANGJIAO_ZHAPEN:
@@ -720,7 +720,7 @@ WT_QINGXIANGJIAO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&a&l芭蕉汁'
-    lore: ['&7芭蕉鲜榨汁']
+    lore: ['&7芭蕉鮮榨汁']
     amount: 1
 
 WT_KEKEGUO_ZHAPEN:
@@ -733,7 +733,7 @@ WT_KEKEGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&8&l可可果汁'
-    lore: ['&7可可果鲜榨汁']
+    lore: ['&7可可果鮮榨汁']
     amount: 1
 
 WT_SHEPIGUO_ZHAPEN:
@@ -746,7 +746,7 @@ WT_SHEPIGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l蛇皮果汁'
-    lore: ['&7蛇皮果鲜榨汁']
+    lore: ['&7蛇皮果鮮榨汁']
     amount: 1
 
 WT_FEIZHOULI_ZHAPEN:
@@ -759,7 +759,7 @@ WT_FEIZHOULI_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&5&l非洲梨汁'
-    lore: ['&7非洲梨鲜榨汁']
+    lore: ['&7非洲梨鮮榨汁']
     amount: 1
 
 WT_MANGGUO_ZHAPEN:
@@ -772,7 +772,7 @@ WT_MANGGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l芒果汁'
-    lore: ['&7芒果鲜榨汁']
+    lore: ['&7芒果鮮榨汁']
     amount: 1
 
 WT_SUANJIAO_ZHAPEN:
@@ -785,7 +785,7 @@ WT_SUANJIAO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&a&l刺果番荔枝汁'
-    lore: ['&7刺果番荔枝鲜榨汁']
+    lore: ['&7刺果番荔枝鮮榨汁']
     amount: 1
 
 WT_LIULIAN_ZHAPEN:
@@ -797,8 +797,8 @@ WT_LIULIAN_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l榴莲汁'
-    lore: ['&7榴莲鲜榨汁']
+    name: '&e&l榴蓮汁'
+    lore: ['&7榴蓮鮮榨汁']
     amount: 1
 
 WT_QINGNILIULIAN_ZHAPEN:
@@ -810,8 +810,8 @@ WT_QINGNILIULIAN_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&a&l青尼榴莲汁'
-    lore: ['&7青尼榴莲鲜榨汁']
+    name: '&a&l青尼榴蓮汁'
+    lore: ['&7青尼榴蓮鮮榨汁']
     amount: 1
 
 WT_MIYOU_ZHAPEN:
@@ -824,7 +824,7 @@ WT_MIYOU_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l蜜柚汁'
-    lore: ['&7蜜柚鲜榨汁']
+    lore: ['&7蜜柚鮮榨汁']
     amount: 1
 
 WT_HEIGANLAN_ZHAPEN:
@@ -836,8 +836,8 @@ WT_HEIGANLAN_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&8&l黑橄榄汁'
-    lore: ['&7黑橄榄鲜榨汁']
+    name: '&8&l黑橄欖汁'
+    lore: ['&7黑橄欖鮮榨汁']
     amount: 1
 
 WT_FANSHILIU_ZHAPEN:
@@ -850,7 +850,7 @@ WT_FANSHILIU_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&a&l番石榴汁'
-    lore: ['&7番石榴鲜榨汁']
+    lore: ['&7番石榴鮮榨汁']
     amount: 1
 
 WT_XUECHENG_ZHAPEN:
@@ -863,7 +863,7 @@ WT_XUECHENG_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&c&l血橙汁'
-    lore: ['&7血橙鲜榨汁']
+    lore: ['&7血橙鮮榨汁']
     amount: 1
 
 WT_WUHUAGUO_ZHAPEN:
@@ -875,8 +875,8 @@ WT_WUHUAGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&5&l无花果汁'
-    lore: ['&7无花果鲜榨汁']
+    name: '&5&l無花果汁'
+    lore: ['&7無花果鮮榨汁']
     amount: 1
 
 WT_MIANBAOGUO_ZHAPEN:
@@ -888,8 +888,8 @@ WT_MIANBAOGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&8&l面包果汁'
-    lore: ['&7面包果鲜榨汁']
+    name: '&8&l麵包果汁'
+    lore: ['&7麵包果鮮榨汁']
     amount: 1
 
 WT_BOLUOMI_ZHAPEN:
@@ -901,8 +901,8 @@ WT_BOLUOMI_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l菠萝蜜汁'
-    lore: ['&7菠萝蜜鲜榨汁']
+    name: '&e&l菠蘿蜜汁'
+    lore: ['&7菠蘿蜜鮮榨汁']
     amount: 1
 
 WT_HAMIGUA_ZHAPEN:
@@ -915,7 +915,7 @@ WT_HAMIGUA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l哈密瓜汁'
-    lore: ['&7哈密瓜鲜榨汁']
+    lore: ['&7哈密瓜鮮榨汁']
     amount: 1
 
 WT_MUGUA_ZHAPEN:
@@ -928,7 +928,7 @@ WT_MUGUA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l木瓜汁'
-    lore: ['&7木瓜鲜榨汁']
+    lore: ['&7木瓜鮮榨汁']
     amount: 1
 
 WT_RENXINGUO_ZHAPEN:
@@ -941,7 +941,7 @@ WT_RENXINGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l人心果汁'
-    lore: ['&7人心果鲜榨汁']
+    lore: ['&7人心果鮮榨汁']
     amount: 1
 
 WT_SHUFANQIE_ZHAPEN:
@@ -953,8 +953,8 @@ WT_SHUFANQIE_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&c&l树番茄汁'
-    lore: ['&7树番茄鲜榨汁']
+    name: '&c&l樹番茄汁'
+    lore: ['&7樹番茄鮮榨汁']
     amount: 1
 
 WT_HUANGLONGGUO_ZHAPEN:
@@ -966,8 +966,8 @@ WT_HUANGLONGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&e&l黄龙果汁'
-    lore: ['&7黄龙果鲜榨汁']
+    name: '&e&l黃龍果汁'
+    lore: ['&7黃龍果鮮榨汁']
     amount: 1
 
 WT_QINGLONGGUO_ZHAPEN:
@@ -979,8 +979,8 @@ WT_QINGLONGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&a&l青龙果汁'
-    lore: ['&7青龙果鲜榨汁']
+    name: '&a&l青龍果汁'
+    lore: ['&7青龍果鮮榨汁']
     amount: 1
 
 WT_TIANLONGGUO_ZHAPEN:
@@ -992,8 +992,8 @@ WT_TIANLONGGUO_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&f&l天龙果汁'
-    lore: ['&7天龙果鲜榨汁']
+    name: '&f&l天龍果汁'
+    lore: ['&7天龍果鮮榨汁']
     amount: 1
 
 WT_XIAOXIGUA_ZHAPEN:
@@ -1006,7 +1006,7 @@ WT_XIAOXIGUA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&c&l小西瓜汁'
-    lore: ['&7小西瓜鲜榨汁']
+    lore: ['&7小西瓜鮮榨汁']
     amount: 1
 
 WT_TIANGUA_ZHAPEN:
@@ -1019,7 +1019,7 @@ WT_TIANGUA_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&e&l甜瓜汁'
-    lore: ['&7甜瓜鲜榨汁']
+    lore: ['&7甜瓜鮮榨汁']
     amount: 1
 
 WT_QIGUA_ZHAPEN:
@@ -1031,8 +1031,8 @@ WT_QIGUA_ZHAPEN:
   result:
     material_type: mc
     material: HONEY_BOTTLE
-    name: '&f&l齐瓜汁'
-    lore: ['&7齐瓜鲜榨汁']
+    name: '&f&l齊瓜汁'
+    lore: ['&7齊瓜鮮榨汁']
     amount: 1
 
 WT_SHANZHU_ZHAPEN:
@@ -1045,7 +1045,7 @@ WT_SHANZHU_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&5&l山竹汁'
-    lore: ['&7山竹鲜榨汁']
+    lore: ['&7山竹鮮榨汁']
     amount: 1
 
 WT_BAIXIANGGUO_ZHAPEN:
@@ -1058,7 +1058,7 @@ WT_BAIXIANGGUO_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&6&l百香果汁'
-    lore: ['&7百香果鲜榨汁']
+    lore: ['&7百香果鮮榨汁']
     amount: 1
 
 WT_XIANRENZHANG_ZHAPEN:
@@ -1071,10 +1071,10 @@ WT_XIANRENZHANG_ZHAPEN:
     material_type: mc
     material: HONEY_BOTTLE
     name: '&2&l仙人掌果汁'
-    lore: ['&7仙人掌果鲜榨汁']
+    lore: ['&7仙人掌果鮮榨汁']
     amount: 1
 
-# 多材料配方示例（取消注释即可启用：2 苹果 + 2 甜浆果）：
+# 多材料配方示例（取消註釋即可啓用：2 蘋果 + 2 甜漿果）：
 #HUNHE_ZHAPEN:
 #  ingredient:
 #    - APPLE:2
@@ -1085,10 +1085,10 @@ WT_XIANRENZHANG_ZHAPEN:
 #  result:
 #    material_type: mc
 #    material: HONEY_BOTTLE
-#    name: '&a&l果园汁'
+#    name: '&a&l果園汁'
 #    amount: 1
 
-# 铁砧配方示例（取消注释即可启用）：
+# 鐵砧配方示例（取消註釋即可啓用）：
 #PUTAOTI_ZHAPEN:
 #  ingredient:
 #    - WT_PUTAOTI:2

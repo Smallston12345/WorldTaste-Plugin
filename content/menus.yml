@@ -1,5 +1,5 @@
 WT_BWWYL:
-  title: §e§km§6§l百味万用炉§e§km
+  title: §e§km§6§l百味萬用爐§e§km
   slots:
     '6':
       amount: 1
@@ -47,12 +47,12 @@ WT_BWWYL:
       name: '&a'
       material: ORANGE_STAINED_GLASS_PANE
     '34':
-      name: §6§l单击合成
+      name: §6§l單擊合成
       amount: 1
       material_type: mc
       material: CRAFTING_TABLE
       progressbar:
-        name: §6§l单击合成
+        name: §6§l單擊合成
         amount: 1
         material_type: mc
         material: CRAFTING_TABLE
@@ -92,7 +92,7 @@ WT_BWWYL:
       name: '&a'
       material: MAGENTA_STAINED_GLASS_PANE
 WT_ZHONGZIJDY:
-  title: §e§l种子分析仪
+  title: §e§l種子分析儀
   slots:
     '37':
       amount: 1
@@ -171,7 +171,7 @@ WT_ZHONGZIJDY:
       name: '&a'
       material: YELLOW_STAINED_GLASS_PANE
 WT_NGZHONGZIJDY:
-  title: §a§l农耕种子分析仪
+  title: §a§l農耕種子分析儀
   slots:
     '37':
       amount: 1
@@ -250,7 +250,7 @@ WT_NGZHONGZIJDY:
       name: '&a'
       material: YELLOW_STAINED_GLASS_PANE
 WT_QIEDPTTJ:
-  title: §a§l切毒普忒头机
+  title: §a§l切毒普忒頭機
   slots:
     '31':
       amount: 1
@@ -434,7 +434,7 @@ WT_QIEDPTTJ:
       name: '&a'
       material: ORANGE_STAINED_GLASS_PANE
 WT_PTTJLJ:
-  title: §2§l普忒头精炼机
+  title: §2§l普忒頭精煉機
   slots:
     '31':
       amount: 1
@@ -598,7 +598,7 @@ WT_PTTJLJ:
       name: '&a'
       material: PINK_STAINED_GLASS_PANE
 WT_CHANLUANSHI:
-  title: §c§l产卵室
+  title: §c§l產卵室
   slots:
     0-1:
       name: ' '
@@ -681,12 +681,12 @@ WT_FUHUASHI:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
     '9':
-      name: §6此处放入蛋
+      name: §6此處放入蛋
       amount: 1
       material_type: mc
       material: PURPLE_STAINED_GLASS_PANE
     '10':
-      name: §6此处放入饲料
+      name: §6此處放入飼料
       amount: 1
       material_type: mc
       material: BLUE_STAINED_GLASS_PANE
@@ -736,7 +736,7 @@ WT_FUHUASHI:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
 WT_JIYINFENXIYI:
-  title: §6§l基因分析仪
+  title: §6§l基因分析儀
   slots:
     '20':
       name: ' '
@@ -790,7 +790,7 @@ WT_JIYINFENXIYI:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_HWSCPCLJ:
-  title: §c§l恒温水产品处理机
+  title: §c§l恆温水產品處理機
   slots:
     '20':
       name: ' '
@@ -834,7 +834,7 @@ WT_HWSCPCLJ:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_TUZAIJI:
-  title: §4§l屠宰机
+  title: §4§l屠宰機
   slots:
     '28':
       name: ' '
@@ -853,7 +853,7 @@ WT_TUZAIJI:
       material_type: mc
       material: LIME_STAINED_GLASS_PANE
     '9':
-      name: §6§l请在下方放入需要屠宰的整只生物/生物头颅
+      name: §6§l請在下方放入需要屠宰的整隻生物/生物頭顱
       amount: 1
       material_type: mc
       material: MAGENTA_STAINED_GLASS_PANE
@@ -868,7 +868,7 @@ WT_TUZAIJI:
       material_type: mc
       material: LIME_STAINED_GLASS_PANE
     '27':
-      name: §6§l请在下方放入放血刀/砍刀
+      name: §6§l請在下方放入放血刀/砍刀
       amount: 1
       material_type: mc
       material: RED_STAINED_GLASS_PANE
@@ -888,7 +888,7 @@ WT_TUZAIJI:
       material_type: mc
       material: LIME_STAINED_GLASS_PANE
 WT_XIELONG:
-  title: §6§l蟹笼
+  title: §6§l蟹籠
   slots:
     '28':
       name: ' '
@@ -917,7 +917,7 @@ WT_XIELONG:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
     '18':
-      name: §b§l在下方放入诱饵
+      name: §b§l在下方放入誘餌
       amount: 1
       material_type: mc
       material: BLUE_STAINED_GLASS_PANE
@@ -947,7 +947,7 @@ WT_XIELONG:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_DIANDONGBUSHUJIA:
-  title: §e§l电动捕鼠夹
+  title: §e§l電動捕鼠夾
   slots:
     '22':
       amount: 1
@@ -1047,7 +1047,7 @@ WT_DIANDONGBUSHUJIA:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_ZYCHUGUO:
-  title: §7§l§kd§f§l终焉厨锅§7§l§kd
+  title: §7§l§kd§f§l終焉廚鍋§7§l§kd
   slots:
     '24':
       name: ' '
@@ -1148,7 +1148,7 @@ WT_HETUNGZT:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
     '16':
-      name: §6单击合成
+      name: §6單擊合成
       amount: 1
       material_type: mc
       material: CRAFTING_TABLE
@@ -1193,7 +1193,7 @@ WT_HETUNGZT:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_BUYUWANG:
-  title: §b§l百味捕鱼网
+  title: §b§l百味捕魚網
   slots:
     '37':
       amount: 1
@@ -1257,7 +1257,7 @@ WT_BUYUWANG:
       material_type: mc
       material: ORANGE_STAINED_GLASS_PANE
 WT_TONGCANG:
-  title: §c§l筒仓
+  title: §c§l筒倉
   slots:
     '22':
       amount: 1
@@ -1285,7 +1285,7 @@ WT_TONGCANG:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
 WT_DIANFANBAO:
-  title: §f§l电饭煲
+  title: §f§l電飯煲
   slots:
     '22':
       amount: 1
@@ -1313,7 +1313,7 @@ WT_DIANFANBAO:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
 WT_SHIPINYLJGJ:
-  title: §f§l食品原料加工机
+  title: §f§l食品原料加工機
   slots:
     '31':
       amount: 1
@@ -1405,7 +1405,7 @@ WT_SHIPINYLJGJ:
       material_type: mc
       material: YELLOW_STAINED_GLASS_PANE
 WT_RENZAOROUHCJ:
-  title: §6§l人造肉合成机
+  title: §6§l人造肉合成機
   slots:
     '22':
       amount: 1
@@ -1433,7 +1433,7 @@ WT_RENZAOROUHCJ:
       material_type: mc
       material: LIGHT_BLUE_STAINED_GLASS_PANE
 WT_BEICHALU:
-  title: §f§l焙茶炉
+  title: §f§l焙茶爐
   slots:
     '22':
       amount: 1
@@ -1461,7 +1461,7 @@ WT_BEICHALU:
       material_type: mc
       material: LIGHT_BLUE_STAINED_GLASS_PANE
 WT_DIANCHAHU:
-  title: §f§l电茶壶
+  title: §f§l電茶壺
   slots:
     '22':
       amount: 1
@@ -1489,7 +1489,7 @@ WT_DIANCHAHU:
       material_type: mc
       material: LIGHT_BLUE_STAINED_GLASS_PANE
 WT_SHUICHANPEIYUJI:
-  title: §b§l水产培育机
+  title: §b§l水產培育機
   slots:
     '22':
       amount: 1
@@ -1518,7 +1518,7 @@ WT_SHUICHANPEIYUJI:
       material: LIGHT_BLUE_STAINED_GLASS_PANE
 
 WT_HWCHENNIANGMIN:
-  title: §6§l恒温陈酿皿
+  title: §6§l恆温陳釀皿
   slots:
     '40':
       amount: 1

@@ -39,7 +39,7 @@ public final class ZhNames {
         put("JUNGLE_WOOD", "叢林木");
         put("STRIPPED_JUNGLE_LOG", "去皮叢林原木");
         put("STRIPPED_JUNGLE_WOOD", "去皮叢林木");
-        put("END_STONE", "末地石");
+        put("END_STONE", "終界石");
         put("MYCELIUM", "菌絲體");
         put("NETHERRACK", "地獄石");
         put("CRIMSON_NYLIUM", "緋紅菌巖");
