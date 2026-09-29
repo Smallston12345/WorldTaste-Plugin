@@ -34,21 +34,21 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitTask;
 
 /**
- * 酒窖管理器机器页面（粘液原生 {@link BlockMenuPreset} 体系，与本体机器同款打开方式）。
+ * 酒窖管理器機器頁面（粘液原生 {@link BlockMenuPreset} 體系，與本體機器同款打開方式）。
  *
- * <p>静态布局（背景/装饰/按钮与点击处理器）由 {@link #setupMenu} 在 preset init 中绘制一次，
- * 每 BlockMenu 克隆共享；动态槽位（时钟/清空/羊毛/液位线/酒曲展示/灌装按钮/命名牌）由
- * 10 tick 周期任务对<b>有查看者</b>的界面 {@code replaceExistingItem} 实时刷新。
- * 界面内容随方块数据持久化（Slimefun 原生机制）：玩家放入的瓶子/酒曲/成品关页不丢，
- * 重开原样还在，多玩家同时查看共享同一份界面内容。</p>
+ * <p>靜態佈局（背景/裝飾/按鈕與點擊處理器）由 {@link #setupMenu} 在 preset init 中繪製一次，
+ * 每 BlockMenu 克隆共享；動態槽位（時鐘/清空/羊毛/液位線/酒麴展示/灌裝按鈕/命名牌）由
+ * 10 tick 週期任務對<b>有查看者</b>的界面 {@code replaceExistingItem} 實時刷新。
+ * 界面內容隨方塊數據持久化（Slimefun 原生機制）：玩家放入的瓶子/酒麴/成品關頁不丟，
+ * 重開原樣還在，多玩家同時查看共享同一份界面內容。</p>
  *
- * <p>槽位布局：槽 0 结构展示入口、槽 1 配方入口、槽 4 时钟（模式/计时，点击切换，
- * shift+右键切换自动陈化）、槽 7 黄板（污染清空；非运行态 shift+右键直接清空机内液体与
- * 已投入酒曲）、右列粉色液位线（24 单位，1 格 4 单位）、添料区 3×3 空槽 19-21/28-30/37-39
- * （投果汁：瓶 +1/桶 +3，返还空容器；清水可投入稀释）、槽 13 酒曲放置位（投入后只消耗
- * 1 个，槽 22 显示对应酒曲图标）、槽 31 羊毛启动/关闭（酿造关闭=报废、陈化关闭=出酒）、
- * 出酒区 3×3 空槽 23-25/32-34/41-43（只出不进）、槽 40 灌装槽（放原版玻璃瓶）、
- * 槽 49 炼药锅「点我装瓶」、槽 45 命名牌。计时推进由管理器 ticker 调用 {@link #advance}。</p>
+ * <p>槽位佈局：槽 0 結構展示入口、槽 1 配方入口、槽 4 時鐘（模式/計時，點擊切換，
+ * shift+右鍵切換自動陳化）、槽 7 黃板（污染清空；非運行態 shift+右鍵直接清空機內液體與
+ * 已投入酒麴）、右列粉色液位線（24 單位，1 格 4 單位）、添料區 3×3 空槽 19-21/28-30/37-39
+ * （投果汁：瓶 +1/桶 +3，返還空容器；清水可投入稀釋）、槽 13 酒麴放置位（投入後只消耗
+ * 1 個，槽 22 顯示對應酒麴圖標）、槽 31 羊毛啓動/關閉（釀造關閉=報廢、陳化關閉=出酒）、
+ * 出酒區 3×3 空槽 23-25/32-34/41-43（只出不進）、槽 40 灌裝槽（放原版玻璃瓶）、
+ * 槽 49 煉藥鍋「點我裝瓶」、槽 45 命名牌。計時推進由管理器 ticker 調用 {@link #advance}。</p>
  */
 public final class CellarMenu {
 
@@ -56,26 +56,26 @@ public final class CellarMenu {
     private static final int SLOT_CLEAR = 7;
     private static final int SLOT_WOOL = 31;
     private static final int[] GAUGE = {8, 17, 26, 35, 44, 53};
-    /** 酒曲投放位（玩家槽）：只接受酒曲，投入后只消耗 1 个。 */
+    /** 酒麴投放位（玩家槽）：只接受酒麴，投入後只消耗 1 個。 */
     private static final int SLOT_YEAST_INPUT = 13;
-    /** 酒曲展示位（只读）：与 4 时钟 / 31 羊毛 / 40 产物预览同列。 */
+    /** 酒麴展示位（只讀）：與 4 時鐘 / 31 羊毛 / 40 產物預覽同列。 */
     private static final int SLOT_YEAST = 22;
     private static final int[] INPUT_SLOTS = {19, 20, 21, 28, 29, 30, 37, 38, 39};
-    private static final int SLOT_FILL = 40; // 灌装槽：留空，放入玻璃瓶即灌装
+    private static final int SLOT_FILL = 40; // 灌裝槽：留空，放入玻璃瓶即灌裝
     private static final int[] OUTPUT_SLOTS = {23, 24, 25, 32, 33, 34, 41, 42, 43};
-    /** 灌装槽按钮（炼药锅「点我装瓶」）。 */
+    /** 灌裝槽按鈕（煉藥鍋「點我裝瓶」）。 */
     private static final int SLOT_FILL_DISPLAY = 49;
-    /** 左下角命名牌按钮：为酒窖命名（仅放置者，配置可关）。 */
+    /** 左下角命名牌按鈕：為酒窖命名（僅放置者，配置可關）。 */
     private static final int SLOT_NAMETAG = 45;
     private static final int[] GREEN_DECO = {10, 11, 12, 18, 27, 36, 46, 47, 48};
     private static final int[] RED_DECO = {14, 15, 16, 50, 51, 52};
     private static final long TICK_MS = 50;
 
-    /** 正在命名的玩家 → 待命名的酒窖方块位置（铁砧打开时酒窖页面会话已结束）。 */
+    /** 正在命名的玩家 → 待命名的酒窖方塊位置（鐵砧打開時酒窖頁面會話已結束）。 */
     private static final Map<UUID, Location> PENDING_CELLAR = new HashMap<>();
-    /** 正在命名的玩家 → 其命名铁砧界面（打开后填入占位物品）。 */
+    /** 正在命名的玩家 → 其命名鐵砧界面（打開後填入佔位物品）。 */
     private static final Map<UUID, org.bukkit.inventory.Inventory> NAMING = new HashMap<>();
-    /** 已创建界面的酒窖（位置 → BlockMenu）：刷新任务只遍历这些界面。 */
+    /** 已創建界面的酒窖（位置 → BlockMenu）：刷新任務只遍歷這些界面。 */
     private static final Map<Location, BlockMenu> MENUS = new HashMap<>();
     private static BukkitTask refreshTask;
 
@@ -87,8 +87,8 @@ public final class CellarMenu {
     }
 
     /**
-     * preset 静态布局：背景只覆盖「非玩家槽位」（玩家槽留空，物品由 BlockMenu 原生持久化），
-     * 全部交互槽注册点击处理器（处理器内经事件 holder 取 {@link BlockMenu} 定位方块）。
+     * preset 靜態佈局：背景只覆蓋「非玩家槽位」（玩家槽留空，物品由 BlockMenu 原生持久化），
+     * 全部交互槽註冊點擊處理器（處理器內經事件 holder 取 {@link BlockMenu} 定位方塊）。
      */
     static void setupMenu(ChestMenu menu) {
         menu.setEmptySlotsClickable(true);
@@ -98,21 +98,21 @@ public final class CellarMenu {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        // 多方块结构展示入口（左上角）
-        menu.addItem(0, pane(Material.SPYGLASS, "§b多方块结构",
-                List.of(leg("§7查看酒窖的 3×3×3 结构分层"), leg(""), leg(ChatColor.YELLOW + "点击打开"))),
+        // 多方塊結構展示入口（左上角）
+        menu.addItem(0, pane(Material.SPYGLASS, "§b多方塊結構",
+                List.of(leg("§7查看酒窖的 3×3×3 結構分層"), leg(""), leg(ChatColor.YELLOW + "點擊打開"))),
                 handler((pl, bm, cur) -> {
                     CellarStructureMenu.open(pl, bm.getBlock());
                     return false;
                 }));
-        // 配方展示入口（结构按钮旁）
+        // 配方展示入口（結構按鈕旁）
         menu.addItem(1, pane(Material.BOOK, "§e酒窖配方",
-                List.of(leg("§7查看酒窖可酿造的配方一览"), leg(""), leg(ChatColor.YELLOW + "点击打开"))),
+                List.of(leg("§7查看酒窖可釀造的配方一覽"), leg(""), leg(ChatColor.YELLOW + "點擊打開"))),
                 handler((pl, bm, cur) -> {
                     CellarRecipeMenu.openRecipeList(pl, 0, bm.getBlock());
                     return false;
                 }));
-        // 时钟：Shift+右键切换自动陈化；普通点击切换模式
+        // 時鐘：Shift+右鍵切換自動陳化；普通點擊切換模式
         menu.addMenuClickHandler(SLOT_CLOCK, new ChestMenu.AdvancedMenuClickHandler() {
             @Override
             public boolean onClick(InventoryClickEvent e, Player pl, int s, ItemStack cursor,
@@ -130,7 +130,7 @@ public final class CellarMenu {
                 return false;
             }
         });
-        // 清空按钮：普通点击仅在污染态生效。Shift+右键走 Bukkit 监听（CSCoreLib 不一定带上右键标记）。
+        // 清空按鈕：普通點擊僅在污染態生效。Shift+右鍵走 Bukkit 監聽（CSCoreLib 不一定帶上右鍵標記）。
         menu.addMenuClickHandler(SLOT_CLEAR, handler((pl, bm, cur) -> {
             clearContaminated(pl, bm.getBlock(), false);
             paint(bm, bm.getBlock());
@@ -142,14 +142,14 @@ public final class CellarMenu {
             paint(bm, manager);
             return false;
         }));
-        // 灌装槽按钮（炼药锅图标）：点击灌装一次
+        // 灌裝槽按鈕（煉藥鍋圖標）：點擊灌裝一次
         menu.addMenuClickHandler(SLOT_FILL_DISPLAY, handler((pl, bm, cur) -> {
             Block manager = bm.getBlock();
             fillOne(pl, manager, bm);
             paint(bm, manager);
             return false;
         }));
-        // 左下角命名牌：为酒窖命名（配置可关；仅放置者）
+        // 左下角命名牌：為酒窖命名（配置可關；僅放置者）
         if (com.haiman233.worldtaste.load.CellarLoader.cellarNameEnabled) {
             menu.addMenuClickHandler(SLOT_NAMETAG, handler((pl, bm, cur) -> {
                 clickNameTag(pl, bm.getBlock());
@@ -158,44 +158,44 @@ public final class CellarMenu {
             }));
         }
 
-        // 装饰文本（绿/红玻璃板标识）
+        // 裝飾文本（綠/紅玻璃板標識）
         for (int slot : GREEN_DECO) {
-            menu.addItem(slot, pane(Material.LIME_STAINED_GLASS_PANE, "§a添料区",
-                    List.of(leg("§7添料槽：投入瓶装/桶装果汁"), leg("§7瓶 +1 单位，桶 +3 单位"))),
+            menu.addItem(slot, pane(Material.LIME_STAINED_GLASS_PANE, "§a添料區",
+                    List.of(leg("§7添料槽：投入瓶裝/桶裝果汁"), leg("§7瓶 +1 單位，桶 +3 單位"))),
                     ChestMenuUtils.getEmptyClickHandler());
         }
         for (int slot : RED_DECO) {
-            menu.addItem(slot, pane(Material.RED_STAINED_GLASS_PANE, "§c输出槽",
-                    List.of(leg("§7在这里输出产物"), leg("§7物品会保存在机器内"))),
+            menu.addItem(slot, pane(Material.RED_STAINED_GLASS_PANE, "§c輸出槽",
+                    List.of(leg("§7在這裏輸出產物"), leg("§7物品會保存在機器內"))),
                     ChestMenuUtils.getEmptyClickHandler());
         }
 
-        // 添料区：果汁投料 + 出酒阶段玻璃瓶灌装；禁止果酒回流，酒曲只能在 13 号槽投放
+        // 添料區：果汁投料 + 出酒階段玻璃瓶灌裝；禁止果酒迴流，酒麴只能在 13 號槽投放
         for (int slot : INPUT_SLOTS) {
             menu.addMenuClickHandler(slot, handler((pl, bm, cursor) -> {
                 Block manager = bm.getBlock();
                 WineCellarState st = WineCellarState.get(manager);
-                // 只拦「放入」：光标上有物品才算放入；空手提起、shift 取出一律放行。
+                // 只攔「放入」：光標上有物品才算放入；空手提起、shift 取出一律放行。
                 ItemStack incoming = (cursor != null && !cursor.getType().isAir()) ? cursor : null;
-                // 运行中/已污染：放入的物品不会被吸收，会一直滞留槽内，直接拦截
+                // 運行中/已污染：放入的物品不會被吸收，會一直滯留槽內，直接攔截
                 if (incoming != null && st.phase() != WineCellarState.Phase.IDLE
                         && st.phase() != WineCellarState.Phase.READY) {
-                    pl.sendMessage("§c机器未处于待机/出酒状态，不能放入物品！");
+                    pl.sendMessage("§c機器未處於待機/出酒狀態，不能放入物品！");
                     return false;
                 }
                 if (isWine(incoming)) {
-                    pl.sendMessage("§c陈酿果酒不能再次放入酒窖！");
+                    pl.sendMessage("§c陳釀果酒不能再次放入酒窖！");
                     return false;
                 }
                 if (incoming != null && isJuice(incoming) && st.hasAlcohol()) {
-                    pl.sendMessage("§c酒窖中已含酒精液体，不能投入果汁！");
+                    pl.sendMessage("§c酒窖中已含酒精液體，不能投入果汁！");
                     return false;
                 }
                 if (isYeast(incoming)) {
-                    pl.sendMessage("§c酒曲请放入酒曲槽位！");
+                    pl.sendMessage("§c酒麴請放入酒麴槽位！");
                     return false;
                 }
-                // 液位余量校验：放不下的果汁/清水不收（滞留槽内不被吸收）
+                // 液位餘量校驗：放不下的果汁/清水不收（滯留槽內不被吸收）
                 if (incoming != null) {
                     String reject = capacityReject(st, incoming);
                     if (reject != null) {
@@ -206,49 +206,49 @@ public final class CellarMenu {
                 return true;
             }));
         }
-        // 出酒区：只出不进（成品由灌装槽输出到此处，不接受玩家放入）
+        // 出酒區：只出不進（成品由灌裝槽輸出到此處，不接受玩家放入）
         for (int slot : OUTPUT_SLOTS) {
             menu.addMenuClickHandler(slot, handler((pl, bm, cursor) -> {
                 if (cursor == null || cursor.getType().isAir()) return true;
-                pl.sendMessage("§c你不能在这里放置物品！");
+                pl.sendMessage("§c你不能在這裏放置物品！");
                 return false;
             }));
         }
-        // 酒曲投放位：只接受酒曲，且每台机器限一种（投入后只消耗 1 个）
+        // 酒麴投放位：只接受酒麴，且每台機器限一種（投入後只消耗 1 個）
         menu.addMenuClickHandler(SLOT_YEAST_INPUT, handler((pl, bm, cursor) -> {
             if (cursor == null || cursor.getType().isAir()) return true;
             if (!isYeast(cursor)) {
-                pl.sendMessage("§c酒曲槽只能放入酒曲！");
+                pl.sendMessage("§c酒麴槽只能放入酒麴！");
                 return false;
             }
             Block manager = bm.getBlock();
             WineCellarState st = WineCellarState.get(manager);
-            // 运行中/出酒阶段加入酒曲不会被使用，只会滞留槽内
+            // 運行中/出酒階段加入酒麴不會被使用，只會滯留槽內
             if (st.phase() != WineCellarState.Phase.IDLE) {
-                pl.sendMessage("§c只有待机状态才能加入酒曲！");
+                pl.sendMessage("§c只有待機狀態才能加入酒麴！");
                 return false;
             }
             if (st.yeast() != null) {
-                pl.sendMessage("§c该酒窖已加入过酒曲！");
+                pl.sendMessage("§c該酒窖已加入過酒麴！");
                 return false;
             }
             return true;
         }));
     }
 
-    /** 新界面对象：登记进刷新表并立即绘制一次动态槽位。 */
+    /** 新界面對象：登記進刷新表並立即繪製一次動態槽位。 */
     static void onNewInstance(BlockMenu menu, Block b) {
         MENUS.put(b.getLocation(), menu);
         paint(menu, b);
     }
 
-    /** 重新打开某台酒窖的机器页面（子页面返回用）。 */
+    /** 重新打開某台酒窖的機器頁面（子頁面返回用）。 */
     public static void open(Player p, Block manager) {
         BlockMenu menu = me.mrCookieSlime.Slimefun.api.BlockStorage.getInventory(manager);
         if (menu != null) menu.open(p);
     }
 
-    /** 简单处理器适配：由 Bukkit 点击事件解析出对应 BlockMenu（玩家槽校验由调用方完成）。 */
+    /** 簡單處理器適配：由 Bukkit 點擊事件解析出對應 BlockMenu（玩家槽校驗由調用方完成）。 */
     private interface MenuClick {
         boolean run(Player pl, BlockMenu menu, ItemStack cursor);
     }
@@ -269,7 +269,7 @@ public final class CellarMenu {
         };
     }
 
-    /** 玩家可自由存取的槽位（布局时不放背景，物品随方块持久化）。 */
+    /** 玩家可自由存取的槽位（佈局時不放背景，物品隨方塊持久化）。 */
     private static boolean isPlayerSlot(int slot) {
         for (int s : INPUT_SLOTS) {
             if (s == slot) return true;
@@ -280,14 +280,14 @@ public final class CellarMenu {
         return slot == SLOT_YEAST_INPUT || slot == SLOT_FILL;
     }
 
-    /** 是否为陈酿果酒（不允许再次投入酒窖）。 */
+    /** 是否為陳釀果酒（不允許再次投入酒窖）。 */
     private static boolean isWine(ItemStack it) {
         return it != null && !it.getType().isAir() && it.hasItemMeta()
                 && it.getItemMeta().getPersistentDataContainer()
                         .has(JuicerRecipe.KEY_ITEM_WINE, PersistentDataType.BYTE);
     }
 
-    /** 是否为酒曲（在 {@link JuicerRecipe#yeastBonus} 加成表内的粘液物品）。 */
+    /** 是否為酒麴（在 {@link JuicerRecipe#yeastBonus} 加成表內的粘液物品）。 */
     private static boolean isYeast(ItemStack it) {
         if (it == null || it.getType().isAir()) return false;
         io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem sf =
@@ -295,7 +295,7 @@ public final class CellarMenu {
         return sf != null && JuicerRecipe.yeastBonus(sf.getId()) >= 0;
     }
 
-    /** 是否为果汁容器（带组成数据的瓶/桶装产物，非果酒）。 */
+    /** 是否為果汁容器（帶組成數據的瓶/桶裝產物，非果酒）。 */
     private static boolean isJuice(ItemStack it) {
         if (it == null || it.getType().isAir() || !it.hasItemMeta() || isWine(it)) return false;
         String c = it.getItemMeta().getPersistentDataContainer()
@@ -303,16 +303,16 @@ public final class CellarMenu {
         return c != null && !c.isEmpty();
     }
 
-    /** 原版水瓶判定（药水材质且基础药水类型为水）。 */
+    /** 原版水瓶判定（藥水材質且基礎藥水類型為水）。 */
     private static boolean isWaterBottle(ItemStack it) {
         if (it == null || it.getType() != Material.POTION || !it.hasItemMeta()) return false;
         return it.getItemMeta() instanceof org.bukkit.inventory.meta.PotionMeta pm
                 && org.bukkit.potion.PotionType.WATER == basePotionType(pm);
     }
 
-    // --- 基础药水类型读取（跨版本二进制兼容） ---
-    // getBasePotionType 为 1.20.2+ API（1.20.0/1.20.1 调用会 NoSuchMethodError），
-    // getBasePotionData 为 1.20.4- API（1.20.5+ 已移除，编译期不可引用），两条路径全部走反射。
+    // --- 基礎藥水類型讀取（跨版本二進制兼容） ---
+    // getBasePotionType 為 1.20.2+ API（1.20.0/1.20.1 調用會 NoSuchMethodError），
+    // getBasePotionData 為 1.20.4- API（1.20.5+ 已移除，編譯期不可引用），兩條路徑全部走反射。
     private static final java.lang.reflect.Method M_BASE_POTION_TYPE =
             findMethod(org.bukkit.inventory.meta.PotionMeta.class, "getBasePotionType");
     private static final java.lang.reflect.Method M_BASE_POTION_DATA =
@@ -335,7 +335,7 @@ public final class CellarMenu {
         }
     }
 
-    /** 读取药水基础药水类型（跨版本；未设置时返回 null）。 */
+    /** 讀取藥水基礎藥水類型（跨版本；未設置時返回 null）。 */
     private static org.bukkit.potion.PotionType basePotionType(org.bukkit.inventory.meta.PotionMeta pm) {
         try {
             if (M_BASE_POTION_TYPE != null) {
@@ -346,12 +346,12 @@ public final class CellarMenu {
                 return data == null ? null : (org.bukkit.potion.PotionType) M_POTION_DATA_TYPE.invoke(data);
             }
         } catch (Throwable ignored) {
-            // 反射失败按非水瓶处理
+            // 反射失敗按非水瓶處理
         }
         return null;
     }
 
-    /** 启动前电力校验：管理器与温控器双机蓄电均需 ≥ 各自每 tick 消耗。 */
+    /** 啓動前電力校驗：管理器與温控器雙機蓄電均需 ≥ 各自每 tick 消耗。 */
     private static boolean hasEnoughPower(Block manager) {
         if (!(me.mrCookieSlime.Slimefun.api.BlockStorage.check(manager) instanceof WineCellarManager wm)) {
             return false;
@@ -367,26 +367,26 @@ public final class CellarMenu {
     }
 
     /**
-     * 校验待放入的果汁/清水是否还有液位余量，放不下时返回拒绝提示，可放返回 null。
-     * （放不下的果汁/清水只会滞留槽内不被吸收，放入前就拦下）
+     * 校驗待放入的果汁/清水是否還有液位餘量，放不下時返回拒絕提示，可放返回 null。
+     * （放不下的果汁/清水只會滯留槽內不被吸收，放入前就攔下）
      */
     private static String capacityReject(WineCellarState st, ItemStack incoming) {
         if (isJuice(incoming)) {
             boolean bucket = incoming.getItemMeta().getPersistentDataContainer()
                     .has(JuicerRecipe.KEY_ITEM_BUCKET, PersistentDataType.BYTE);
             if (!st.canAccept(bucket ? 3 : 1)) {
-                return "§c液位余量不足，无法投入" + (bucket ? "桶装" : "瓶装") + "果汁！";
+                return "§c液位餘量不足，無法投入" + (bucket ? "桶裝" : "瓶裝") + "果汁！";
             }
         } else if (isVanilla(incoming, Material.WATER_BUCKET)) {
-            if (!st.canAccept(3)) return "§c液位余量不足，无法投入清水！";
+            if (!st.canAccept(3)) return "§c液位餘量不足，無法投入清水！";
         } else if (incoming.getType() == Material.POTION
                 && isVanilla(incoming, Material.POTION) && isWaterBottle(incoming)) {
-            if (!st.canAccept(1)) return "§c液位余量不足，无法投入清水！";
+            if (!st.canAccept(1)) return "§c液位餘量不足，無法投入清水！";
         }
         return null;
     }
 
-    /** 动态槽位刷新（时钟/清空/羊毛/液位线/酒曲展示/灌装按钮/命名牌）。 */
+    /** 動態槽位刷新（時鐘/清空/羊毛/液位線/酒麴展示/灌裝按鈕/命名牌）。 */
     private static void paint(BlockMenu menu, Block manager) {
         scanSlots(menu, manager);
         WineCellarState st = WineCellarState.get(manager);
@@ -401,16 +401,16 @@ public final class CellarMenu {
             boolean full = idx < filled;
             idx++;
             if (st.phase() == WineCellarState.Phase.CONTAMINATED) {
-                menu.replaceExistingItem(slot, pane(Material.BLACK_STAINED_GLASS_PANE, "§8受污染的液体",
-                        List.of(leg("§7点击黄色玻璃板清空复原"))));
+                menu.replaceExistingItem(slot, pane(Material.BLACK_STAINED_GLASS_PANE, "§8受污染的液體",
+                        List.of(leg("§7點擊黃色玻璃板清空復原"))));
                 continue;
             }
             if (full) {
                 List<Component> lore = new ArrayList<>();
-                lore.add(leg("§7液位: §e" + st.units() + "§7/" + WineCellarState.CAPACITY + " 单位"));
+                lore.add(leg("§7液位: §e" + st.units() + "§7/" + WineCellarState.CAPACITY + " 單位"));
                 if (st.hasAlcohol()) lore.add(leg("§c酒精度: §e" + fmt(st.alcohol()) + "°"));
-                // 同种果汁合并显示「倒入的材料份数」：每单位组成 × 批次单位数
-                // （如 2 单位苹果汁 → 苹果×2；甜浆果每瓶 3 个，2 单位 → 甜浆果×6）
+                // 同種果汁合併顯示「倒入的材料份數」：每單位組成 × 批次單位數
+                // （如 2 單位蘋果汁 → 蘋果×2；甜漿果每瓶 3 個，2 單位 → 甜漿果×6）
                 Map<String, Double> merged = new LinkedHashMap<>();
                 for (WineCellarState.Liquid lq : st.liquids()) {
                     for (Map.Entry<String, Double> e : lq.contents().entrySet()) {
@@ -418,7 +418,7 @@ public final class CellarMenu {
                     }
                 }
                 for (Map.Entry<String, Double> e : merged.entrySet()) {
-                    // 用可翻译组件拼接，客户端按语言文件渲染出中文物品名
+                    // 用可翻譯組件拼接，客户端按語言文件渲染出中文物品名
                     lore.add(LegacyComponentSerializer.legacySection().deserialize("§b")
                             .append(JuicerRecipe.nameComponent(e.getKey()))
                             .append(Component.text(" ×" + JuicerRecipe.formatFraction(e.getValue()),
@@ -427,35 +427,35 @@ public final class CellarMenu {
                 if (st.waterUnits() > 0) {
                     lore.add(leg("§9清水 ×" + st.waterUnits()));
                 }
-                menu.replaceExistingItem(slot, pane(Material.PINK_STAINED_GLASS_PANE, "§d液位线", lore));
+                menu.replaceExistingItem(slot, pane(Material.PINK_STAINED_GLASS_PANE, "§d液位線", lore));
             } else {
                 int free = Math.max(0, WineCellarState.CAPACITY - (full ? filled * 4 : st.units()));
-                menu.replaceExistingItem(slot, pane(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "§7液位线（空）",
-                        List.of(leg("§7空余容量: §e" + free + "§7 单位"))));
+                menu.replaceExistingItem(slot, pane(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "§7液位線（空）",
+                        List.of(leg("§7空餘容量: §e" + free + "§7 單位"))));
             }
         }
         menu.replaceExistingItem(SLOT_YEAST, yeastPane(st));
         menu.replaceExistingItem(SLOT_FILL_DISPLAY, fillPane());
-        // 命名牌按钮：实时刷新当前名称展示（未开启功能时保持背景板）
+        // 命名牌按鈕：實時刷新當前名稱展示（未開啓功能時保持背景板）
         if (com.haiman233.worldtaste.load.CellarLoader.cellarNameEnabled) {
             menu.replaceExistingItem(SLOT_NAMETAG, nameTagItem(st));
         }
     }
 
-    /** 灌装槽按钮（炼药锅）：点击灌装一次。 */
+    /** 灌裝槽按鈕（煉藥鍋）：點擊灌裝一次。 */
     private static ItemStack fillPane() {
-        return pane(Material.CAULDRON, "§e点我装瓶",
-                List.of(leg("§7在上方放入玻璃瓶后才能灌装")));
+        return pane(Material.CAULDRON, "§e點我裝瓶",
+                List.of(leg("§7在上方放入玻璃瓶後才能灌裝")));
     }
 
     /**
-     * 酒曲位展示：未加入时显示橙色占位板（提示往 13 号酒曲槽投放）；
-     * 已加入时显示<b>该酒曲物品本身</b>（材质/头颅与指南中的酒曲一致）。
+     * 酒麴位展示：未加入時顯示橙色佔位板（提示往 13 號酒麴槽投放）；
+     * 已加入時顯示<b>該酒麴物品本身</b>（材質/頭顱與指南中的酒麴一致）。
      */
     private static ItemStack yeastPane(WineCellarState st) {
         if (st.yeast() == null) {
-            return pane(Material.ORANGE_STAINED_GLASS_PANE, "§6酒曲投放口",
-                    List.of(leg("§7请将酒曲放在上面")));
+            return pane(Material.ORANGE_STAINED_GLASS_PANE, "§6酒麴投放口",
+                    List.of(leg("§7請將酒麴放在上面")));
         }
         io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem sf =
                 io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem.getById(st.yeast());
@@ -465,8 +465,8 @@ public final class CellarMenu {
         if (meta != null) {
             String name = meta.hasDisplayName() ? meta.getDisplayName()
                     : ChatColor.WHITE + st.yeast();
-            meta.setDisplayName("§a已放入酒曲！");
-            meta.setLore(List.of(name, ChatColor.GRAY + "酿造模式下每台机器只能放入一种酒曲"));
+            meta.setDisplayName("§a已放入酒麴！");
+            meta.setLore(List.of(name, ChatColor.GRAY + "釀造模式下每台機器只能放入一種酒麴"));
             yeast.setItemMeta(meta);
         }
         return yeast;
@@ -475,11 +475,11 @@ public final class CellarMenu {
     private static void scanSlots(BlockMenu menu, Block manager) {
         WineCellarState st = WineCellarState.get(manager);
         boolean changed = false;
-        // 运行中/已污染时不再吸收任何投入物（放入路径已在点击处理器拦截，这里兜底防御）：
+        // 運行中/已污染時不再吸收任何投入物（放入路徑已在點擊處理器攔截，這裏兜底防禦）：
         boolean acceptInput = st.phase() == WineCellarState.Phase.IDLE
                 || st.phase() == WineCellarState.Phase.READY;
 
-        // 酒曲投放位（槽 13）：只吸收酒曲，每台机器限一种，每次只消耗 1 个
+        // 酒麴投放位（槽 13）：只吸收酒麴，每台機器限一種，每次只消耗 1 個
         if (acceptInput && st.yeast() == null) {
             ItemStack it = menu.getItemInSlot(SLOT_YEAST_INPUT);
             if (it != null && !it.getType().isAir() && isYeast(it)) {
@@ -493,10 +493,10 @@ public final class CellarMenu {
                 changed = true;
             }
         }
-        // 已加入过酒曲：槽 13 里多放的酒曲原样保留（不吞），由玩家自行取回
+        // 已加入過酒麴：槽 13 裏多放的酒麴原樣保留（不吞），由玩家自行取回
 
-        // 出酒阶段：液位被灌装耗尽后整池复位（含清除酒曲记录）。否则酒曲会一直残留在机器上，
-        // 下一轮既无法更换酒曲，也会让液位槽显示异常。
+        // 出酒階段：液位被灌裝耗盡後整池復位（含清除酒麴記錄）。否則酒麴會一直殘留在機器上，
+        // 下一輪既無法更換酒麴，也會讓液位槽顯示異常。
         if (st.phase() == WineCellarState.Phase.READY) {
             if (st.units() <= 0) {
                 st.clear();
@@ -507,11 +507,11 @@ public final class CellarMenu {
         for (int slot : acceptInput ? INPUT_SLOTS : new int[0]) {
             ItemStack it = menu.getItemInSlot(slot);
             if (it == null || it.getType().isAir()) continue;
-            // 带 PDC 的容器优先判定：桶装果汁是水桶材质，必须先于清水判定，
-            // 否则果汁桶会被当成清水吸收
+            // 帶 PDC 的容器優先判定：桶裝果汁是水桶材質，必須先於清水判定，
+            // 否則果汁桶會被當成清水吸收
             if (it.hasItemMeta()) {
                 var pdc = it.getItemMeta().getPersistentDataContainer();
-                // 陈酿果酒禁止回流：弹出到机器旁
+                // 陳釀果酒禁止迴流：彈出到機器旁
                 if (pdc.has(JuicerRecipe.KEY_ITEM_WINE, PersistentDataType.BYTE)) {
                     drop(manager, it);
                     menu.replaceExistingItem(slot, null);
@@ -533,7 +533,7 @@ public final class CellarMenu {
                     int sugarPerUnit = pdc.getOrDefault(JuicerRecipe.KEY_ITEM_SUGAR, PersistentDataType.INTEGER, 0);
                     String juicer = pdc.get(JuicerRecipe.KEY_ITEM_PLAYERS, PersistentDataType.STRING);
                     st.addLiquid(contents, sugarPerUnit, add, juicer);
-                    // 每轮只吸收 1 个：整堆投入时不能直接把槽位换成 1 个空容器（会吞掉其余果汁）
+                    // 每輪只吸收 1 個：整堆投入時不能直接把槽位換成 1 個空容器（會吞掉其餘果汁）
                     if (it.getAmount() > 1) {
                         it.setAmount(it.getAmount() - 1);
                         menu.replaceExistingItem(slot, it);
@@ -546,7 +546,7 @@ public final class CellarMenu {
                     continue;
                 }
             }
-            // 清水：稀释（水瓶 +1 / 水桶 +3 单位，无糖分；返回空容器）
+            // 清水：稀釋（水瓶 +1 / 水桶 +3 單位，無糖分；返回空容器）
             if (isVanilla(it, Material.WATER_BUCKET)) {
                 if (st.canAccept(3)) {
                     st.addWater(3);
@@ -565,15 +565,15 @@ public final class CellarMenu {
                 }
                 continue;
             }
-            // 酒曲不允许走添料区：原样留着等玩家取回（点击拦截为主，这里防 shift 漏网）
+            // 酒麴不允許走添料區：原樣留着等玩家取回（點擊攔截為主，這裏防 shift 漏網）
             if (isYeast(it)) continue;
         }
         if (changed) st.save(manager);
     }
 
     /**
-     * 出酒产物：锁定了酒窖配方时输出该配方的单位产物（带 PDC 数据，并附加
-     * wine-lore-format 渲染的信息行 + 竖向组成），否则输出通用陈酿果酒。
+     * 出酒產物：鎖定了酒窖配方時輸出該配方的單位產物（帶 PDC 數據，並附加
+     * wine-lore-format 渲染的信息行 + 豎向組成），否則輸出通用陳釀果酒。
      */
     private static ItemStack productItem(WineCellarState st, int perBottleSugar) {
         CellarRecipe cr = st.cellarRecipe() != null ? CellarRecipe.byKey(st.cellarRecipe()) : null;
@@ -596,10 +596,10 @@ public final class CellarMenu {
                 if (cr.aging) {
                     pdc.set(JuicerRecipe.KEY_ITEM_ALCOHOL, PersistentDataType.DOUBLE, st.alcohol());
                 }
-                // 统一附加 wine-lore-format 渲染的信息行（组成物品开关 + 竖向显示同时作用于配方酒）
+                // 統一附加 wine-lore-format 渲染的信息行（組成物品開關 + 豎向顯示同時作用於配方酒）
                 List<String> lore = meta.getLore() != null
                         ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
-                // 渲染 info：非陈酿型（aging=false）用 0 酒精度占位，避免副产物无格式行
+                // 渲染 info：非陳釀型（aging=false）用 0 酒精度佔位，避免副產物無格式行
                 double alcForLore = cr.aging ? st.alcohol() : 0.0;
                 List<String> infoLines = renderWineInfo(JuicerRecipe.wineLoreFormat,
                         st.allPlayers(), st.contentsOfAll(), alcForLore);
@@ -611,18 +611,18 @@ public final class CellarMenu {
         return appendCellarName(st, out);
     }
 
-    /** 按 wine-lore-format 渲染成品酒信息行（竖向/横向/隐藏三态由 JuicerRecipe 开关控制）。 */
+    /** 按 wine-lore-format 渲染成品酒信息行（豎向/橫向/隱藏三態由 JuicerRecipe 開關控制）。 */
     private static List<String> renderWineInfo(String format, java.util.Set<String> players,
                                                Map<String, Double> contents, double alcohol) {
-        String playersText = players == null || players.isEmpty() ? "无" : String.join("、", players);
+        String playersText = players == null || players.isEmpty() ? "無" : String.join("、", players);
         List<String> contentsLines = JuicerRecipe.contentsLegacyList(contents);
         List<String> out = new ArrayList<>();
         if (JuicerRecipe.wineContentsVertical && contentsLines.size() >= 1
-                && !contentsLines.get(0).equals("§7无")
-                && !contentsLines.get(0).equals("§8[组成已隐藏]")) {
+                && !contentsLines.get(0).equals("§7無")
+                && !contentsLines.get(0).equals("§8[組成已隱藏]")) {
             String firstLine = format
                     .replace("%players%", playersText)
-                    .replace("%contents%", "§b组成：")
+                    .replace("%contents%", "§b組成：")
                     .replace("%alcohol%", String.format("%.1f", alcohol));
             out.add(com.haiman233.worldtaste.util.Colors.c(firstLine));
             out.addAll(contentsLines);
@@ -636,21 +636,21 @@ public final class CellarMenu {
         return out;
     }
 
-    /** 命名的酒窖灌装产物：在 lore 尾部追加酒窖名。 */
+    /** 命名的酒窖灌裝產物：在 lore 尾部追加酒窖名。 */
     private static ItemStack appendCellarName(WineCellarState st, ItemStack out) {
         if (st.cellarName() == null) return out;
         ItemMeta meta = out.getItemMeta();
         if (meta != null) {
             List<String> lore = meta.getLore() != null
                     ? new ArrayList<>(meta.getLore()) : new ArrayList<>();
-            lore.add("§6来自酒窖：§r" + st.cellarName());
+            lore.add("§6來自酒窖：§r" + st.cellarName());
             meta.setLore(lore);
             out.setItemMeta(meta);
         }
         return out;
     }
 
-    /** 左下角命名牌按钮：显示当前名称与操作提示。 */
+    /** 左下角命名牌按鈕：顯示當前名稱與操作提示。 */
     private static ItemStack nameTagItem(WineCellarState st) {
         ItemStack it = new ItemStack(Material.NAME_TAG);
         ItemMeta meta = it.getItemMeta();
@@ -658,69 +658,69 @@ public final class CellarMenu {
             meta.setDisplayName(ChatColor.GOLD + "酒窖命名");
             List<String> lore = new ArrayList<>();
             lore.add(st.cellarName() != null
-                    ? ChatColor.GRAY + "当前名称: §r" + st.cellarName()
-                    : ChatColor.GRAY + "当前未命名");
-            lore.add(ChatColor.YELLOW + "点击为酒窖命名（支持颜色代码）");
-            lore.add(ChatColor.DARK_GRAY + "仅放置酒窖的玩家可以命名");
+                    ? ChatColor.GRAY + "當前名稱: §r" + st.cellarName()
+                    : ChatColor.GRAY + "當前未命名");
+            lore.add(ChatColor.YELLOW + "點擊為酒窖命名（支持顏色代碼）");
+            lore.add(ChatColor.DARK_GRAY + "僅放置酒窖的玩家可以命名");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 点击命名牌：校验开关与归属后，打开虚拟铁砧输入名字（点击「确定」即完成）。 */
+    /** 點擊命名牌：校驗開關與歸屬後，打開虛擬鐵砧輸入名字（點擊「確定」即完成）。 */
     private static void clickNameTag(Player p, Block manager) {
         if (!com.haiman233.worldtaste.load.CellarLoader.cellarNameEnabled) {
-            p.sendMessage("§c酒窖命名功能未开启！");
+            p.sendMessage("§c酒窖命名功能未開啓！");
             return;
         }
         WineCellarState st = WineCellarState.get(manager);
         if (st.ownerId() != null && !st.isOwner(p)) {
-            p.sendMessage("§c只有放置该酒窖的玩家才能命名！");
+            p.sendMessage("§c只有放置該酒窖的玩家才能命名！");
             return;
         }
         if (NAMING.containsKey(p.getUniqueId())) {
-            p.sendMessage("§c你已打开命名界面！");
+            p.sendMessage("§c你已打開命名界面！");
             return;
         }
         PENDING_CELLAR.put(p.getUniqueId(), manager.getLocation());
-        p.sendMessage("§e请在铁砧上方输入框输入酒窖名字（支持 &6&l& 颜色代码&e），"
-                + "点击右侧「§a§l确定§e」完成命名；点击左侧「§c取消命名§e」或直接关闭界面取消。");
-        // 下个 tick 再开铁砧：当前正在处理酒窖页面的点击事件，立即切换界面可能被吞
+        p.sendMessage("§e請在鐵砧上方輸入框輸入酒窖名字（支持 &6&l& 顏色代碼&e），"
+                + "點擊右側「§a§l確定§e」完成命名；點擊左側「§c取消命名§e」或直接關閉界面取消。");
+        // 下個 tick 再開鐵砧：當前正在處理酒窖頁面的點擊事件，立即切換界面可能被吞
         Bukkit.getScheduler().runTask(WT.plugin, () -> {
             if (!p.isOnline()) return;
-            // InventoryView 在 1.21 由类改为接口，直接调用其方法跨版本会抛 IncompatibleClassChangeError，
-            // 经反射工具（Views.top）取顶部容器
+            // InventoryView 在 1.21 由類改為接口，直接調用其方法跨版本會拋 IncompatibleClassChangeError，
+            // 經反射工具（Views.top）取頂部容器
             org.bukkit.inventory.AnvilInventory ai = Views.top(p.openAnvil(null, true))
                     instanceof org.bukkit.inventory.AnvilInventory a ? a : null;
             if (ai == null) {
                 PENDING_CELLAR.remove(p.getUniqueId());
-                p.sendMessage("§c无法打开命名界面！");
+                p.sendMessage("§c無法打開命名界面！");
                 return;
             }
-            // 虚拟铁砧：免除重命名经验消耗
+            // 虛擬鐵砧：免除重命名經驗消耗
             try {
                 ai.setMaximumRepairCost(0);
             } catch (Throwable ignored) {
-                // 旧 API 无此方法时忽略
+                // 舊 API 無此方法時忽略
             }
             ai.setRepairCost(0);
-            // 第一槽位：取消命名（点击即取消）
+            // 第一槽位：取消命名（點擊即取消）
             org.bukkit.inventory.ItemStack cancelItem = new ItemStack(Material.PAPER);
             ItemMeta cm = cancelItem.getItemMeta();
             if (cm != null) {
                 cm.setDisplayName("§c取消命名");
                 List<String> lore = new ArrayList<>();
-                lore.add("§7点击此物品取消命名");
+                lore.add("§7點擊此物品取消命名");
                 lore.add(st.cellarName() != null
-                        ? "§7当前名称: §r" + st.cellarName() : "§7当前未命名");
+                        ? "§7當前名稱: §r" + st.cellarName() : "§7當前未命名");
                 cm.setLore(lore);
                 cancelItem.setItemMeta(cm);
             }
             ai.setItem(0, cancelItem);
             NAMING.put(p.getUniqueId(), ai);
-            // 结果槽改名为「确定」（打字时会实时重算结果，用周期任务保持标签）
-            final String confirmName = "§a§l确定";
+            // 結果槽改名為「確定」（打字時會實時重算結果，用週期任務保持標籤）
+            final String confirmName = "§a§l確定";
             BukkitTask[] holder = new BukkitTask[1];
             holder[0] = Bukkit.getScheduler().runTaskTimer(WT.plugin, () -> {
                 if (!p.isOnline() || NAMING.get(p.getUniqueId()) != ai
@@ -735,44 +735,44 @@ public final class CellarMenu {
                     return;
                 }
                 rm.setDisplayName(confirmName);
-                rm.setLore(List.of("§7点击确认命名"));
+                rm.setLore(List.of("§7點擊確認命名"));
                 result.setItemMeta(rm);
             }, 2L, 2L);
         });
     }
 
-    /** 应用铁砧输入的酒窖名（主线程调用；名称为空视为取消）。 */
+    /** 應用鐵砧輸入的酒窖名（主線程調用；名稱為空視為取消）。 */
     private static void applyCellarName(Player p, Block manager, String msg) {
         if (msg.isEmpty() || msg.equalsIgnoreCase("cancel")) {
             p.sendMessage("§7已取消命名。");
             return;
         }
         if (msg.length() > 32) {
-            p.sendMessage("§c名字过长（最多 32 字符）！请重新点击命名牌再试。");
+            p.sendMessage("§c名字過長（最多 32 字符）！請重新點擊命名牌再試。");
             return;
         }
         WineCellarState st = WineCellarState.get(manager);
-        st.setOwner(p); // 未记录归属的旧机器：首个命名者视为所有者
-        // 竖线是存档分隔符，替换为空格防止破坏序列化
+        st.setOwner(p); // 未記錄歸屬的舊機器：首個命名者視為所有者
+        // 豎線是存檔分隔符，替換為空格防止破壞序列化
         String name = ChatColor.translateAlternateColorCodes('&', msg.replace('|', ' '));
         st.cellarName(name);
         st.save(manager);
-        p.sendMessage("§a酒窖已命名为：§r" + name);
+        p.sendMessage("§a酒窖已命名為：§r" + name);
     }
 
-    /** 点击炼药锅图标灌装一次：消耗灌装槽内 1 个玻璃瓶，果酒输出到输出槽。 */
+    /** 點擊煉藥鍋圖標灌裝一次：消耗灌裝槽內 1 個玻璃瓶，果酒輸出到輸出槽。 */
     private static void fillOne(Player p, Block manager, BlockMenu menu) {
         WineCellarState st = WineCellarState.get(manager);
         if (st.phase() == WineCellarState.Phase.RUNNING) {
-            p.sendMessage("§c机器运行中，暂不可灌装！");
+            p.sendMessage("§c機器運行中，暫不可灌裝！");
             return;
         }
         if (st.phase() == WineCellarState.Phase.CONTAMINATED) {
-            p.sendMessage("§c液体已污染，请先清空机器！");
+            p.sendMessage("§c液體已污染，請先清空機器！");
             return;
         }
         if (st.phase() != WineCellarState.Phase.READY || st.units() <= 0) {
-            p.sendMessage("§c尚无可灌装的果酒（需先完成酿造/陈化）！");
+            p.sendMessage("§c尚無可灌裝的果酒（需先完成釀造/陳化）！");
             return;
         }
         ItemStack inSlot = menu.getItemInSlot(SLOT_FILL);
@@ -782,7 +782,7 @@ public final class CellarMenu {
         }
         int out = firstEmpty(menu, OUTPUT_SLOTS);
         if (out < 0) {
-            p.sendMessage("§c输出槽已满，无法继续灌装！");
+            p.sendMessage("§c輸出槽已滿，無法繼續灌裝！");
             return;
         }
         int perBottleSugar = st.totalSugar() / Math.max(1, st.units());
@@ -794,7 +794,7 @@ public final class CellarMenu {
         if (st.units() <= 0) {
             st.clear();
             st.save(manager);
-            p.sendMessage("§a酒窖已灌装完毕，已复原。");
+            p.sendMessage("§a酒窖已灌裝完畢，已復原。");
             return;
         }
         st.save(manager);
@@ -813,8 +813,8 @@ public final class CellarMenu {
     }
 
     /**
-     * 返还果汁的空容器（玻璃瓶/铁桶）：优先塞进正在查看界面的玩家背包，
-     * 背包满或无人查看时掉在机器旁，避免整堆投料时空容器无处可放被吞掉。
+     * 返還果汁的空容器（玻璃瓶/鐵桶）：優先塞進正在查看界面的玩家揹包，
+     * 揹包滿或無人查看時掉在機器旁，避免整堆投料時空容器無處可放被吞掉。
      */
     private static void giveContainer(BlockMenu menu, Block manager, Material m) {
         ItemStack empty = new ItemStack(m);
@@ -828,7 +828,7 @@ public final class CellarMenu {
         drop(manager, empty);
     }
 
-    // ===== 计时推进（管理器 ticker 供电成功后调用）=====
+    // ===== 計時推進（管理器 ticker 供電成功後調用）=====
 
     static void advance(WineCellarState st, Block manager) {
         st.elapsedMs(st.elapsedMs() + TICK_MS);
@@ -839,7 +839,7 @@ public final class CellarMenu {
                 finished = true;
             }
         } else {
-            // 防御：异常数据（nextGrowthAt<=0）会导致while死循环，先校正
+            // 防禦：異常數據（nextGrowthAt<=0）會導致while死循環，先校正
             if (st.nextGrowthAt() <= 0) st.nextGrowthAt(st.elapsedMs() + WineCellarState.GAME_DAY_MS);
             while (st.elapsedMs() >= st.nextGrowthAt()) {
                 double g = JuicerRecipe.agingGrowthMin + ThreadLocalRandom.current().nextDouble()
@@ -848,36 +848,36 @@ public final class CellarMenu {
                 st.nextGrowthAt(st.nextGrowthAt() + WineCellarState.GAME_DAY_MS);
             }
         }
-        // 每 5 分钟或酿造完成时落盘一次（计时中无需高频写 BlockStorage）
+        // 每 5 分鐘或釀造完成時落盤一次（計時中無需高頻寫 BlockStorage）
         if (finished || System.currentTimeMillis() - st.lastSaveMs() >= 300_000L) {
             st.save(manager);
         }
     }
 
     private static void finishBrew(WineCellarState st, Block manager) {
-        // 酒精度 = 总糖分 × 转化比率 + 酒曲加成（清水不含糖分，稀释只摊薄产出份数）
+        // 酒精度 = 總糖分 × 轉化比率 + 酒麴加成（清水不含糖分，稀釋只攤薄產出份數）
         double yeast = JuicerRecipe.yeastBonus(st.yeast());
         CellarRecipe cr = st.cellarRecipe() != null ? CellarRecipe.byKey(st.cellarRecipe()) : null;
         if (cr != null && !cr.aging) {
-            st.alcohol(0); // 该配方不允许陈酿/不含酒精（副产物）
+            st.alcohol(0); // 該配方不允許陳釀/不含酒精（副產物）
         } else {
             st.alcohol(st.totalSugar() * JuicerRecipe.sugarAlcoholRatio + yeast);
         }
-        st.yeast(null); // 酒曲随酿造消耗：完成后重置酒曲图标与记录
+        st.yeast(null); // 酒麴隨釀造消耗：完成後重置酒麴圖標與記錄
         manager.getWorld().playSound(manager.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
         Player placer = st.placerId() != null ? Bukkit.getPlayer(st.placerId()) : null;
         if (st.autoAge() && st.durationMs() > 0) {
-            // 自动陈化：酿造完成直接切到陈化模式开始计时（每完整游戏日增长）。
-            // 测试模式（0 时长立即完成）跳过自动陈化，保证立即出产物。
+            // 自動陳化：釀造完成直接切到陳化模式開始計時（每完整遊戲日增長）。
+            // 測試模式（0 時長立即完成）跳過自動陳化，保證立即出產物。
             st.toggleMode();
             st.phase(WineCellarState.Phase.RUNNING);
             st.elapsedMs(0);
             st.nextGrowthAt(WineCellarState.GAME_DAY_MS);
-            if (placer != null) placer.sendMessage("§a酿造已经完成！已自动开始陈化。");
+            if (placer != null) placer.sendMessage("§a釀造已經完成！已自動開始陳化。");
         } else {
             st.phase(WineCellarState.Phase.READY);
             if (placer != null) {
-                placer.sendMessage("§a酿造已经完成！耗时" + fmt(st.elapsedMs()) + "§a！");
+                placer.sendMessage("§a釀造已經完成！耗時" + fmt(st.elapsedMs()) + "§a！");
             }
         }
     }
@@ -898,9 +898,9 @@ public final class CellarMenu {
 
     private static final class CloseListener implements Listener {
         /**
-         * 多方块结构被破坏（任意部分）→ 直接清除机器数据（液体/酒曲/配方/槽位内容物/
-         * 归属与酒窖名一并清空），并同步清空打开中的界面槽位。
-         * 快速预筛：只有破坏点周围存在酿造台时才深查。
+         * 多方塊結構被破壞（任意部分）→ 直接清除機器數據（液體/酒麴/配方/槽位內容物/
+         * 歸屬與酒窖名一併清空），並同步清空打開中的界面槽位。
+         * 快速預篩：只有破壞點周圍存在釀造台時才深查。
          */
         @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
         public void onStructureBreak(BlockBreakEvent e) {
@@ -925,7 +925,7 @@ public final class CellarMenu {
             WineCellarManager.invalidateStructureCheck(manager);
             WineCellarState.get(manager).clearIdentity();
             WineCellarState.get(manager).save(manager);
-            // 结构被破坏 → 机器数据一并清空，并移除内存缓存：原位重放新机器时从空状态重建
+            // 結構被破壞 → 機器數據一併清空，並移除內存緩存：原位重放新機器時從空狀態重建
             WineCellarState.remove(manager);
             BlockMenu menu = MENUS.remove(manager.getLocation());
             if (menu != null) {
@@ -936,7 +936,7 @@ public final class CellarMenu {
             }
         }
 
-        /** 命名铁砧未确认就关闭：清理挂起状态（确认/取消路径已先行移除，此处兜底）。 */
+        /** 命名鐵砧未確認就關閉：清理掛起狀態（確認/取消路徑已先行移除，此處兜底）。 */
         @EventHandler
         public void onClose(org.bukkit.event.inventory.InventoryCloseEvent e) {
             if (!(e.getPlayer() instanceof Player p)) return;
@@ -945,14 +945,14 @@ public final class CellarMenu {
             }
         }
 
-        /** 玩家退出时清理命名流程的挂起状态。 */
+        /** 玩家退出時清理命名流程的掛起狀態。 */
         @EventHandler
         public void onQuit(org.bukkit.event.player.PlayerQuitEvent e) {
             NAMING.remove(e.getPlayer().getUniqueId());
             PENDING_CELLAR.remove(e.getPlayer().getUniqueId());
         }
 
-        /** 记录酒窖归属（放置者，命名权限用）：延迟 1 tick 等粘液注册完方块数据。 */
+        /** 記錄酒窖歸屬（放置者，命名權限用）：延遲 1 tick 等粘液註冊完方塊數據。 */
         @EventHandler(priority = org.bukkit.event.EventPriority.MONITOR, ignoreCancelled = true)
         public void onPlace(org.bukkit.event.block.BlockPlaceEvent e) {
             Block b = e.getBlockPlaced();
@@ -966,14 +966,14 @@ public final class CellarMenu {
             });
         }
 
-        /** 命名铁砧：点击「确定」（产物槽）按输入名应用；点击「取消命名」（第一槽位）取消。 */
+        /** 命名鐵砧：點擊「確定」（產物槽）按輸入名應用；點擊「取消命名」（第一槽位）取消。 */
         @EventHandler
         public void onAnvilClick(InventoryClickEvent e) {
             if (!(e.getWhoClicked() instanceof Player p)) return;
             org.bukkit.inventory.Inventory anvil = NAMING.get(p.getUniqueId());
             if (anvil == null || e.getInventory() != anvil) return;
             e.setCancelled(true);
-            e.setCursor(null); // 防止结果物品被客户端预测带入光标
+            e.setCursor(null); // 防止結果物品被客户端預測帶入光標
             if (e.getRawSlot() == 0) { // 取消命名
                 NAMING.remove(p.getUniqueId());
                 PENDING_CELLAR.remove(p.getUniqueId());
@@ -981,15 +981,15 @@ public final class CellarMenu {
                 p.sendMessage("§7已取消命名。");
                 return;
             }
-            if (e.getRawSlot() != 2) return; // 只认结果槽（确定）
-            // 名字取铁砧改名框文本（结果槽已改名为「确定」，不能读物品名）
+            if (e.getRawSlot() != 2) return; // 只認結果槽（確定）
+            // 名字取鐵砧改名框文本（結果槽已改名為「確定」，不能讀物品名）
             String name = anvil instanceof org.bukkit.inventory.AnvilInventory ai
                     && ai.getRenameText() != null ? ai.getRenameText().trim() : null;
             NAMING.remove(p.getUniqueId());
             Location loc = PENDING_CELLAR.remove(p.getUniqueId());
             p.closeInventory();
             if (name == null || name.isEmpty()) {
-                p.sendMessage("§7已取消命名（名称为空）。");
+                p.sendMessage("§7已取消命名（名稱為空）。");
                 return;
             }
             if (loc == null) return;
@@ -997,8 +997,8 @@ public final class CellarMenu {
         }
 
         /**
-         * Shift+右键清空：CSCoreLib 菜单点击不一定带上「右键」标记，因此在 Bukkit 事件里单独处理。
-         * 同时统一接管从背包 shift 快速移入的路由（酒曲/果酒拦截，果汁/清水进添料区，玻璃瓶进灌装槽）。
+         * Shift+右鍵清空：CSCoreLib 菜單點擊不一定帶上「右鍵」標記，因此在 Bukkit 事件裏單獨處理。
+         * 同時統一接管從揹包 shift 快速移入的路由（酒麴/果酒攔截，果汁/清水進添料區，玻璃瓶進灌裝槽）。
          */
         @EventHandler(ignoreCancelled = false)
         public void onClick(InventoryClickEvent e) {
@@ -1022,44 +1022,44 @@ public final class CellarMenu {
                 ItemStack cursor = e.getCursor();
                 if (cursor != null && !cursor.getType().isAir() && !e.isShiftClick()) {
                     e.setCancelled(true);
-                    p.sendMessage("§c输出槽不能放入物品！");
+                    p.sendMessage("§c輸出槽不能放入物品！");
                     return;
                 }
             }
 
             if (e.getClickedInventory() == top && isInputSlot(e.getRawSlot()) && isYeast(e.getCursor())) {
                 e.setCancelled(true);
-                p.sendMessage("§c酒曲请放入上方的「酒曲槽」（13 号）！");
+                p.sendMessage("§c酒麴請放入上方的「酒麴槽」（13 號）！");
                 return;
             }
 
             if (e.isShiftClick() && e.getClickedInventory() != top) {
-                // 从背包快速移入：原版会按槽位顺序落进酒曲槽/输出槽等错误位置，这里统一接管路由
+                // 從揹包快速移入：原版會按槽位順序落進酒麴槽/輸出槽等錯誤位置，這裏統一接管路由
                 ItemStack moving = e.getCurrentItem();
                 if (moving == null || moving.getType().isAir()) return;
                 WineCellarState st = WineCellarState.get(manager);
                 if (isYeast(moving)) {
                     e.setCancelled(true);
-                    p.sendMessage("§c酒曲请放入上方的「酒曲槽」（13 号）！");
+                    p.sendMessage("§c酒麴請放入上方的「酒麴槽」（13 號）！");
                 } else if (isWine(moving)) {
                     e.setCancelled(true);
-                    p.sendMessage("§c陈酿果酒不能再次放入酒窖！");
+                    p.sendMessage("§c陳釀果酒不能再次放入酒窖！");
                 } else if (isJuice(moving) && st.hasAlcohol()) {
                     e.setCancelled(true);
-                    p.sendMessage("§c酒窖中已含酒精液体，不能投入果汁！");
+                    p.sendMessage("§c酒窖中已含酒精液體，不能投入果汁！");
                 } else if (isJuice(moving) || isVanilla(moving, Material.WATER_BUCKET)
                         || (moving.getType() == Material.POTION
                             && isVanilla(moving, Material.POTION) && isWaterBottle(moving))) {
-                    // 果汁/清水（水桶/水瓶）：统一引导进添料区，由扫描任务吸收
+                    // 果汁/清水（水桶/水瓶）：統一引導進添料區，由掃描任務吸收
                     e.setCancelled(true);
                     if (st.phase() != WineCellarState.Phase.IDLE
                             && st.phase() != WineCellarState.Phase.READY) {
-                        p.sendMessage("§c机器未处于待机/出酒状态，不能放入物品！");
+                        p.sendMessage("§c機器未處於待機/出酒狀態，不能放入物品！");
                         return;
                     }
                     int dest = firstEmpty(menu, INPUT_SLOTS);
                     if (dest < 0) {
-                        p.sendMessage("§c添料区已满，无法快速放入！");
+                        p.sendMessage("§c添料區已滿，無法快速放入！");
                         return;
                     }
                     String reject = capacityReject(st, moving);
@@ -1070,22 +1070,22 @@ public final class CellarMenu {
                     menu.replaceExistingItem(dest, moving.clone());
                     e.setCurrentItem(null);
                 } else if (isVanilla(moving, Material.GLASS_BOTTLE)) {
-                    // 玻璃瓶：直接进灌装槽（40 号），点击炼药锅图标即可装瓶
+                    // 玻璃瓶：直接進灌裝槽（40 號），點擊煉藥鍋圖標即可裝瓶
                     e.setCancelled(true);
                     if (st.phase() != WineCellarState.Phase.READY) {
-                        p.sendMessage("§c只有出酒阶段才能放入玻璃瓶！");
+                        p.sendMessage("§c只有出酒階段才能放入玻璃瓶！");
                         return;
                     }
                     ItemStack inFill = menu.getItemInSlot(SLOT_FILL);
                     if (inFill != null && !inFill.getType().isAir()) {
-                        p.sendMessage("§c灌装槽已有玻璃瓶！");
+                        p.sendMessage("§c灌裝槽已有玻璃瓶！");
                         return;
                     }
                     menu.replaceExistingItem(SLOT_FILL, moving.clone());
                     e.setCurrentItem(null);
                 } else {
                     e.setCancelled(true);
-                    p.sendMessage("§c这个物品不能快速放入酒窖，请手持放入添料区！");
+                    p.sendMessage("§c這個物品不能快速放入酒窖，請手持放入添料區！");
                 }
             }
         }
@@ -1104,12 +1104,12 @@ public final class CellarMenu {
                 if (slot >= 54) continue;
                 if (yeast && isInputSlot(slot)) {
                     e.setCancelled(true);
-                    p.sendMessage("§c酒曲请放入上方的「酒曲槽」（13 号）！");
+                    p.sendMessage("§c酒麴請放入上方的「酒麴槽」（13 號）！");
                     return;
                 }
                 if (bottle && isOutputSlot(slot)) {
                     e.setCancelled(true);
-                    p.sendMessage("§c输出槽不能放入物品！");
+                    p.sendMessage("§c輸出槽不能放入物品！");
                     return;
                 }
             }
@@ -1135,59 +1135,59 @@ public final class CellarMenu {
     private static void toggleMode(Player p, Block manager) {
         WineCellarState st = WineCellarState.get(manager);
         if (st.phase() == WineCellarState.Phase.RUNNING) {
-            p.sendMessage("§c机器运行中，无法切换模式！");
+            p.sendMessage("§c機器運行中，無法切換模式！");
             return;
         }
         if (st.phase() == WineCellarState.Phase.CONTAMINATED) {
-            p.sendMessage("§c请先点击黄色玻璃板清空机器！");
+            p.sendMessage("§c請先點擊黃色玻璃板清空機器！");
             return;
         }
         st.toggleMode();
         st.save(manager);
     }
 
-    /** 切换自动陈化（仅酿造模式、非运行态）：开启后酿造完成直接进入陈化。 */
+    /** 切換自動陳化（僅釀造模式、非運行態）：開啓後釀造完成直接進入陳化。 */
     private static void toggleAutoAge(Player p, Block manager) {
         WineCellarState st = WineCellarState.get(manager);
         if (st.phase() == WineCellarState.Phase.RUNNING
                 || st.phase() == WineCellarState.Phase.CONTAMINATED) {
-            p.sendMessage("§c机器运行中，无法切换自动陈化！");
+            p.sendMessage("§c機器運行中，無法切換自動陳化！");
             return;
         }
         if (st.mode() != WineCellarState.Mode.BREW) {
-            p.sendMessage("§c只有酿造模式下才能设置自动陈化！");
+            p.sendMessage("§c只有釀造模式下才能設置自動陳化！");
             return;
         }
         st.autoAge(!st.autoAge());
         st.save(manager);
         p.sendMessage(st.autoAge()
-                ? "§a已开启自动陈化：酿造完成后自动开始陈化！"
-                : "§7已关闭自动陈化。");
+                ? "§a已開啓自動陳化：釀造完成後自動開始陳化！"
+                : "§7已關閉自動陳化。");
     }
 
     /**
-     * 清空机器：普通点击仅处理污染态；{@code force=true}（<b>非运行态 shift+右键</b>）
-     * 直接排空机内已有液体并复原，方便玩家中途换料重来。
+     * 清空機器：普通點擊僅處理污染態；{@code force=true}（<b>非運行態 shift+右鍵</b>）
+     * 直接排空機內已有液體並復原，方便玩家中途換料重來。
      *
-     * <p>注意：这里清的是<b>机器的液体与酒曲记录</b>，不是删除槽位里的物品堆——
-     * 添料区/酒曲槽中玩家尚未被吸收的物品属于玩家物品，原样保留在槽位中。</p>
+     * <p>注意：這裏清的是<b>機器的液體與酒麴記錄</b>，不是刪除槽位裏的物品堆——
+     * 添料區/酒麴槽中玩家尚未被吸收的物品屬於玩家物品，原樣保留在槽位中。</p>
      */
     private static void clearContaminated(Player p, Block manager, boolean force) {
         WineCellarState st = WineCellarState.get(manager);
         if (st.phase() == WineCellarState.Phase.RUNNING) {
-            p.sendMessage("§c机器运行中，无法清空！");
+            p.sendMessage("§c機器運行中，無法清空！");
             return;
         }
         boolean contaminated = st.phase() == WineCellarState.Phase.CONTAMINATED;
         if (st.units() <= 0 && st.yeast() == null && !contaminated) {
-            if (force) p.sendMessage("§7酒窖内没有可清空的液体。");
+            if (force) p.sendMessage("§7酒窖內沒有可清空的液體。");
             return;
         }
         if (!force && !contaminated) return;
         boolean hadYeast = st.yeast() != null;
         st.clear();
         st.save(manager);
-        p.sendMessage(hadYeast ? "§a酒窖已清空复原，已一并清除酒曲。" : "§a酒窖已清空复原。");
+        p.sendMessage(hadYeast ? "§a酒窖已清空復原，已一併清除酒麴。" : "§a酒窖已清空復原。");
     }
 
     private static void woolClick(Player p, Block manager) {
@@ -1198,11 +1198,11 @@ public final class CellarMenu {
             case RUNNING -> {
                 if (st.mode() == WineCellarState.Mode.BREW) {
                     st.contaminate();
-                    p.sendMessage("§c液体全部报废！");
+                    p.sendMessage("§c液體全部報廢！");
                     manager.getWorld().playSound(manager.getLocation(), Sound.ENTITY_TNT_PRIMED, 1f, 1f);
                 } else {
                     st.phase(WineCellarState.Phase.READY);
-                    p.sendMessage("§a陈化已停止，可放置玻璃瓶出酒。");
+                    p.sendMessage("§a陳化已停止，可放置玻璃瓶出酒。");
                 }
                 st.save(manager);
             }
@@ -1212,28 +1212,28 @@ public final class CellarMenu {
 
     private static void start(Player p, WineCellarState st, Block manager) {
         if (!CellarStructure.matches(manager, false)) {
-            p.sendMessage("§c多方块结构不完整，无法启动酿造！");
+            p.sendMessage("§c多方塊結構不完整，無法啓動釀造！");
             return;
         }
         if (!hasEnoughPower(manager)) {
-            p.sendMessage("§c电量不足！");
+            p.sendMessage("§c電量不足！");
             return;
         }
         if (st.yeast() == null) {
-            p.sendMessage("§c必须加入一种酒曲才能开始配方！");
+            p.sendMessage("§c必須加入一種酒麴才能開始配方！");
             return;
         }
         if (st.juiceUnits() <= 0) {
-            p.sendMessage("§c盆中只有清水，需要先投入果汁才能酿造！");
+            p.sendMessage("§c盆中只有清水，需要先投入果汁才能釀造！");
             return;
         }
         if (st.mode() == WineCellarState.Mode.AGE) {
             startAgeOrNothing(p, st, manager);
             return;
         }
-        // 按材料份数匹配：池内各原料总份数（每单位果汁按组成折算材料数，如 1 单位
-        // 甜浆果汁 = 3 份甜浆果），与配方 ingredient 数量成整数倍比例时优先按配方产出
-        // （清水不参与匹配）
+        // 按材料份數匹配：池內各原料總份數（每單位果汁按組成折算材料數，如 1 單位
+        // 甜漿果汁 = 3 份甜漿果），與配方 ingredient 數量成整數倍比例時優先按配方產出
+        // （清水不參與匹配）
         Map<String, Double> portions = new LinkedHashMap<>();
         for (WineCellarState.Liquid lq : st.liquids()) {
             for (Map.Entry<String, Double> e : lq.contents().entrySet()) {
@@ -1241,46 +1241,46 @@ public final class CellarMenu {
             }
         }
         CellarRecipe.MatchResult cm = CellarRecipe.match(portions);
-        // 配方批次豁免 8 单位最低液位（1 倍配方可能只有几单位）；通用果酒仍需 ≥8
+        // 配方批次豁免 8 單位最低液位（1 倍配方可能只有幾單位）；通用果酒仍需 ≥8
         if (cm == null && st.units() < 8) {
-            p.sendMessage("§c液位不足 8 单位，无法启动！");
+            p.sendMessage("§c液位不足 8 單位，無法啓動！");
             return;
         }
-        // 酿造时长：测试模式（cellar.yml options.test-mode）启动后立即完成；
-        // 正式时长 20~40 分钟随机
+        // 釀造時長：測試模式（cellar.yml options.test-mode）啓動後立即完成；
+        // 正式時長 20~40 分鐘隨機
         long duration = com.haiman233.worldtaste.load.CellarLoader.testMode
                 ? 0L
                 : (20 + ThreadLocalRandom.current().nextInt(21)) * 60_000L;
         st.startRun(p, duration);
         st.setCellarRecipe(cm != null ? cm.recipe.key : null, cm != null ? cm.multiplier : 0);
         st.save(manager);
-        p.sendMessage("§a酿造开始！"
+        p.sendMessage("§a釀造開始！"
                 + (com.haiman233.worldtaste.load.CellarLoader.testMode
-                        ? "§7（测试模式：立即完成）"
-                        : "§7预计 " + fmt(duration) + " 完成")
+                        ? "§7（測試模式：立即完成）"
+                        : "§7預計 " + fmt(duration) + " 完成")
                 + (cm != null ? " §7配方: §e" + cm.recipe.key
-                        + " §7(×" + cm.multiplier + "，产出 §e" + st.juiceUnits() + " 单位§7)"
+                        + " §7(×" + cm.multiplier + "，產出 §e" + st.juiceUnits() + " 單位§7)"
                         : ""));
     }
 
     private static void startAgeOrNothing(Player p, WineCellarState st, Block manager) {
         if (st.mode() != WineCellarState.Mode.AGE) return;
         if (!CellarStructure.matches(manager, false)) {
-            p.sendMessage("§c多方块结构不完整，无法开始陈化！");
+            p.sendMessage("§c多方塊結構不完整，無法開始陳化！");
             return;
         }
         if (!hasEnoughPower(manager)) {
-            p.sendMessage("§c电量不足！");
+            p.sendMessage("§c電量不足！");
             return;
         }
         if (!st.hasAlcohol()) {
-            p.sendMessage("§c没有含酒精的液体，无法陈化！");
+            p.sendMessage("§c沒有含酒精的液體，無法陳化！");
             return;
         }
         st.startRun(p, 0);
         st.nextGrowthAt(WineCellarState.GAME_DAY_MS);
         st.save(manager);
-        p.sendMessage("§a陈化开始！每完整游戏日酒精度按配置比例增长。");
+        p.sendMessage("§a陳化開始！每完整遊戲日酒精度按配置比例增長。");
     }
 
     // ===== 展示物品 =====
@@ -1290,35 +1290,35 @@ public final class CellarMenu {
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(st.mode() == WineCellarState.Mode.BREW
-                    ? ChatColor.GOLD + "酿造模式" : ChatColor.AQUA + "陈化模式");
+                    ? ChatColor.GOLD + "釀造模式" : ChatColor.AQUA + "陳化模式");
             List<String> lore = new ArrayList<>();
             if (st.phase() == WineCellarState.Phase.RUNNING) {
                 if (st.mode() == WineCellarState.Mode.BREW) {
-                    lore.add(ChatColor.GRAY + "剩余: " + ChatColor.YELLOW
+                    lore.add(ChatColor.GRAY + "剩餘: " + ChatColor.YELLOW
                             + fmt(Math.max(0, st.durationMs() - st.elapsedMs())));
                 } else {
-                    // 只按完整游戏日计数：不足 1 日的零头不计入陈化天数、也不触发酒精度增长
+                    // 只按完整遊戲日計數：不足 1 日的零頭不計入陳化天數、也不觸發酒精度增長
                     long days = st.elapsedMs() / WineCellarState.GAME_DAY_MS;
-                    lore.add(ChatColor.GRAY + "已陈化: " + ChatColor.YELLOW + days + ChatColor.GRAY + " 游戏日");
-                    lore.add(ChatColor.DARK_GRAY + "不满一个完整游戏日不计入");
+                    lore.add(ChatColor.GRAY + "已陳化: " + ChatColor.YELLOW + days + ChatColor.GRAY + " 遊戲日");
+                    lore.add(ChatColor.DARK_GRAY + "不滿一個完整遊戲日不計入");
                 }
-                lore.add(ChatColor.GRAY + "电力不足时酿造/陈化直接失败！");
+                lore.add(ChatColor.GRAY + "電力不足時釀造/陳化直接失敗！");
             } else {
-                lore.add(ChatColor.GRAY + "当前未运行");
+                lore.add(ChatColor.GRAY + "當前未運行");
             }
             lore.add("");
             lore.add(st.mode() == WineCellarState.Mode.BREW
-                    ? ChatColor.GRAY + "酿造: 糖分×比率+酒曲 → 酒精度，20~40 分钟"
-                    : ChatColor.GRAY + "陈化: 每完整游戏日酒精度按比例增长");
+                    ? ChatColor.GRAY + "釀造: 糖分×比率+酒麴 → 酒精度，20~40 分鐘"
+                    : ChatColor.GRAY + "陳化: 每完整遊戲日酒精度按比例增長");
             if (st.mode() == WineCellarState.Mode.BREW) {
                 lore.add(st.autoAge()
-                        ? ChatColor.GREEN + "自动陈化: 已开启（酿造完成后自动陈化）"
-                        : ChatColor.GRAY + "自动陈化: 已关闭");
-                lore.add(ChatColor.YELLOW + "Shift+右键切换自动陈化！");
+                        ? ChatColor.GREEN + "自動陳化: 已開啓（釀造完成後自動陳化）"
+                        : ChatColor.GRAY + "自動陳化: 已關閉");
+                lore.add(ChatColor.YELLOW + "Shift+右鍵切換自動陳化！");
             }
-            lore.add(ChatColor.GRAY + "需要含酒精液体才能陈化");
+            lore.add(ChatColor.GRAY + "需要含酒精液體才能陳化");
             lore.add("");
-            lore.add(ChatColor.YELLOW + "点击切换模式");
+            lore.add(ChatColor.YELLOW + "點擊切換模式");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
@@ -1332,14 +1332,14 @@ public final class CellarMenu {
         if (meta != null) {
             List<String> lore = new ArrayList<>();
             if (st.phase() == WineCellarState.Phase.RUNNING) {
-                meta.setDisplayName(ChatColor.YELLOW + "污染清空按钮");
-                lore.add(ChatColor.RED + "机器运行中，无法清空");
+                meta.setDisplayName(ChatColor.YELLOW + "污染清空按鈕");
+                lore.add(ChatColor.RED + "機器運行中，無法清空");
             } else {
-                meta.setDisplayName(ChatColor.YELLOW + (contaminated ? "清空机器（复原）" : "污染清空按钮"));
-                lore.add(contaminated ? ChatColor.GRAY + "点击清空污染液体并复原机器"
-                        : ChatColor.DARK_GRAY + "液体报废后用于复原机器");
-                lore.add(ChatColor.YELLOW + "Shift + 右键：直接清空机内液体");
-                lore.add(ChatColor.DARK_GRAY + "（一并清除已放入的酒曲）");
+                meta.setDisplayName(ChatColor.YELLOW + (contaminated ? "清空機器（復原）" : "污染清空按鈕"));
+                lore.add(contaminated ? ChatColor.GRAY + "點擊清空污染液體並復原機器"
+                        : ChatColor.DARK_GRAY + "液體報廢后用於復原機器");
+                lore.add(ChatColor.YELLOW + "Shift + 右鍵：直接清空機內液體");
+                lore.add(ChatColor.DARK_GRAY + "（一併清除已放入的酒麴）");
             }
             meta.setLore(lore);
             it.setItemMeta(meta);
@@ -1355,34 +1355,34 @@ public final class CellarMenu {
             List<String> lore = new ArrayList<>();
             switch (st.phase()) {
                 case IDLE -> {
-                    meta.setDisplayName(ChatColor.RED + "启动");
+                    meta.setDisplayName(ChatColor.RED + "啓動");
                     lore.add(ChatColor.GRAY + "液位: " + st.units() + "/" + WineCellarState.CAPACITY
                             + "（通用 ≥8，配方不限）");
-                    lore.add(st.yeast() == null ? ChatColor.RED + "未加入酒曲" : ChatColor.GREEN + "酒曲已加入");
-                    lore.add(ChatColor.GRAY + "模式: " + (st.mode() == WineCellarState.Mode.BREW ? "酿造" : "陈化"));
+                    lore.add(st.yeast() == null ? ChatColor.RED + "未加入酒麴" : ChatColor.GREEN + "酒麴已加入");
+                    lore.add(ChatColor.GRAY + "模式: " + (st.mode() == WineCellarState.Mode.BREW ? "釀造" : "陳化"));
                     if (st.mode() == WineCellarState.Mode.AGE) {
-                        lore.add(ChatColor.RED + "陈化需要含酒精的液体");
+                        lore.add(ChatColor.RED + "陳化需要含酒精的液體");
                     }
-                    lore.add(ChatColor.YELLOW + "点击启动");
+                    lore.add(ChatColor.YELLOW + "點擊啓動");
                 }
                 case RUNNING -> {
                     meta.setDisplayName(ChatColor.GREEN + (st.mode() == WineCellarState.Mode.BREW
-                            ? "酿造中 · 点击关闭" : "陈化中 · 点击停止"));
-                    lore.add(ChatColor.GRAY + "正在耗电运行（断电=直接失败报废）");
+                            ? "釀造中 · 點擊關閉" : "陳化中 · 點擊停止"));
+                    lore.add(ChatColor.GRAY + "正在耗電運行（斷電=直接失敗報廢）");
                     if (st.mode() == WineCellarState.Mode.BREW) {
-                        lore.add(ChatColor.RED + "酿造中关闭将报废全部液体！");
+                        lore.add(ChatColor.RED + "釀造中關閉將報廢全部液體！");
                     } else {
-                        lore.add(ChatColor.GRAY + "关闭后停止计时，可出酒");
+                        lore.add(ChatColor.GRAY + "關閉後停止計時，可出酒");
                     }
                 }
                 case READY -> {
-                    meta.setDisplayName(ChatColor.GREEN + "已完成 · 下方槽位放玻璃瓶灌装");
-                    lore.add(ChatColor.GRAY + "酒精度: " + fmt(st.alcohol()) + "°  液位: " + st.units() + " 单位");
+                    meta.setDisplayName(ChatColor.GREEN + "已完成 · 下方槽位放玻璃瓶灌裝");
+                    lore.add(ChatColor.GRAY + "酒精度: " + fmt(st.alcohol()) + "°  液位: " + st.units() + " 單位");
                     if (st.mode() == WineCellarState.Mode.BREW) {
-                        lore.add(ChatColor.GRAY + "切换陈化模式后点击羊毛可开始陈化");
+                        lore.add(ChatColor.GRAY + "切換陳化模式後點擊羊毛可開始陳化");
                     }
                 }
-                default -> meta.setDisplayName(ChatColor.DARK_RED + "液体已报废");
+                default -> meta.setDisplayName(ChatColor.DARK_RED + "液體已報廢");
             }
             meta.setLore(lore);
             it.setItemMeta(meta);

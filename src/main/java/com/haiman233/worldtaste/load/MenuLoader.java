@@ -7,7 +7,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-/** 加载 menus.yml → {@link WT#menus}（供机器取 GUI 布局）。支持 slots 单槽与 a-b 区间写法。 */
+/** 加載 menus.yml → {@link WT#menus}（供機器取 GUI 佈局）。支持 slots 單槽與 a-b 區間寫法。 */
 public final class MenuLoader {
 
     private MenuLoader() {}
@@ -42,13 +42,13 @@ public final class MenuLoader {
                 WT.menus.put(id, menu);
                 ok++;
             } catch (Exception e) {
-                WT.log("menus.yml " + id + " 失败: " + e);
+                WT.log("menus.yml " + id + " 失敗: " + e);
             }
         }
-        WT.plugin.getLogger().info("menus.yml: 注册 " + ok);
+        WT.plugin.getLogger().info("menus.yml: 註冊 " + ok);
     }
 
-    /** 解析槽位键：单值 "6" 或区间 "10-17"。非法/反转/越界（>53）返回空数组（仅跳过该槽，不连累整个菜单）。 */
+    /** 解析槽位鍵：單值 "6" 或區間 "10-17"。非法/反轉/越界（>53）返回空數組（僅跳過該槽，不連累整個菜單）。 */
     private static int[] parseSlots(String key) {
         key = key.trim();
         int dash = key.indexOf('-');
@@ -56,9 +56,9 @@ public final class MenuLoader {
             try {
                 int lo = Integer.parseInt(key.substring(0, dash));
                 int hi = Integer.parseInt(key.substring(dash + 1));
-                // 反转区间(如 17-10)曾导致 NegativeArraySizeException 逃出 NumberFormatException
-                // 捕获、连累整个菜单注册失败；越界槽位(>53)则会在 constructMenu 越界炸掉机器注册，
-                // 此处一并校验后返回空数组，实现故障隔离。
+                // 反轉區間(如 17-10)曾導致 NegativeArraySizeException 逃出 NumberFormatException
+                // 捕獲、連累整個菜單註冊失敗；越界槽位(>53)則會在 constructMenu 越界炸掉機器註冊，
+                // 此處一併校驗後返回空數組，實現故障隔離。
                 if (lo >= 0 && hi < 54 && hi >= lo) {
                     int[] out = new int[hi - lo + 1];
                     for (int i = 0; i < out.length; i++) out[i] = lo + i;

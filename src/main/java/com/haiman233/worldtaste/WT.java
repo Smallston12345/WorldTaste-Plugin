@@ -7,20 +7,20 @@ import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.inventory.ItemStack;
 
-/** 全局上下文：持有插件引用与各注册表，供各 loader 共享。 */
+/** 全局上下文：持有插件引用與各註冊表，供各 loader 共享。 */
 public final class WT {
 
     private WT() {}
 
     public static WorldTastePlugin plugin;
 
-    /** id(小写) -> ItemGroup */
+    /** id(小寫) -> ItemGroup */
     public static final Map<String, ItemGroup> groups = new HashMap<>();
-    /** id(大写) -> 自定义 RecipeType（来自 recipe_types.yml） */
+    /** id(大寫) -> 自定義 RecipeType（來自 recipe_types.yml） */
     public static final Map<String, RecipeType> recipeTypes = new HashMap<>();
-    /** id(大写) -> 预加载的展示物品（供跨文件 material_type:slimefun 引用解析） */
+    /** id(大寫) -> 預加載的展示物品（供跨文件 material_type:slimefun 引用解析） */
     public static final Map<String, ItemStack> preload = new HashMap<>();
-    /** id -> 菜单定义（来自 menus.yml，供机器 GUI 使用） */
+    /** id -> 菜單定義（來自 menus.yml，供機器 GUI 使用） */
     public static final Map<String, MenuDef> menus = new HashMap<>();
 
     public static ItemGroup group(String id) {

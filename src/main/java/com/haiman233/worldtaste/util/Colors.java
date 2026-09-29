@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 import org.bukkit.ChatColor;
 
 /**
- * 颜色工具：兼容 WorldTaste 中三种十六进制写法 {@code &#RRGGBB}、{@code {#RRGGBB}}，
- * 以及标准 {@code &a/&l/...} 颜色/格式码。
+ * 顏色工具：兼容 WorldTaste 中三種十六進制寫法 {@code &#RRGGBB}、{@code {#RRGGBB}}，
+ * 以及標準 {@code &a/&l/...} 顏色/格式碼。
  */
 public final class Colors {
 

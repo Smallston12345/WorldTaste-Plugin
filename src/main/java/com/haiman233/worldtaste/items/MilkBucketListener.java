@@ -13,11 +13,11 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 动物奶桶挤取：空桶（原版铁桶）右键对应生物 → 获得对应的奶桶饮品，
- * 与原版挤牛奶同款交互（主手桶消耗 1 个；整堆持有时数量 -1、奶桶入包）。
+ * 動物奶桶擠取：空桶（原版鐵桶）右鍵對應生物 → 獲得對應的奶桶飲品，
+ * 與原版擠牛奶同款交互（主手桶消耗 1 個；整堆持有時數量 -1、奶桶入包）。
  *
- * <p>对应关系：骆驼 → 骆驼奶、马 → 马奶、羊 → 羊奶、驴 → 驴奶
- * （物品本体在 foods.yml 饮料分类中定义，原合成配方已移除）。</p>
+ * <p>對應關係：駱駝 → 駱駝奶、馬 → 馬奶、羊 → 羊奶、驢 → 驢奶
+ * （物品本體在 foods.yml 飲料分類中定義，原合成配方已移除）。</p>
  */
 public final class MilkBucketListener implements Listener {
 
@@ -41,7 +41,7 @@ public final class MilkBucketListener implements Listener {
         if (milk == null) return;
         Player p = e.getPlayer();
         ItemStack held = p.getInventory().getItemInMainHand();
-        // 仅原版空铁桶可挤取（粘液物品桶不算）
+        // 僅原版空鐵桶可擠取（粘液物品桶不算）
         if (held == null || held.getType() != Material.BUCKET
                 || SlimefunItem.getByItem(held) != null) return;
         e.setCancelled(true);

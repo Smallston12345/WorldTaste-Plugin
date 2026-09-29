@@ -9,8 +9,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 加载 geo_resources.yml：以普通物品注册（指南可见、可被配方引用），并注册为真正的 {@link WTGeoResource}，
- * 使 GEO 采掘机能按 supply 产出、GEO 扫描仪能探测。
+ * 加載 geo_resources.yml：以普通物品註冊（指南可見、可被配方引用），並註冊為真正的 {@link WTGeoResource}，
+ * 使 GEO 採掘機能按 supply 產出、GEO 掃描儀能探測。
  */
 public final class GeoLoader {
 
@@ -39,9 +39,9 @@ public final class GeoLoader {
                 res.register();
                 ok++;
             } catch (Exception e) {
-                WT.log("geo_resources.yml " + id + " 注册失败: " + e);
+                WT.log("geo_resources.yml " + id + " 註冊失敗: " + e);
             }
         }
-        WT.plugin.getLogger().info("geo_resources.yml: 注册 " + ok);
+        WT.plugin.getLogger().info("geo_resources.yml: 註冊 " + ok);
     }
 }

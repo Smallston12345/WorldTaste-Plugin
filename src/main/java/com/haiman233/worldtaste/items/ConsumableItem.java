@@ -21,8 +21,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 /**
- * 消耗型食物（右键食用）。覆盖原 WT_eatConsumable 与独立食物脚本(yl/tang/jiu/yan/zhongdu 等)：
- * 主手消耗、副手校验(默认禁粘液物品；offhandTool 指定必备工具如 yan 打火石/xuejia 剪刀)、按 opts 恢复饥饿/饱和/消耗/空气/冻结并施加药水。
+ * 消耗型食物（右鍵食用）。覆蓋原 WT_eatConsumable 與獨立食物腳本(yl/tang/jiu/yan/zhongdu 等)：
+ * 主手消耗、副手校驗(默認禁粘液物品；offhandTool 指定必備工具如 yan 打火石/xuejia 剪刀)、按 opts 恢復飢餓/飽和/消耗/空氣/凍結並施加藥水。
  */
 public class ConsumableItem extends SimpleSlimefunItem<ItemUseHandler> implements NotPlaceable {
 
@@ -37,7 +37,7 @@ public class ConsumableItem extends SimpleSlimefunItem<ItemUseHandler> implement
     public ItemUseHandler getItemHandler() {
         return e -> {
             Player p = e.getPlayer();
-            // 潜行右键不食用：让出放置行为（食物可放置且挖掘保留粘液数据，见 PlantGuardListener）
+            // 潛行右鍵不食用：讓出放置行為（食物可放置且挖掘保留粘液數據，見 PlantGuardListener）
             if (p.isSneaking()) return;
             if (opts.requireHungry && p.getFoodLevel() >= 20) return;
             PlayerInventory inv = p.getInventory();
@@ -45,23 +45,23 @@ public class ConsumableItem extends SimpleSlimefunItem<ItemUseHandler> implement
 
             if (opts.offhandTool != null) {
                 if (off == null || off.getType() != opts.offhandTool) {
-                    p.sendMessage("您必须使用主手且副手持有 " + com.haiman233.worldtaste.util.ZhNames.orEnglish(opts.offhandTool) + "！");
+                    p.sendMessage("您必須使用主手且副手持有 " + com.haiman233.worldtaste.util.ZhNames.orEnglish(opts.offhandTool) + "！");
                     return;
                 }
             } else if (off != null && SlimefunItem.getByItem(off) != null) {
-                p.sendMessage("您必须使用主手进食且副手不能持有粘液科技物品！");
+                p.sendMessage("您必須使用主手進食且副手不能持有粘液科技物品！");
                 return;
             }
 
             ItemStack main = inv.getItemInMainHand();
             if (main == null || main.getAmount() <= 0) return;
-            // 到 0 必须清空主手槽位，避免 0 数量幽灵物品残留（否则下次右键仍被识别/显示）
+            // 到 0 必須清空主手槽位，避免 0 數量幽靈物品殘留（否則下次右鍵仍被識別/顯示）
             Stacks.consumeOneInMainHand(inv);
             if (opts.offhandTool != null && opts.consumeOffhand) {
-                // 工具类副手（打火石/剪刀等有耐久物品）按 1 点耐久损耗，与原版使用工具一致；
-                // 原 yan.js/xuejia.js 的 setAmount-1 整件消耗属移植保真遗留（玩家反馈不合理）。
-                // 不可损耗工具（无耐久上限）回退整件消耗；无敌工具不损耗也不消耗；
-                // 耐久耗尽由 Stacks 清空副手槽位，防止 0 数量幽灵物品被 getType() 校验无限复用。
+                // 工具類副手（打火石/剪刀等有耐久物品）按 1 點耐久損耗，與原版使用工具一致；
+                // 原 yan.js/xuejia.js 的 setAmount-1 整件消耗屬移植保真遺留（玩家反饋不合理）。
+                // 不可損耗工具（無耐久上限）回退整件消耗；無敵工具不損耗也不消耗；
+                // 耐久耗盡由 Stacks 清空副手槽位，防止 0 數量幽靈物品被 getType() 校驗無限複用。
                 if (!Stacks.damageToolInOffHand(inv, 1)) {
                     Stacks.consumeOneInOffHand(inv);
                 }
@@ -91,10 +91,10 @@ public class ConsumableItem extends SimpleSlimefunItem<ItemUseHandler> implement
             for (Potion pt : opts.potions) {
                 PotionEffectType type = PotionEffectType.getByName(pt.type);
                 if (type != null) p.addPotionEffect(new PotionEffect(type, pt.duration, pt.amplifier, false));
-                else WT.log("未知药水类型: " + pt.type);
+                else WT.log("未知藥水類型: " + pt.type);
             }
 
-            // 异域花园联动：酒类饮品（items.yml alcohol 字段）饮用后累加其酒精度
+            // 異域花園聯動：酒類飲品（items.yml alcohol 字段）飲用後累加其酒精度
             ExoticGardenHook.onDrink(p, this.getId());
 
             if (opts.message != null) p.sendMessage(opts.message);

@@ -3,7 +3,7 @@ version: 1.9.3-standalone
 main: com.haiman233.worldtaste.WorldTastePlugin
 api-version: '1.20'
 author: haiman233
-description: 尘世百味（独立附属，由RSC版改写而来）
+description: 塵世百味（獨立附屬，由RSC版改寫而來）
 depend: [Slimefun]
 softdepend: [Gastronomicon, ExoticGarden, Cultivation, InfinityExpansion, LogiTech, JustEnoughGuide]
 website: https://github.com/haiman233/WorldTaste

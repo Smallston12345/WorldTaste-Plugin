@@ -21,8 +21,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 /**
- * 百味钓竿钓鱼（对齐原 diaoyu.js + wt_fishing.js）：主手持指定钓竿、副手持已知鱼饵时，
- * 取消原掉落、消耗 1 鱼饵、按权重随机产出 1 个物品并拉向玩家。
+ * 百味釣竿釣魚（對齊原 diaoyu.js + wt_fishing.js）：主手持指定釣竿、副手持已知魚餌時，
+ * 取消原掉落、消耗 1 魚餌、按權重隨機產出 1 個物品並拉向玩家。
  */
 public final class FishingListener implements Listener {
 
@@ -52,7 +52,7 @@ public final class FishingListener implements Listener {
             }
         }
         int total = baits.values().stream().mapToInt(b -> b.drops.size()).sum();
-        WT.plugin.getLogger().info("行为数据: fishing rod=" + rodId + " baits=" + baits.size() + " drops=" + total);
+        WT.plugin.getLogger().info("行為數據: fishing rod=" + rodId + " baits=" + baits.size() + " drops=" + total);
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -66,35 +66,35 @@ public final class FishingListener implements Listener {
         Bait table = baits.get(bait.getId());
         if (table == null) return;
 
-        // 先选并解析掉落物；无法解析（如未装对应附属）时不取消事件、不扣饵、保留原渔获
+        // 先選並解析掉落物；無法解析（如未裝對應附屬）時不取消事件、不扣餌、保留原漁獲
         Drop d = select(table);
         if (d == null) return;
         ItemStack stack = resolve(d.id);
         if (stack == null) return;
 
         e.setCancelled(true);
-        // 鱼饵耗尽到 0 必须清空副手槽位：否则残留 0 数量幽灵物品仍被识别为该鱼饵，
-        // 玩家可无消耗无限钓获（复制漏洞）。
+        // 魚餌耗盡到 0 必須清空副手槽位：否則殘留 0 數量幽靈物品仍被識別為該魚餌，
+        // 玩家可無消耗無限釣獲（複製漏洞）。
         Stacks.consumeOneInOffHand(p.getInventory());
         e.getCaught().remove();
-        // 关键：取消 CAUGHT_FISH 后必须彻底移除鱼钩实体——
-        // Paper 的 FishingHook.catchFish 在事件取消时不会自动收回钩子：仅清"持有鱼"状态
-        // 会让钩子残留水中继续 tick（浮漂不收回、旧钩子持续触发 CAUGHT_FISH），
-        // 导致"连续收杆抛竿可多次收获"；remove() 后玩家下次右键会自动复位 fishing 引用并抛新竿。
+        // 關鍵：取消 CAUGHT_FISH 後必須徹底移除魚鈎實體——
+        // Paper 的 FishingHook.catchFish 在事件取消時不會自動收回鈎子：僅清"持有魚"狀態
+        // 會讓鈎子殘留水中繼續 tick（浮漂不收回、舊鈎子持續觸發 CAUGHT_FISH），
+        // 導致"連續收杆拋竿可多次收穫"；remove() 後玩家下次右鍵會自動復位 fishing 引用並拋新竿。
         e.getHook().remove();
 
         stack.setAmount(1);
-        // 产物优先进背包；背包满时以掉落物形态掉落在玩家位置
+        // 產物優先進揹包；揹包滿時以掉落物形態掉落在玩家位置
         java.util.Map<Integer, ItemStack> leftover = p.getInventory().addItem(stack);
         if (!leftover.isEmpty()) {
             Item ent = p.getWorld().dropItem(p.getLocation().add(0, 1, 0), leftover.get(0));
             ent.setPickupDelay(2);
         }
-        p.sendMessage("§b恭喜你钓到了 " + displayName(stack) + " §b*1");
+        p.sendMessage("§b恭喜你釣到了 " + displayName(stack) + " §b*1");
         p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1f, 1f);
     }
 
-    /** 按权重随机选 1 个掉落。total 在 load 期预算（消除每次钓获的求和）。 */
+    /** 按權重隨機選 1 個掉落。total 在 load 期預算（消除每次釣獲的求和）。 */
     private static Drop select(Bait table) {
         if (table.total <= 0) return null;
         double r = java.util.concurrent.ThreadLocalRandom.current().nextDouble() * table.total;
@@ -125,7 +125,7 @@ public final class FishingListener implements Listener {
         Drop(String id, int weight) { this.id = id; this.weight = weight; }
     }
 
-    /** 一个鱼饵的掉落表 + 预算权重总和（load 期一次计算，select 直接用，消除每次钓获的求和）。 */
+    /** 一個魚餌的掉落表 + 預算權重總和（load 期一次計算，select 直接用，消除每次釣獲的求和）。 */
     private static final class Bait {
         final List<Drop> drops;
         final int total;

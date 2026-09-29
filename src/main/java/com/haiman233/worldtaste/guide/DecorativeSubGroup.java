@@ -18,37 +18,37 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 /**
- * 装饰分隔板组（groups.yml type: button，RSC 中 actions: none 的对应物）。
+ * 裝飾分隔板組（groups.yml type: button，RSC 中 actions: none 的對應物）。
  *
- * <p>两类装饰物：
+ * <p>兩類裝飾物：
  * <ul>
- *   <li>玻璃板（材质 *_STAINED_GLASS_PANE / GLASS_PANE）：清洗为「普通原版玻璃板」
- *       （无名字/无 lore/无贴图变化）；</li>
- *   <li>区段标签（头颅等其它材质，如「主题餐饮」）：保留原名字与头颅贴图，仅确保无 lore。</li>
+ *   <li>玻璃板（材質 *_STAINED_GLASS_PANE / GLASS_PANE）：清洗為「普通原版玻璃板」
+ *       （無名字/無 lore/無貼圖變化）；</li>
+ *   <li>區段標籤（頭顱等其它材質，如「主題餐飲」）：保留原名字與頭顱貼圖，僅確保無 lore。</li>
  * </ul>
- * 两者均打上 PDC 标记：原版指南路径由 WTNestedGroup.openVanilla 渲染并绑定空点击处理器；
- * JEG 指南路径点击时触发 ItemGroupButtonClickEvent，由 JegGuideListener 依据该标记取消
- * 事件——JEG 的 EventBuilder.ifSuccess 语义为「已取消 = 点击已处理」，菜单纹丝不动，
- * 既打不开也拿不走。另外覆写 getItem(Player) 去掉 Slimefun 默认加上的
- * 「打开物品组」提示 lore（装饰板不可打开，不需要该提示）。</p>
+ * 兩者均打上 PDC 標記：原版指南路徑由 WTNestedGroup.openVanilla 渲染並綁定空點擊處理器；
+ * JEG 指南路徑點擊時觸發 ItemGroupButtonClickEvent，由 JegGuideListener 依據該標記取消
+ * 事件——JEG 的 EventBuilder.ifSuccess 語義為「已取消 = 點擊已處理」，菜單紋絲不動，
+ * 既打不開也拿不走。另外覆寫 getItem(Player) 去掉 Slimefun 默認加上的
+ * 「打開物品組」提示 lore（裝飾板不可打開，不需要該提示）。</p>
  *
- * <p>可见性（Slimefun 的 ItemGroup.isVisible 逻辑）：
+ * <p>可見性（Slimefun 的 ItemGroup.isVisible 邏輯）：
  * <ol>
- *   <li>入口检查 items 字段非空——靠构造时塞入的哑物品通过；</li>
- *   <li>遍历 getItems() 调用 item.isDisabledIn(world)——未注册物品在这里会抛
- *       IllegalArgumentException，因此哑物品绝不能出现在 getItems() 结果里：
- *       本类覆写 getItems()，惰性挑一个已注册、非隐藏、未禁用的真实物品返回。</li>
+ *   <li>入口檢查 items 字段非空——靠構造時塞入的啞物品通過；</li>
+ *   <li>遍歷 getItems() 調用 item.isDisabledIn(world)——未註冊物品在這裏會拋
+ *       IllegalArgumentException，因此啞物品絕不能出現在 getItems() 結果裏：
+ *       本類覆寫 getItems()，惰性挑一個已註冊、非隱藏、未禁用的真實物品返回。</li>
  * </ol>
- * 哑物品只进 items 字段、不注册进 Slimefun 注册表，搜索/作弊模式/指南均不可见。</p>
+ * 啞物品只進 items 字段、不註冊進 Slimefun 註冊表，搜索/作弊模式/指南均不可見。</p>
  */
 public class DecorativeSubGroup extends SubItemGroup {
 
     private static NamespacedKey markKey;
 
-    /** 清洗后的展示物品（玻璃板无名无 lore；头颅标签保留名字与贴图）。 */
+    /** 清洗後的展示物品（玻璃板無名無 lore；頭顱標籤保留名字與貼圖）。 */
     private final ItemStack displayItem;
 
-    /** 可见性循环用的真实物品（惰性解析 + 缓存）。 */
+    /** 可見性循環用的真實物品（惰性解析 + 緩存）。 */
     private SlimefunItem cachedVisibilityItem;
 
     public DecorativeSubGroup(NamespacedKey key, NestedItemGroup parent, ItemStack display, int tier) {
@@ -57,13 +57,13 @@ public class DecorativeSubGroup extends SubItemGroup {
         addVisibilityDummy();
     }
 
-    /** 覆写掉 Slimefun 默认的「打开物品组」提示 lore——装饰板不可打开，不需要该提示。 */
+    /** 覆寫掉 Slimefun 默認的「打開物品組」提示 lore——裝飾板不可打開，不需要該提示。 */
     @Override
     public ItemStack getItem(Player p) {
         return displayItem.clone();
     }
 
-    /** 识别标记 key：JegGuideListener 据此取消 JEG 的物品组点击事件。 */
+    /** 識別標記 key：JegGuideListener 據此取消 JEG 的物品組點擊事件。 */
     public static NamespacedKey markKey() {
         if (markKey == null) {
             markKey = new NamespacedKey(WT.plugin, "decorative_pane");
@@ -72,8 +72,8 @@ public class DecorativeSubGroup extends SubItemGroup {
     }
 
     /**
-     * 覆写可见性遍历：绝不返回未注册的哑物品（isDisabledIn 会抛异常炸掉整页渲染），
-     * 改回一个已注册的真实物品。解析失败返回空列表（该组不显示，但不会炸菜单）。
+     * 覆寫可見性遍歷：絕不返回未註冊的啞物品（isDisabledIn 會拋異常炸掉整頁渲染），
+     * 改回一個已註冊的真實物品。解析失敗返回空列表（該組不顯示，但不會炸菜單）。
      */
     @Override
     public List<SlimefunItem> getItems() {
@@ -96,8 +96,8 @@ public class DecorativeSubGroup extends SubItemGroup {
     }
 
     /**
-     * 塞入可见性哑物品：仅让 items 字段非空（isVisible 的入口检查），
-     * 不 register 进 Slimefun 注册表；配合 getItems() 覆写，它永远不会被遍历到。
+     * 塞入可見性啞物品：僅讓 items 字段非空（isVisible 的入口檢查），
+     * 不 register 進 Slimefun 註冊表；配合 getItems() 覆寫，它永遠不會被遍歷到。
      */
     private void addVisibilityDummy() {
         try {
@@ -106,13 +106,13 @@ public class DecorativeSubGroup extends SubItemGroup {
             SlimefunItem dummy = new SlimefunItem(this, stack, RecipeType.NULL, new ItemStack[9]);
             add(dummy);
         } catch (Throwable t) {
-            WT.log("装饰组 " + getKey().getKey() + " 哑物品创建失败，该玻璃板可能不显示: " + t);
+            WT.log("裝飾組 " + getKey().getKey() + " 啞物品創建失敗，該玻璃板可能不顯示: " + t);
         }
     }
 
     /**
-     * 展示物品清洗：玻璃板 → 无名字无 lore 的纯占位；
-     * 其它（头颅区段标签等）→ 保留原名字与贴图；两者统一清 lore 并打 PDC 标记。
+     * 展示物品清洗：玻璃板 → 無名字無 lore 的純佔位；
+     * 其它（頭顱區段標籤等）→ 保留原名字與貼圖；兩者統一清 lore 並打 PDC 標記。
      */
     private static ItemStack prepareDisplay(ItemStack src) {
         ItemStack out = src == null ? new ItemStack(Material.WHITE_STAINED_GLASS_PANE) : src.clone();

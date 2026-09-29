@@ -23,21 +23,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 酒窖管理器（machines.yml 中 script: jiujiao，材质酿造台）：酒窖多方块核心。
+ * 酒窖管理器（machines.yml 中 script: jiujiao，材質釀造台）：酒窖多方塊核心。
  *
- * <p>储电 500J，耗电 100J/t（仅多方块结构完整且蓄电充足时自 charge 扣除，
- * 电网会自动向其补电）。右键经 {@link BlockMenuPreset} 原生打开机器页面
- * （{@link CellarMenu}，结构与本体机器一致；结构不完整时页面内可查看多方块结构展示）。
- * 运行中双机（管理器/温控器）任一蓄电不足 → 酿造/陈化直接失败产生废液。</p>
+ * <p>儲電 500J，耗電 100J/t（僅多方塊結構完整且蓄電充足時自 charge 扣除，
+ * 電網會自動向其補電）。右鍵經 {@link BlockMenuPreset} 原生打開機器頁面
+ * （{@link CellarMenu}，結構與本體機器一致；結構不完整時頁面內可查看多方塊結構展示）。
+ * 運行中雙機（管理器/温控器）任一蓄電不足 → 釀造/陳化直接失敗產生廢液。</p>
  *
- * <p>耗电量经 {@link PowerConsumer} 暴露，注册时自动写入物品 lore。</p>
+ * <p>耗電量經 {@link PowerConsumer} 暴露，註冊時自動寫入物品 lore。</p>
  */
 public class WineCellarManager extends SlimefunItem implements EnergyNetComponent, PowerConsumer {
 
     public static final int CAPACITY = 500;
     public static final int CONSUMPTION = 100;
 
-    /** 结构校验缓存：partner() 一次调用替代逐 tick 的 matches()+partner() 双重 3×3×3 扫描。 */
+    /** 結構校驗緩存：partner() 一次調用替代逐 tick 的 matches()+partner() 雙重 3×3×3 掃描。 */
     private record StructureCheck(long expireAtTick, Block partner, TemperatureController ctrl) {}
 
     private static final Map<World, Map<Long, StructureCheck>> CHECKS = new HashMap<>();
@@ -46,13 +46,13 @@ public class WineCellarManager extends SlimefunItem implements EnergyNetComponen
         return ((long) (b.getX() & 0x3FFFFFF) << 38) | ((long) (b.getZ() & 0x3FFFFFF) << 12) | (b.getY() & 0xFFF);
     }
 
-    /** 结构被破坏时失效该位置的校验缓存（防止缓存窗口内向已拆除方块写电）。 */
+    /** 結構被破壞時失效該位置的校驗緩存（防止緩存窗口內向已拆除方塊寫電）。 */
     public static void invalidateStructureCheck(Block b) {
         Map<Long, StructureCheck> m = CHECKS.get(b.getWorld());
         if (m != null) m.remove(key(b));
     }
 
-    /** 缓存式结构校验：结构完整缓存 20 tick，不完整缓存 10 tick（补建后尽快恢复计时）。 */
+    /** 緩存式結構校驗：結構完整緩存 20 tick，不完整緩存 10 tick（補建後儘快恢復計時）。 */
     private static StructureCheck structureCheck(Block b) {
         World w = b.getWorld();
         long now = w.getGameTime();
@@ -85,7 +85,7 @@ public class WineCellarManager extends SlimefunItem implements EnergyNetComponen
                 if (check.ctrl() == null) return;
                 Block partner = check.partner();
                 TemperatureController ctrl = check.ctrl();
-                // 断电：酿造/陈化直接失败，液体报废（结构被拆仍为暂停，破坏事件本身会清数据）
+                // 斷電：釀造/陳化直接失敗，液體報廢（結構被拆仍為暫停，破壞事件本身會清數據）
                 if (getCharge(b.getLocation()) < CONSUMPTION
                         || ctrl.getCharge(partner.getLocation())
                                 < TemperatureController.CONSUMPTION) {
@@ -95,20 +95,20 @@ public class WineCellarManager extends SlimefunItem implements EnergyNetComponen
                     b.getWorld().playSound(b.getLocation(), Sound.ENTITY_TNT_PRIMED, 1f, 1f);
                     Player placer = st.placerId() != null ? Bukkit.getPlayer(st.placerId()) : null;
                     if (placer != null) {
-                        placer.sendMessage("§c酒窖电力中断，" + (brew ? "酿造" : "陈化")
-                                + "失败，液体已全部报废！");
+                        placer.sendMessage("§c酒窖電力中斷，" + (brew ? "釀造" : "陳化")
+                                + "失敗，液體已全部報廢！");
                     }
                     return;
                 }
-                // 双机电力协调：本轮从管理器与温控器各扣除消耗
+                // 雙機電力協調：本輪從管理器與温控器各扣除消耗
                 removeCharge(b.getLocation(), CONSUMPTION);
                 ctrl.removeCharge(partner.getLocation(), TemperatureController.CONSUMPTION);
                 CellarMenu.advance(st, b);
             }
         });
 
-        // 机器页面（粘液原生 BlockMenuPreset：右键打开、界面内容随方块持久化、多玩家共享查看）。
-        // 本分支 BlockMenuPreset 构造即自注册进注册表（不经过 addItemHandler）
+        // 機器頁面（粘液原生 BlockMenuPreset：右鍵打開、界面內容隨方塊持久化、多玩家共享查看）。
+        // 本分支 BlockMenuPreset 構造即自注冊進註冊表（不經過 addItemHandler）
         new BlockMenuPreset(item.getItemId(), ChatColor.GOLD + "酒窖管理器") {
             @Override
             public void init() {

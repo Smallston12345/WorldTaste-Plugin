@@ -18,16 +18,16 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 种植与放置保护（统一走 {@link BlockPlaceEvent}，不依赖 Slimefun 内部放置流程）：
+ * 種植與放置保護（統一走 {@link BlockPlaceEvent}，不依賴 Slimefun 內部放置流程）：
  * <ol>
- *   <li>所有作物种子（{@link CropBlock}）放置校验：显式 plantOn 或按材质推断的种植要求
- *       （耕地/灵魂沙/丛林原木/末地石等原版机制），不满足则取消放置并提示。
- *       方向性作物（COCOA 等需侧面附着的）必须以侧面附着方式放置且附着方块符合要求，
- *       地面式放置（如点在原木顶面）无效。</li>
- *   <li>食物（{@link ConsumableItem}）：普通右键=食用（此时取消放置，避免"吃+放"双消耗），
- *       潜行右键=放置——放置时登记进 {@link BlockStorage}，挖掘时 Slimefun 掉落带粘液数据的物品
- *       （持久化于 Slimefun 数据库，爆炸/活塞/水流等破坏路径也由 Slimefun 统一处理）。</li>
- *   <li>其他 NotPlaceable 装饰：直接允许放置并登记（不限制潜行）。</li>
+ *   <li>所有作物種子（{@link CropBlock}）放置校驗：顯式 plantOn 或按材質推斷的種植要求
+ *       （耕地/靈魂沙/叢林原木/末地石等原版機制），不滿足則取消放置並提示。
+ *       方向性作物（COCOA 等需側面附着的）必須以側面附着方式放置且附着方塊符合要求，
+ *       地面式放置（如點在原木頂面）無效。</li>
+ *   <li>食物（{@link ConsumableItem}）：普通右鍵=食用（此時取消放置，避免"吃+放"雙消耗），
+ *       潛行右鍵=放置——放置時登記進 {@link BlockStorage}，挖掘時 Slimefun 掉落帶粘液數據的物品
+ *       （持久化於 Slimefun 數據庫，爆炸/活塞/水流等破壞路徑也由 Slimefun 統一處理）。</li>
+ *   <li>其他 NotPlaceable 裝飾：直接允許放置並登記（不限制潛行）。</li>
  * </ol>
  */
 public final class PlantGuardListener implements Listener {
@@ -40,48 +40,48 @@ public final class PlantGuardListener implements Listener {
     public void onPlace(BlockPlaceEvent e) {
         ItemStack item = e.getItemInHand();
         if (item == null || item.getType().isAir()) {
-            // 幽灵放置：手持物品已被消费（如手持 1 个食物食用后主手清空），客户端仍声明放置——
-            // Bukkit 会按客户端声明放置一个无 NBT 的原版头颅；正常放置必然手持物品，直接取消
+            // 幽靈放置：手持物品已被消費（如手持 1 個食物食用後主手清空），客户端仍聲明放置——
+            // Bukkit 會按客户端聲明放置一個無 NBT 的原版頭顱；正常放置必然手持物品，直接取消
             e.setCancelled(true);
             return;
         }
         SlimefunItem sf = SlimefunItem.getByItem(item);
         if (sf == null) {
-            // 兜底：无 id 展示物品（如未注册物品的机器/多方块产物）按外观反查注册物品
+            // 兜底：無 id 展示物品（如未註冊物品的機器/多方塊產物）按外觀反查註冊物品
             sf = com.haiman233.worldtaste.util.Stacks.findRegisteredByAppearance(item);
         }
         if (sf == null) return;
 
-        // 作物种子：种植要求校验（全部种子类生效）
+        // 作物種子：種植要求校驗（全部種子類生效）
         if (sf instanceof CropBlock crop) {
             List<Material> allowed = crop.getPlantOn();
             if (allowed != null && !allowed.isEmpty()) {
                 Block block = e.getBlock();
                 boolean ok;
                 if (crop.isDirectionalCrop()) {
-                    // 方向性作物（如 COCOA，facing 须指向附着的原木）：必须以侧面附着方式放置
-                    // 且附着方块符合 plantOn；地面式放置（如点在原木顶面）无法附着，直接拒绝，
-                    // 否则种子头转换为作物方块后会因附着失效被原版反复破坏
+                    // 方向性作物（如 COCOA，facing 須指向附着的原木）：必須以側面附着方式放置
+                    // 且附着方塊符合 plantOn；地面式放置（如點在原木頂面）無法附着，直接拒絕，
+                    // 否則種子頭轉換為作物方塊後會因附着失效被原版反覆破壞
                     ok = block.getBlockData() instanceof Directional dir
                             && allowed.contains(block.getRelative(dir.getFacing().getOppositeFace()).getType());
                 } else {
-                    // 地面作物：仅要求脚下方块符合 plantOn（点在支撑侧面放置的悬空种子无效）
+                    // 地面作物：僅要求腳下方塊符合 plantOn（點在支撐側面放置的懸空種子無效）
                     ok = allowed.contains(block.getRelative(BlockFace.DOWN).getType());
                 }
                 if (!ok) {
                     e.setCancelled(true);
                     Player p = e.getPlayer();
-                    if (p != null) p.sendMessage("该作物只能种植在 " + names(allowed) + " 上！");
+                    if (p != null) p.sendMessage("該作物只能種植在 " + names(allowed) + " 上！");
                 }
             }
             return;
         }
 
-        // 不可放置类物品
+        // 不可放置類物品
         if (sf instanceof NotPlaceable) {
-            // 食物（头颅材质可放置方块）：普通右键（非潜行）已被食用逻辑消费，
-            // 取消放置避免"吃+放"双消耗与头颅残留；潜行右键=明确放置意图，放行并登记
-            // Slimefun 方块（挖掘保留粘液数据）
+            // 食物（頭顱材質可放置方塊）：普通右鍵（非潛行）已被食用邏輯消費，
+            // 取消放置避免"吃+放"雙消耗與頭顱殘留；潛行右鍵=明確放置意圖，放行並登記
+            // Slimefun 方塊（挖掘保留粘液數據）
             if (sf instanceof ConsumableItem) {
                 if (!e.getPlayer().isSneaking()) {
                     e.setCancelled(true);
@@ -90,7 +90,7 @@ public final class PlantGuardListener implements Listener {
                 BlockStorage.store(e.getBlock(), sf.getId());
                 return;
             }
-            // 其他不可放置装饰：允许放置并登记
+            // 其他不可放置裝飾：允許放置並登記
             BlockStorage.store(e.getBlock(), sf.getId());
         }
     }

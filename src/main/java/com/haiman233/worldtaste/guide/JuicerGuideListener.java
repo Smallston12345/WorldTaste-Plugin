@@ -20,15 +20,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 /**
- * 指南榨汁盆入口（双模式）：
+ * 指南榨汁盆入口（雙模式）：
  * <ul>
- *   <li><b>JEG 模式</b>（安装 JEG 时启用 {@link JuicerJegEntryListener}）：拦截指南点击榨汁盆，
- *       打开 {@link JuicerMenu#openBasinOverview} 自身配方概览页，右下角金苹果进入配方展示页
- *       （JEG 指南页面经其 formatter 重绘且大于 54 格，无法按物品扫描注入）；</li>
- *   <li><b>注入模式</b>（无 JEG 的原版 Slimefun 指南）：点击榨汁盆放行默认配方页，延迟注入
- *       金苹果按钮到右下角。</li>
+ *   <li><b>JEG 模式</b>（安裝 JEG 時啓用 {@link JuicerJegEntryListener}）：攔截指南點擊榨汁盆，
+ *       打開 {@link JuicerMenu#openBasinOverview} 自身配方概覽頁，右下角金蘋果進入配方展示頁
+ *       （JEG 指南頁面經其 formatter 重繪且大於 54 格，無法按物品掃描注入）；</li>
+ *   <li><b>注入模式</b>（無 JEG 的原版 Slimefun 指南）：點擊榨汁盆放行默認配方頁，延遲注入
+ *       金蘋果按鈕到右下角。</li>
  * </ul>
- * 点击带标记的金苹果按钮 → 打开 {@link JuicerMenu} 配方展示页。
+ * 點擊帶標記的金蘋果按鈕 → 打開 {@link JuicerMenu} 配方展示頁。
  */
 public final class JuicerGuideListener implements Listener {
 
@@ -44,10 +44,10 @@ public final class JuicerGuideListener implements Listener {
 
     private JuicerGuideListener() {}
 
-    /** 无 JEG：指南中点击榨汁盆 → 放行默认展示，延迟注入入口按钮。 */
+    /** 無 JEG：指南中點擊榨汁盆 → 放行默認展示，延遲注入入口按鈕。 */
     @EventHandler
     public void onBasinClick(InventoryClickEvent e) {
-        if (JegHook.available()) return; // JEG 模式由 JuicerJegEntryListener 处理
+        if (JegHook.available()) return; // JEG 模式由 JuicerJegEntryListener 處理
         if (!(e.getWhoClicked() instanceof Player)) return;
         if (e.getClickedInventory() != e.getInventory()) return;
         ItemStack clicked = e.getCurrentItem();
@@ -58,7 +58,7 @@ public final class JuicerGuideListener implements Listener {
         Bukkit.getScheduler().runTaskLater(WT.plugin, () -> injectEntry(p), 2);
     }
 
-    /** 在榨汁盆配方页右下角注入金苹果入口（已有的 slot 依次向前寻找空位）。 */
+    /** 在榨汁盆配方頁右下角注入金蘋果入口（已有的 slot 依次向前尋找空位）。 */
     private void injectEntry(Player p) {
         if (!p.isOnline()) return;
         Inventory top = Views.top(p.getOpenInventory());
@@ -76,7 +76,7 @@ public final class JuicerGuideListener implements Listener {
         for (int slot = 53; slot >= 45; slot--) {
             ItemStack cur = top.getItem(slot);
             if (cur != null && isEntry(cur)) return; // 已注入
-            // 原版指南配方页空位也会填背景板：背景板视为可注入位置
+            // 原版指南配方頁空位也會填背景板：背景板視為可注入位置
             if (cur == null || cur.getType().isAir() || cur == ChestMenuUtils.getBackground()) {
                 top.setItem(slot, JuicerMenu.entryButton());
                 return;
@@ -84,7 +84,7 @@ public final class JuicerGuideListener implements Listener {
         }
     }
 
-    /** 点击入口按钮：打开展示菜单。 */
+    /** 點擊入口按鈕：打開展示菜單。 */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntryClick(InventoryClickEvent e) {
         ItemStack cur = e.getCurrentItem();

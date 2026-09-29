@@ -14,9 +14,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 加载 foods.yml：应用 FoodComponent(nutrition/saturation/canAlwaysEat) 使食物可食，
- * 并登记 onEat 脚本(kind=eat)供 {@link com.haiman233.worldtaste.behavior.FoodConsumeListener} 追加效果。
- * eatseconds：Paper 1.21.11 的 FoodComponent 不支持，忽略（与 RSC 一致）。
+ * 加載 foods.yml：應用 FoodComponent(nutrition/saturation/canAlwaysEat) 使食物可食，
+ * 並登記 onEat 腳本(kind=eat)供 {@link com.haiman233.worldtaste.behavior.FoodConsumeListener} 追加效果。
+ * eatseconds：Paper 1.21.11 的 FoodComponent 不支持，忽略（與 RSC 一致）。
  */
 public final class FoodsLoader {
 
@@ -32,9 +32,9 @@ public final class FoodsLoader {
                 if (!RegisterConditions.pass(s)) { skip++; continue; }
                 String effId = s.getString("id_alias", id);
                 ItemGroup g = WT.group(s.getString("item_group"));
-                if (g == null) { MissingItems.record("物品组缺失:" + s.getString("item_group")); skip++; continue; }
+                if (g == null) { MissingItems.record("物品組缺失:" + s.getString("item_group")); skip++; continue; }
                 ItemStack display = WT.preload.get(effId.toUpperCase(java.util.Locale.ROOT));
-                if (display == null) { MissingItems.record("无展示物品:" + effId); skip++; continue; }
+                if (display == null) { MissingItems.record("無展示物品:" + effId); skip++; continue; }
                 display = display.clone();
                 float eatSeconds = (float) s.getDouble("eatseconds", s.getDouble("eat_seconds", 0));
                 boolean foodOk = FoodHelper.apply(display, s.getInt("nutrition", 0), (float) s.getDouble("saturation", 0),
@@ -56,14 +56,14 @@ public final class FoodsLoader {
                 }
                 ok++;
             } catch (Exception e) {
-                WT.log("foods.yml " + id + " 注册失败: " + e);
+                WT.log("foods.yml " + id + " 註冊失敗: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info("foods.yml: 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info("foods.yml: 註冊 " + ok + ", 跳過 " + skip);
         if (foodFail > 0) {
             WT.plugin.getLogger().severe("foods.yml: " + foodFail
-                    + " 个食物的 FoodComponent 应用失败，这些食物将不可食用！");
+                    + " 個食物的 FoodComponent 應用失敗，這些食物將不可食用！");
         }
     }
 }

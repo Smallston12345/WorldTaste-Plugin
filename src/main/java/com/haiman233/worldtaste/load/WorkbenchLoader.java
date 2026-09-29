@@ -12,7 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-/** 加载 workbenches.yml → {@link WTWorkbench}（点击合成）。 */
+/** 加載 workbenches.yml → {@link WTWorkbench}（點擊合成）。 */
 public final class WorkbenchLoader {
 
     private WorkbenchLoader() {}
@@ -25,10 +25,10 @@ public final class WorkbenchLoader {
             if (s == null) continue;
             try {
                 ItemGroup g = WT.group(s.getString("item_group"));
-                if (g == null) { MissingItems.record("物品组缺失:" + s.getString("item_group")); skip++; continue; }
+                if (g == null) { MissingItems.record("物品組缺失:" + s.getString("item_group")); skip++; continue; }
                 if (WTConfig.blockItem(s.getString("item_group"), id)) { skip++; continue; }
                 ItemStack display = WT.preload.get(id.toUpperCase(java.util.Locale.ROOT));
-                if (display == null) { MissingItems.record("无展示物品:" + id); skip++; continue; }
+                if (display == null) { MissingItems.record("無展示物品:" + id); skip++; continue; }
                 SlimefunItemStack sfis = new SlimefunItemStack(id, display);
                 RecipeType rt = RecipeTypes.resolve(s.getString("recipe_type", "NULL"));
                 ItemStack[] craftRecipe = Read.recipe(s.getConfigurationSection("recipe"), 9);
@@ -47,10 +47,10 @@ public final class WorkbenchLoader {
                 w.register(WT.plugin);
                 ok++;
             } catch (Exception e) {
-                WT.log("workbenches.yml " + id + " 注册失败: " + e);
+                WT.log("workbenches.yml " + id + " 註冊失敗: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info("workbenches.yml: 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info("workbenches.yml: 註冊 " + ok + ", 跳過 " + skip);
     }
 }

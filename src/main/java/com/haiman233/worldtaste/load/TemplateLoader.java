@@ -16,8 +16,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 加载 template_machines.yml → {@link WTTemplateMachine}。配方按“模板物品 id”分组；
- * 玩家在 templateSlot 放入对应模板后，机器仅匹配该模板下的配方（模板不消耗）。
+ * 加載 template_machines.yml → {@link WTTemplateMachine}。配方按“模板物品 id”分組；
+ * 玩家在 templateSlot 放入對應模板後，機器僅匹配該模板下的配方（模板不消耗）。
  */
 public final class TemplateLoader {
 
@@ -31,10 +31,10 @@ public final class TemplateLoader {
             if (s == null) continue;
             try {
                 ItemGroup g = WT.group(s.getString("item_group"));
-                if (g == null) { MissingItems.record("物品组缺失:" + s.getString("item_group")); skip++; continue; }
+                if (g == null) { MissingItems.record("物品組缺失:" + s.getString("item_group")); skip++; continue; }
                 if (WTConfig.blockItem(s.getString("item_group"), id)) { skip++; continue; }
                 ItemStack display = WT.preload.get(id.toUpperCase(java.util.Locale.ROOT));
-                if (display == null) { MissingItems.record("无展示物品:" + id); skip++; continue; }
+                if (display == null) { MissingItems.record("無展示物品:" + id); skip++; continue; }
                 SlimefunItemStack sfis = new SlimefunItemStack(id, display);
                 RecipeType rt = RecipeTypes.resolve(s.getString("recipe_type", "NULL"));
                 ItemStack[] craftRecipe = Read.recipe(s.getConfigurationSection("recipe"), 9);
@@ -66,10 +66,10 @@ public final class TemplateLoader {
                 m.register(WT.plugin);
                 ok++;
             } catch (Exception e) {
-                WT.log("template_machines.yml " + id + " 注册失败: " + e);
+                WT.log("template_machines.yml " + id + " 註冊失敗: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info("template_machines.yml: 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info("template_machines.yml: 註冊 " + ok + ", 跳過 " + skip);
     }
 }

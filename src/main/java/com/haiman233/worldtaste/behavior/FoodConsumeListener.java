@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 /**
- * 食物进食事件：对 foods.yml 带 onEat 脚本(gz/rou 等)的食物，在进食后追加饥饿/饱和/消耗/药水等效果。
- * （食物的基础 nutrition 由 FoodComponent 提供，此处仅追加脚本效果，对齐原 WT_eatFood。）
+ * 食物進食事件：對 foods.yml 帶 onEat 腳本(gz/rou 等)的食物，在進食後追加飢餓/飽和/消耗/藥水等效果。
+ * （食物的基礎 nutrition 由 FoodComponent 提供，此處僅追加腳本效果，對齊原 WT_eatFood。）
  */
 public final class FoodConsumeListener implements Listener {
 

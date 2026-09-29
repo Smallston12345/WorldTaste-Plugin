@@ -8,23 +8,23 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecip
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 带概率的机器配方：每个输出有独立 chance，可选 chooseOne（多输出择一）。
- * 对应 RSC 的 CustomMachineRecipe。ticks = seconds * 2（MachineRecipe 约定）。
+ * 帶概率的機器配方：每個輸出有獨立 chance，可選 chooseOne（多輸出擇一）。
+ * 對應 RSC 的 CustomMachineRecipe。ticks = seconds * 2（MachineRecipe 約定）。
  */
 public class WTRecipe extends MachineRecipe {
 
     private final int[] chances;
     private final boolean chooseOne;
     private final boolean[] noConsume;
-    /** 每个输入绑定的菜单槽（-1=任意输入槽），用于 linked 机器。 */
+    /** 每個輸入綁定的菜單槽（-1=任意輸入槽），用於 linked 機器。 */
     private final int[] inSlots;
-    /** 每个输出绑定的菜单槽（-1=任意输出槽），用于 linked 机器。 */
+    /** 每個輸出綁定的菜單槽（-1=任意輸出槽），用於 linked 機器。 */
     private final int[] outSlots;
-    /** 每个输入每次合成的耐久消耗点数（0=按数量整件消耗，&gt;0=工具类输入按耐久损耗而不消耗物品本身）。 */
+    /** 每個輸入每次合成的耐久消耗點數（0=按數量整件消耗，&gt;0=工具類輸入按耐久損耗而不消耗物品本身）。 */
     private final int[] inputDamage;
-    /** 每个输入预解析的 Slimefun id（原版输入为 null）；惰性解析（首次 {@link #inputSfId} 时填充）。
-     *  供 {@link WTRecipeMachine} 的 SF-id 预筛使用：两端均 SF 且 id 不同时可安全跳过昂贵的
-     *  {@code SlimefunUtils.isItemSimilar}（其 both-SF 分支按 id 比较，id 不同必返回 false）。 */
+    /** 每個輸入預解析的 Slimefun id（原版輸入為 null）；惰性解析（首次 {@link #inputSfId} 時填充）。
+     *  供 {@link WTRecipeMachine} 的 SF-id 預篩使用：兩端均 SF 且 id 不同時可安全跳過昂貴的
+     *  {@code SlimefunUtils.isItemSimilar}（其 both-SF 分支按 id 比較，id 不同必返回 false）。 */
     private String[] inputSfIds;
 
     public WTRecipe(int seconds, ItemStack[] input, ItemStack[] output, int[] chances, boolean chooseOne, boolean[] noConsume) {
@@ -47,10 +47,10 @@ public class WTRecipe extends MachineRecipe {
     }
 
     /**
-     * 第 i 个输入预解析的 Slimefun id（原版输入返回 null）。
-     * <p>惰性解析并缓存：仅在 {@link WTRecipeMachine} 启用 SF-id 预筛时被调用（多为每 tick 主线程访问），
-     * 故多方块等不经过该路径的 WTRecipe 不会为此付出解析开销。重复解析为幂等（同一输入得到同一 id），
-     * 即便极端并发下重复填充也无害。
+     * 第 i 個輸入預解析的 Slimefun id（原版輸入返回 null）。
+     * <p>惰性解析並緩存：僅在 {@link WTRecipeMachine} 啓用 SF-id 預篩時被調用（多為每 tick 主線程訪問），
+     * 故多方塊等不經過該路徑的 WTRecipe 不會為此付出解析開銷。重複解析為冪等（同一輸入得到同一 id），
+     * 即便極端併發下重複填充也無害。
      */
     public String inputSfId(int i) {
         String[] ids = inputSfIds;
@@ -69,7 +69,7 @@ public class WTRecipe extends MachineRecipe {
         return (i >= 0 && i < ids.length) ? ids[i] : null;
     }
 
-    /** 第 i 个输出的概率（百分比，越界返回 100）。 */
+    /** 第 i 個輸出的概率（百分比，越界返回 100）。 */
     public int chance(int i) {
         return (chances != null && i >= 0 && i < chances.length) ? chances[i] : 100;
     }
@@ -79,24 +79,24 @@ public class WTRecipe extends MachineRecipe {
     }
 
     /**
-     * 第 i 个输入每次合成消耗的耐久点数（0=按数量整件消耗，&gt;0=工具类输入按耐久损耗，如钓竿）。
+     * 第 i 個輸入每次合成消耗的耐久點數（0=按數量整件消耗，&gt;0=工具類輸入按耐久損耗，如釣竿）。
      * 配置缺省或越界返回 0（整件消耗）。
      */
     public int inputDamage(int i) {
         return (inputDamage != null && i >= 0 && i < inputDamage.length) ? inputDamage[i] : 0;
     }
 
-    /** 完成时滚动产出并把每个通过项推入其绑定槽（无绑定则推入 freeSlots）。 */
+    /** 完成時滾動產出並把每個通過項推入其綁定槽（無綁定則推入 freeSlots）。 */
     public void pushOutputs(me.mrCookieSlime.Slimefun.api.inventory.BlockMenu inv, int[] freeSlots) {
         pushOutputs(inv, freeSlots, 1);
     }
 
     /**
-     * 完成时滚动产出并把每个通过项推入其绑定槽（无绑定则推入 freeSlots）。
+     * 完成時滾動產出並把每個通過項推入其綁定槽（無綁定則推入 freeSlots）。
      *
-     * @param multiplier 产出数量乘数（&gt;1 时每个产出 amount *= multiplier）。用于模板机的
-     *                   {@code moreOutputIfMoreTemplates}（按模板堆叠数放大产出，对齐 RSC
-     *                   CustomTemplateMachine:274-275）；默认 1（普通机器不受影响）。
+     * @param multiplier 產出數量乘數（&gt;1 時每個產出 amount *= multiplier）。用於模板機的
+     *                   {@code moreOutputIfMoreTemplates}（按模板堆疊數放大產出，對齊 RSC
+     *                   CustomTemplateMachine:274-275）；默認 1（普通機器不受影響）。
      */
     public void pushOutputs(me.mrCookieSlime.Slimefun.api.inventory.BlockMenu inv, int[] freeSlots, int multiplier) {
         ItemStack[] base = getOutput();
@@ -106,9 +106,9 @@ public class WTRecipe extends MachineRecipe {
             if (ch >= 100 || (ch > 0 && ThreadLocalRandom.current().nextInt(100) < ch)) passed.add(i);
         }
         if (chooseOne && !passed.isEmpty()) {
-            // 对齐 RSC BlockMenuUtil.pushItem 的 chooseOne 语义：首个通过概率滚动的输出即产出并停止
-            // （取 passed.get(0)），而非在幸存者中随机。这样后序输出仅作「主产出概率失败时的回退」，
-            // 产出分布与原版一致（影响 111 个 chooseOne 配方）。
+            // 對齊 RSC BlockMenuUtil.pushItem 的 chooseOne 語義：首個通過概率滾動的輸出即產出並停止
+            // （取 passed.get(0)），而非在倖存者中隨機。這樣後序輸出僅作「主產出概率失敗時的回退」，
+            // 產出分佈與原版一致（影響 111 個 chooseOne 配方）。
             int pick = passed.get(0);
             passed.clear();
             passed.add(pick);
@@ -119,7 +119,7 @@ public class WTRecipe extends MachineRecipe {
             ItemStack out = o.clone();
             if (multiplier > 1) out.setAmount(out.getAmount() * multiplier);
             int slot = (outSlots != null && i < outSlots.length) ? outSlots[i] : -1;
-            // 绑定槽推入有剩余时回退到自由槽，仍有剩余则掉落在机器旁（对齐 AContainer 的溢出处理）
+            // 綁定槽推入有剩餘時回退到自由槽，仍有剩餘則掉落在機器旁（對齊 AContainer 的溢出處理）
             ItemStack leftover = (slot >= 0) ? inv.pushItem(out, slot) : inv.pushItem(out, freeSlots);
             if (leftover != null && leftover.getType() != org.bukkit.Material.AIR) {
                 ItemStack rest = inv.pushItem(leftover, freeSlots);

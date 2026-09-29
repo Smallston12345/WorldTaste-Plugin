@@ -23,8 +23,8 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * 多方块机器（mb_machines.yml）。继承 Slimefun 原生 {@link MultiBlockMachine}，
- * 右键结构时检查发射器内物品、消耗并产出。逻辑对齐 RSC CustomMultiBlockMachine。
+ * 多方塊機器（mb_machines.yml）。繼承 Slimefun 原生 {@link MultiBlockMachine}，
+ * 右鍵結構時檢查發射器內物品、消耗併產出。邏輯對齊 RSC CustomMultiBlockMachine。
  */
 public class WTMultiBlockMachine extends MultiBlockMachine {
 
@@ -62,9 +62,9 @@ public class WTMultiBlockMachine extends MultiBlockMachine {
             MultiBlockCraftEvent event = new MultiBlockCraftEvent(p, this, input, output);
             Bukkit.getPluginManager().callEvent(event);
             if (event.isCancelled() || !SlimefunUtils.canPlayerUseItem(p, event.getOutput(), true)) return;
-            // 对齐官方 EnhancedCraftingTable：事件可能被其他插件 setOutput 替换，发放用事件内的最新输出
+            // 對齊官方 EnhancedCraftingTable：事件可能被其他插件 setOutput 替換，發放用事件內的最新輸出
             ItemStack finalOutput = event.getOutput();
-            // 兜底：产物若为无 id 展示物品（加载期未注册），按外观反查注册物品重建，保证粘液数据完整
+            // 兜底：產物若為無 id 展示物品（加載期未註冊），按外觀反查註冊物品重建，保證粘液數據完整
             if (finalOutput != null && io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem.getByItem(finalOutput) == null) {
                 io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem rebuilt = com.haiman233.worldtaste.util.Stacks.findRegisteredByAppearance(finalOutput);
                 if (rebuilt != null) finalOutput = rebuilt.getItem().clone();

@@ -6,11 +6,11 @@ import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
- * 加载 sugar.yml 糖分值配置（材料 id → 糖分）。
+ * 加載 sugar.yml 糖分值配置（材料 id → 糖分）。
  *
- * <p>id 写法同 juicer.yml 的 ingredient（材质名或粘液物品 id，亦接受 mc:/sf: 前缀）。
- * 产物总糖分 = Σ 材料糖分 × 投入数量；未列出的材料按 0 计。糖分数据经产物 PDC
- * （juice_sugar）与盆状态（BlockStorage）持久化，供后续玩法功能读取。</p>
+ * <p>id 寫法同 juicer.yml 的 ingredient（材質名或粘液物品 id，亦接受 mc:/sf: 前綴）。
+ * 產物總糖分 = Σ 材料糖分 × 投入數量；未列出的材料按 0 計。糖分數據經產物 PDC
+ * （juice_sugar）與盆狀態（BlockStorage）持久化，供後續玩法功能讀取。</p>
  */
 public final class SugarLoader {
 
@@ -20,15 +20,15 @@ public final class SugarLoader {
         YamlConfiguration y = Yaml.loadResource(WT.plugin, "sugar.yml");
         int ok = 0;
         for (String id : y.getKeys(false)) {
-            if (!y.isInt(id)) continue; // 顶行注释说明自动被忽略，非数字值跳过
+            if (!y.isInt(id)) continue; // 頂行註釋説明自動被忽略，非數字值跳過
             int sugar = Math.max(0, y.getInt(id));
             JuicerRecipe.setSugar(resolveRef(id.trim()), sugar);
             ok++;
         }
-        WT.plugin.getLogger().info("sugar.yml: 注册 " + ok + " 种材料的糖分值");
+        WT.plugin.getLogger().info("sugar.yml: 註冊 " + ok + " 種材料的糖分值");
     }
 
-    /** 材料 id → 内容物 ref（mc:/sf: 前缀）。 */
+    /** 材料 id → 內容物 ref（mc:/sf: 前綴）。 */
     private static String resolveRef(String id) {
         if (id.startsWith("mc:") || id.startsWith("sf:")) return id;
         Material m = Material.matchMaterial(id);

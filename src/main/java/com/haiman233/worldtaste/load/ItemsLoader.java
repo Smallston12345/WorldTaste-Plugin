@@ -23,9 +23,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- * 加载物品类配置。items.yml（消耗品/食材/装饰）与 machines.yml（脚本驱动的可放置物品，多为作物）结构一致，
- * 统一经 {@link ScriptItemFactory} 按脚本+属性分派物品子类。支持 register.conditions、lateInit(两遍)、id_alias、
- * placeable、drop_from、vanilla、radiation/soulbound/anti_wither/piglin/energy 等属性。
+ * 加載物品類配置。items.yml（消耗品/食材/裝飾）與 machines.yml（腳本驅動的可放置物品，多為作物）結構一致，
+ * 統一經 {@link ScriptItemFactory} 按腳本+屬性分派物品子類。支持 register.conditions、lateInit(兩遍)、id_alias、
+ * placeable、drop_from、vanilla、radiation/soulbound/anti_wither/piglin/energy 等屬性。
  */
 public final class ItemsLoader {
 
@@ -54,7 +54,7 @@ public final class ItemsLoader {
                 if (register(id, s)) ok++;
                 else skip++;
             } catch (Exception e) {
-                WT.log(file + " " + id + " 注册失败: " + e);
+                WT.log(file + " " + id + " 註冊失敗: " + e);
                 skip++;
             }
         }
@@ -65,35 +65,35 @@ public final class ItemsLoader {
                 if (register(id, late.get(i))) ok++;
                 else skip++;
             } catch (Exception e) {
-                WT.log(file + " " + id + "(lateInit) 注册失败: " + e);
+                WT.log(file + " " + id + "(lateInit) 註冊失敗: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info(file + ": 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info(file + ": 註冊 " + ok + ", 跳過 " + skip);
     }
 
-    /** 通用物品注册（items/machines/foods/mob_drops/geo 复用）。成功返回 true。 */
+    /** 通用物品註冊（items/machines/foods/mob_drops/geo 複用）。成功返回 true。 */
     static boolean register(String id, ConfigurationSection s) {
         return register(id, s, null, null);
     }
 
     /**
-     * 带展示覆盖的注册重载（mob_drops 用）：掉落来源展示（自定义生物掉落类型 + 居中生物刷蛋）
-     * 不是标准 recipe/recipe_type 字段，且 R6 缓存的配置只读（不得向共享 section 写入），
-     * 故由 MobDropsLoader 解析 entity/chance 后经覆盖参数注入；覆盖为 null 时行为不变。
+     * 帶展示覆蓋的註冊重載（mob_drops 用）：掉落來源展示（自定義生物掉落類型 + 居中生物刷蛋）
+     * 不是標準 recipe/recipe_type 字段，且 R6 緩存的配置只讀（不得向共享 section 寫入），
+     * 故由 MobDropsLoader 解析 entity/chance 後經覆蓋參數注入；覆蓋為 null 時行為不變。
      */
     static boolean register(String id, ConfigurationSection s, RecipeType recipeTypeOverride,
                             ItemStack[] recipeOverride) {
-        // 注册条件
+        // 註冊條件
         if (!RegisterConditions.pass(s)) return false;
 
-        // 占位玻璃板物品（各分组分割板：材质 *_STAINED_GLASS_PANE 且无配方）：
-        // 不注册为 Slimefun 物品，不再出现在指南中；旧存档遗留的此类物品因 id 未注册而自然失效
+        // 佔位玻璃板物品（各分組分割板：材質 *_STAINED_GLASS_PANE 且無配方）：
+        // 不註冊為 Slimefun 物品，不再出現在指南中；舊存檔遺留的此類物品因 id 未註冊而自然失效
         ConfigurationSection itemSec = s.getConfigurationSection("item");
         if (itemSec != null) {
             String mat = itemSec.getString("material", "");
             String rt = s.getString("recipe_type", "NULL");
-            // separator: true 的玻璃板为分组页内装饰分隔符，正常注册显示
+            // separator: true 的玻璃板為分組頁內裝飾分隔符，正常註冊顯示
             if (mat.endsWith("_STAINED_GLASS_PANE") && ("NULL".equalsIgnoreCase(rt) || rt.isEmpty())
                     && !s.getBoolean("separator", false)) {
                 return false;
@@ -103,29 +103,29 @@ public final class ItemsLoader {
         String effId = s.getString("id_alias", id);
         ItemGroup g = WT.group(s.getString("item_group"));
         if (g == null) {
-            // 折叠上报（按缺失的组 id 归并计数），加载结束汇总为一行
-            MissingItems.record("物品组缺失:" + s.getString("item_group"));
+            // 摺疊上報（按缺失的組 id 歸併計數），加載結束彙總為一行
+            MissingItems.record("物品組缺失:" + s.getString("item_group"));
             return false;
         }
-        // 酿造工艺总开关关闭：该玩法分组下的物品一律不注册（分组按钮保留，名称标注「已禁用」）
+        // 釀造工藝總開關關閉：該玩法分組下的物品一律不註冊（分組按鈕保留，名稱標註「已禁用」）
         if (WTConfig.blockItem(s.getString("item_group"), effId)) return false;
-        // 反向：酿造「已禁用」占位说明页只在关闭时注册，玩法开启时不能混进指南
+        // 反向：釀造「已禁用」佔位説明頁只在關閉時註冊，玩法開啓時不能混進指南
         if (WTConfig.BREWING_DISABLED_NOTICE.equalsIgnoreCase(effId) && WTConfig.brewingEnabled) return false;
-        // 装饰分隔板组（groups.yml type: button，如 ws_zwf_*）内挂载的占位物品
-        //（PAPER「这就是一个占位符而已」）一律不注册——任何指南里都不出现
+        // 裝飾分隔板組（groups.yml type: button，如 ws_zwf_*）內掛載的佔位物品
+        //（PAPER「這就是一個佔位符而已」）一律不註冊——任何指南里都不出現
         if (g instanceof DecorativeSubGroup) {
             return false;
         }
         ItemStack display = WT.preload.get(effId.toUpperCase(java.util.Locale.ROOT));
         if (display == null) display = WT.preload.get(id.toUpperCase(java.util.Locale.ROOT));
         if (display == null) {
-            // 折叠上报（按物品 id 归并计数），加载结束汇总为一行
-            MissingItems.record("无展示物品:" + effId);
+            // 摺疊上報（按物品 id 歸併計數），加載結束彙總為一行
+            MissingItems.record("無展示物品:" + effId);
             return false;
         }
 
         ItemSpec spec = ItemSpec.from(effId, s);
-        // 酒类饮品（items.yml alcohol 字段）：展示 lore 追加酒精度并登记联动数值。
+        // 酒類飲品（items.yml alcohol 字段）：展示 lore 追加酒精度並登記聯動數值。
         // 修改前先 clone，避免污染 WT.preload 中的共享展示堆（配方引用仍用原堆）。
         if (spec.alcohol > 0) {
             display = display.clone();
@@ -138,7 +138,7 @@ public final class ItemsLoader {
         }
 
         SlimefunItemStack sfis = new SlimefunItemStack(effId, display);
-        // 展示覆盖（mob_drops：自定义掉落类型 + 居中生物刷怪蛋；覆盖为 null 时沿用 yml 原解析）
+        // 展示覆蓋（mob_drops：自定義掉落類型 + 居中生物刷怪蛋；覆蓋為 null 時沿用 yml 原解析）
         RecipeType rt = recipeTypeOverride != null
                 ? recipeTypeOverride : RecipeTypes.resolve(s.getString("recipe_type", "NULL"));
         ItemStack[] recipe = recipeOverride != null
@@ -146,9 +146,9 @@ public final class ItemsLoader {
 
         SlimefunItem item = ScriptItemFactory.create(spec, g, sfis, rt, recipe);
 
-        // 耗电/储电物品（EnergyNetComponent）：展示 lore 追加储电容量与耗电量。
-        // 数值取自各机器类常量（EnergyNetComponent#getCapacity + PowerConsumer#getConsumption），
-        // 改 Java 常量即自动同步，无需在 yml 里再维护一份（也避免两边写不一致）。
+        // 耗電/儲電物品（EnergyNetComponent）：展示 lore 追加儲電容量與耗電量。
+        // 數值取自各機器類常量（EnergyNetComponent#getCapacity + PowerConsumer#getConsumption），
+        // 改 Java 常量即自動同步，無需在 yml 裏再維護一份（也避免兩邊寫不一致）。
         if (item instanceof EnergyNetComponent comp) {
             appendEnergyLore(sfis, comp, item);
         }
@@ -159,7 +159,7 @@ public final class ItemsLoader {
         item.register(WT.plugin);
 
 
-        // 方块破坏掉落
+        // 方塊破壞掉落
         if (spec.dropFrom != null) {
             Material block = Material.matchMaterial(spec.dropFrom);
             int[] range = parseAmountRange(s.getString("drop_amount", "1"));
@@ -170,26 +170,26 @@ public final class ItemsLoader {
     }
 
     /**
-     * 给耗电/储电物品追加电量信息 lore。
+     * 給耗電/儲電物品追加電量信息 lore。
      *
-     * <p>必须在 {@code item.register()} 之前调用：注册后 {@link SlimefunItemStack} 会被 locked，
-     * 再 setItemMeta 会抛异常。{@code SlimefunItemStack#setItemMeta} 已重写并会刷新内部
-     * ItemMetaSnapshot，故指南/配方里读到的也是带电量行的新 lore。</p>
+     * <p>必須在 {@code item.register()} 之前調用：註冊後 {@link SlimefunItemStack} 會被 locked，
+     * 再 setItemMeta 會拋異常。{@code SlimefunItemStack#setItemMeta} 已重寫並會刷新內部
+     * ItemMetaSnapshot，故指南/配方里讀到的也是帶電量行的新 lore。</p>
      */
     private static void appendEnergyLore(SlimefunItemStack sfis, EnergyNetComponent comp, SlimefunItem item) {
         ItemMeta meta = sfis.getItemMeta();
         if (meta == null) return;
         List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
-        lore.add(Colors.c("&7▷▷ &e储电容量: &e" + comp.getCapacity() + " J"));
+        lore.add(Colors.c("&7▷▷ &e儲電容量: &e" + comp.getCapacity() + " J"));
         if (comp.getEnergyComponentType() == EnergyNetComponentType.CONSUMER
                 && item instanceof PowerConsumer consumer && consumer.getConsumption() > 0) {
-            lore.add(Colors.c("&7▷▷ &c运行时耗电: &c" + consumer.getConsumption() + " J/刻"));
+            lore.add(Colors.c("&7▷▷ &c運行時耗電: &c" + consumer.getConsumption() + " J/刻"));
         }
         meta.setLore(lore);
         sfis.setItemMeta(meta);
     }
 
-    /** 解析 drop_amount（支持 "1" 或 "1-3" 区间），返回 {min,max}，由 BlockDrops 每次掉落时掷。 */
+    /** 解析 drop_amount（支持 "1" 或 "1-3" 區間），返回 {min,max}，由 BlockDrops 每次掉落時擲。 */
     private static int[] parseAmountRange(String value) {
         if (value != null) {
             int dash = value.indexOf('-');

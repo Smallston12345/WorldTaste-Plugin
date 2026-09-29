@@ -14,8 +14,8 @@ import io.github.thebusybiscuit.slimefun4.core.attributes.Radioactivity;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 按 {@link ItemSpec}（脚本 + 属性）分派物品子类。覆盖 RSC ItemReader 的各分支：
- * 作物 / 消耗品(含放射性) / 能量 / 猪灵 / 灵魂绑定 / 防凋灵 / 放射性方块 / 普通(可否放置)。
+ * 按 {@link ItemSpec}（腳本 + 屬性）分派物品子類。覆蓋 RSC ItemReader 的各分支：
+ * 作物 / 消耗品(含放射性) / 能量 / 豬靈 / 靈魂綁定 / 防凋靈 / 放射性方塊 / 普通(可否放置)。
  */
 public final class ScriptItemFactory {
 
@@ -23,7 +23,7 @@ public final class ScriptItemFactory {
 
     public static SlimefunItem create(ItemSpec spec, ItemGroup group, SlimefunItemStack sfis,
                                       RecipeType rt, ItemStack[] recipe) {
-        // energy 分支（忽略 script），对齐 RSC
+        // energy 分支（忽略 script），對齊 RSC
         if (spec.energyCapacity != null) {
             return new AttributeItems.EnergyItem(group, sfis, rt, recipe, spec.energyCapacity);
         }
@@ -38,9 +38,9 @@ public final class ScriptItemFactory {
                 if (rad != null) return new AttributeItems.RadioactiveConsumable(group, sfis, rt, recipe, opts, rad);
                 return new ConsumableItem(group, sfis, rt, recipe, opts);
             }
-            // 榨汁盆（machines.yml script: zhapen）：交互式方块机器
+            // 榨汁盆（machines.yml script: zhapen）：交互式方塊機器
             if ("zhapen".equals(spec.script)) return new JuicerBasin(group, sfis, rt, recipe);
-            // 酒窖多方块：管理器（核心，带校验交互）+ 温度控制器（无 UI 能源方块）
+            // 酒窖多方塊：管理器（核心，帶校驗交互）+ 温度控制器（無 UI 能源方塊）
             if ("jiujiao".equals(spec.script)) return new WineCellarManager(group, sfis, rt, recipe);
             if ("wendu".equals(spec.script)) return new TemperatureController(group, sfis, rt, recipe);
             SlimefunItem special = SpecialItems.create(spec.id, group, sfis, rt, recipe, spec.script);

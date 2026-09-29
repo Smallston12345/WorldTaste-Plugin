@@ -9,8 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * JEG 模式榨汁盆入口（仅 JEG 可用时注册，本类直接引用 JEG API）：
- * 拦截指南中点击榨汁盆，打开自身配方概览页（右下角金苹果进入配方展示页）。
+ * JEG 模式榨汁盆入口（僅 JEG 可用時註冊，本類直接引用 JEG API）：
+ * 攔截指南中點擊榨汁盆，打開自身配方概覽頁（右下角金蘋果進入配方展示頁）。
  */
 public final class JuicerJegEntryListener implements Listener {
 
@@ -18,7 +18,7 @@ public final class JuicerJegEntryListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onItemClick(GuideEvents.ItemButtonClickEvent e) {
-        // 作弊模式点击 = 领取物品，不拦截
+        // 作弊模式點擊 = 領取物品，不攔截
         if (e.getGuide().getMode() != SlimefunGuideMode.SURVIVAL_MODE) return;
         ItemStack clicked = e.getClickedItem();
         if (clicked == null) return;

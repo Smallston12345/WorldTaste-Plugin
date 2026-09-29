@@ -12,8 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 工作台（workbenches.yml，如百味万用炉）：复用 {@link WTRecipeMachine} 的配方/能量/GUI，
- * 但不自动 tick 合成；改为玩家点击 click 槽位时即时合成（消耗能量、匹配并消耗输入、产出）。
+ * 工作台（workbenches.yml，如百味萬用爐）：複用 {@link WTRecipeMachine} 的配方/能量/GUI，
+ * 但不自動 tick 合成；改為玩家點擊 click 槽位時即時合成（消耗能量、匹配並消耗輸入、產出）。
  */
 public class WTWorkbench extends WTRecipeMachine {
 
@@ -24,7 +24,7 @@ public class WTWorkbench extends WTRecipeMachine {
                        int capacity, int consumption, int speed, MenuDef menu, boolean hideAll, int clickSlot) {
         super(group, item, rt, recipe, input, output, recipes, capacity, consumption, speed, menu, hideAll);
         this.clickSlot = clickSlot;
-        // 用自定义 preset 覆盖 AContainer 默认 preset，在 newInstance 挂接点击合成
+        // 用自定義 preset 覆蓋 AContainer 默認 preset，在 newInstance 掛接點擊合成
         new BlockMenuPreset(getId(), getItemName()) {
             @Override
             public void init() {
@@ -58,14 +58,14 @@ public class WTWorkbench extends WTRecipeMachine {
 
     @Override
     protected void tick(Block b) {
-        // 工作台不自动合成，仅在点击 click 槽时合成
+        // 工作台不自動合成，僅在點擊 click 槽時合成
     }
 
     private void craft(BlockMenu menu) {
-        // 顺序很关键：先无消耗匹配，命中后才扣能量并消耗输入、产出。
-        //  · 若先扣能量再匹配：玩家空点击会白扣机器能量（可被反复刷空共享机器的能量）；
-        //  · 若先消耗输入再扣能量：没电时已消耗输入却无产出（吞物品）。
-        // 拆出无消耗 findMatch 后：无配方→不扣能量不消耗；有配方没电→不消耗不产出（安全失败）。
+        // 順序很關鍵：先無消耗匹配，命中後才扣能量並消耗輸入、產出。
+        //  · 若先扣能量再匹配：玩家空點擊會白扣機器能量（可被反覆刷空共享機器的能量）；
+        //  · 若先消耗輸入再扣能量：沒電時已消耗輸入卻無產出（吞物品）。
+        // 拆出無消耗 findMatch 後：無配方→不扣能量不消耗；有配方沒電→不消耗不產出（安全失敗）。
         var m = findMatch(menu);
         if (m == null) return;
         if (!takeCharge(menu.getLocation())) return;

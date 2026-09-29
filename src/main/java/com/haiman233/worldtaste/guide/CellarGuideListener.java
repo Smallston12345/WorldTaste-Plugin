@@ -22,14 +22,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 /**
- * 指南酒窖管理器入口（双模式，对齐榨汁盆）：
+ * 指南酒窖管理器入口（雙模式，對齊榨汁盆）：
  * <ul>
- *   <li><b>JEG 模式</b>（安装 JEG 时启用 {@link CellarJegEntryListener}）：拦截指南点击
- *       酒窖管理器，打开 {@link CellarRecipeMenu#openOverview} 自身配方概览页；</li>
- *   <li><b>注入模式</b>（无 JEG 的原版 Slimefun 指南）：点击放行默认配方页，延迟注入
- *       书本按钮到右下角。</li>
+ *   <li><b>JEG 模式</b>（安裝 JEG 時啓用 {@link CellarJegEntryListener}）：攔截指南點擊
+ *       酒窖管理器，打開 {@link CellarRecipeMenu#openOverview} 自身配方概覽頁；</li>
+ *   <li><b>注入模式</b>（無 JEG 的原版 Slimefun 指南）：點擊放行默認配方頁，延遲注入
+ *       書本按鈕到右下角。</li>
  * </ul>
- * 点击带标记的书本按钮 → 打开 {@link CellarRecipeMenu} 配方展示页。
+ * 點擊帶標記的書本按鈕 → 打開 {@link CellarRecipeMenu} 配方展示頁。
  */
 public final class CellarGuideListener implements Listener {
 
@@ -45,10 +45,10 @@ public final class CellarGuideListener implements Listener {
 
     private CellarGuideListener() {}
 
-    /** 无 JEG：指南中点击酒窖管理器 → 放行默认展示，延迟注入入口按钮。 */
+    /** 無 JEG：指南中點擊酒窖管理器 → 放行默認展示，延遲注入入口按鈕。 */
     @EventHandler
     public void onManagerClick(InventoryClickEvent e) {
-        if (JegHook.available()) return; // JEG 模式由 CellarJegEntryListener 处理
+        if (JegHook.available()) return; // JEG 模式由 CellarJegEntryListener 處理
         if (!(e.getWhoClicked() instanceof Player)) return;
         if (e.getClickedInventory() != e.getInventory()) return;
         ItemStack clicked = e.getCurrentItem();
@@ -59,7 +59,7 @@ public final class CellarGuideListener implements Listener {
         Bukkit.getScheduler().runTaskLater(WT.plugin, () -> injectEntry(p), 2);
     }
 
-    /** 在酒窖管理器配方页右下角注入书本入口（已有的 slot 依次向前寻找空位）。 */
+    /** 在酒窖管理器配方頁右下角注入書本入口（已有的 slot 依次向前尋找空位）。 */
     private void injectEntry(Player p) {
         if (!p.isOnline()) return;
         Inventory top = Views.top(p.getOpenInventory());
@@ -77,7 +77,7 @@ public final class CellarGuideListener implements Listener {
         for (int slot = 53; slot >= 45; slot--) {
             ItemStack cur = top.getItem(slot);
             if (cur != null && isEntry(cur)) return; // 已注入
-            // 原版指南配方页空位也会填背景板：背景板视为可注入位置
+            // 原版指南配方頁空位也會填背景板：背景板視為可注入位置
             if (cur == null || cur.getType().isAir() || cur == ChestMenuUtils.getBackground()) {
                 top.setItem(slot, CellarRecipeMenu.entryButton());
                 return;
@@ -85,7 +85,7 @@ public final class CellarGuideListener implements Listener {
         }
     }
 
-    /** 点击入口按钮：打开展示菜单。 */
+    /** 點擊入口按鈕：打開展示菜單。 */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntryClick(InventoryClickEvent e) {
         ItemStack cur = e.getCurrentItem();
@@ -103,14 +103,14 @@ public final class CellarGuideListener implements Listener {
                 .has(KEY_ENTRY, PersistentDataType.BYTE);
     }
 
-    /** JEG 模式：拦截指南点击酒窖管理器，打开自身配方概览页。 */
+    /** JEG 模式：攔截指南點擊酒窖管理器，打開自身配方概覽頁。 */
     public static final class CellarJegEntryListener implements Listener {
 
         public CellarJegEntryListener() {}
 
         @EventHandler(ignoreCancelled = true)
         public void onItemClick(GuideEvents.ItemButtonClickEvent e) {
-            // 作弊模式点击 = 领取物品，不拦截
+            // 作弊模式點擊 = 領取物品，不攔截
             if (e.getGuide().getMode() != SlimefunGuideMode.SURVIVAL_MODE) return;
             ItemStack clicked = e.getClickedItem();
             if (clicked == null) return;

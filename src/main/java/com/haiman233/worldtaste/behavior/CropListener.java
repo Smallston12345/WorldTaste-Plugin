@@ -21,17 +21,17 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 /**
- * 作物方块破坏处理：
+ * 作物方塊破壞處理：
  * <ol>
- *   <li>破坏作物主格：禁用原版掉落，成熟则掉成品/种子（未成熟掉 1 种子）；2 格高作物（如瓶子草）
- *       同时清除上方残留格；</li>
- *   <li>破坏 2 格高作物的上格：联动破坏主格（掉成品/种子）并清数据；</li>
- *   <li>破坏种子附着的支撑方块（耕地/末地石等）：联动破坏上方作物；</li>
- *   <li>非玩家事件（爆炸、水冲、活塞推拉、火烧、耕地踩踏、实体顶替）：作物被波及/失去支撑时
- *       同样按破坏处理（掉成品/种子）并删除粘液数据——否则残留数据会让 tick 把方块复原，
- *       出现「水冲不走、拉不倒」的假活死循环；</li>
- *   <li>生长限高：配置 maxAge 低于原版上限的作物（瓜茎等）长到成熟年龄后取消原版生长事件
- *       （BlockGrowEvent），停留在成熟阶段，不进入原版满龄行为（茎结果实）。</li>
+ *   <li>破壞作物主格：禁用原版掉落，成熟則掉成品/種子（未成熟掉 1 種子）；2 格高作物（如瓶子草）
+ *       同時清除上方殘留格；</li>
+ *   <li>破壞 2 格高作物的上格：聯動破壞主格（掉成品/種子）並清數據；</li>
+ *   <li>破壞種子附着的支撐方塊（耕地/末地石等）：聯動破壞上方作物；</li>
+ *   <li>非玩家事件（爆炸、水衝、活塞推拉、火燒、耕地踩踏、實體頂替）：作物被波及/失去支撐時
+ *       同樣按破壞處理（掉成品/種子）並刪除粘液數據——否則殘留數據會讓 tick 把方塊復原，
+ *       出現「水衝不走、拉不倒」的假活死循環；</li>
+ *   <li>生長限高：配置 maxAge 低於原版上限的作物（瓜莖等）長到成熟年齡後取消原版生長事件
+ *       （BlockGrowEvent），停留在成熟階段，不進入原版滿齡行為（莖結果實）。</li>
  * </ol>
  */
 public final class CropListener implements Listener {
@@ -45,19 +45,19 @@ public final class CropListener implements Listener {
         Block b = e.getBlock();
         SlimefunItem sf = BlockStorage.check(b);
         if (sf instanceof CropBlock crop) {
-            // 禁用原版掉落：作物方块已被 tick 转成 WHEAT 等原版材质，否则会额外掉原版作物/种子
+            // 禁用原版掉落：作物方塊已被 tick 轉成 WHEAT 等原版材質，否則會額外掉原版作物/種子
             e.setDropItems(false);
             breakCrop(b, crop);
             return;
         }
-        // 自身即其他粘液方块（机器/装饰等）：作物只种在原版方块上（plantOn 限定原版材质），
-        // 且 2 格高作物的上格不含粘液数据，故它既不可能是作物的上格残留也不可能是支撑方块，
-        // 跳过下方/上方两次数据查询（粘液方块破坏高频路径）
+        // 自身即其他粘液方塊（機器/裝飾等）：作物只種在原版方塊上（plantOn 限定原版材質），
+        // 且 2 格高作物的上格不含粘液數據，故它既不可能是作物的上格殘留也不可能是支撐方塊，
+        // 跳過下方/上方兩次數據查詢（粘液方塊破壞高頻路徑）
         if (sf != null) return;
-        // 2 格高作物：破坏上格 → 联动破坏主格。
-        // 必须校验「被破坏方块与下方作物同材质」：该分支只服务 2 格高作物（上下同材质，如瓶子草）。
-        // 否则玩家在单格作物（紫颂花/小麦等）上方放的装饰方块被破坏时，会把下方作物误判为
-        // 「2 格高作物的上格」而整株误杀。
+        // 2 格高作物：破壞上格 → 聯動破壞主格。
+        // 必須校驗「被破壞方塊與下方作物同材質」：該分支只服務 2 格高作物（上下同材質，如瓶子草）。
+        // 否則玩家在單格作物（紫頌花/小麥等）上方放的裝飾方塊被破壞時，會把下方作物誤判為
+        // 「2 格高作物的上格」而整株誤殺。
         Block below = b.getRelative(BlockFace.DOWN);
         if (below.getType() == b.getType()) {
             SlimefunItem belowSf = BlockStorage.check(below);
@@ -67,7 +67,7 @@ public final class CropListener implements Listener {
                 return;
             }
         }
-        // 支撑方块被破坏 → 联动破坏上方作物（保留支撑方块自身的原版掉落）
+        // 支撐方塊被破壞 → 聯動破壞上方作物（保留支撐方塊自身的原版掉落）
         Block above = b.getRelative(BlockFace.UP);
         SlimefunItem aboveSf = BlockStorage.check(above);
         if (aboveSf instanceof CropBlock cropAbove) {
@@ -75,7 +75,7 @@ public final class CropListener implements Listener {
         }
     }
 
-    /** 爆炸波及：被炸方块的上/下若有作物（支撑被炸 / 2 格高上格被炸），联动破坏并清数据。 */
+    /** 爆炸波及：被炸方塊的上/下若有作物（支撐被炸 / 2 格高上格被炸），聯動破壞並清數據。 */
     @EventHandler(ignoreCancelled = true)
     public void onBlockExplode(BlockExplodeEvent e) {
         for (Block b : e.blockList()) {
@@ -91,64 +91,64 @@ public final class CropListener implements Listener {
     }
 
     /**
-     * 流体冲刷（水流冲走作物、岩浆烧毁等）：被流体顶替的作物按非玩家破坏处理（掉成品/种子 + 清数据）。
-     * 在事件阶段（流体尚未流入）提前破坏并清数据，原版的流体破坏掉落便不会再发生，避免双重掉落；
-     * 若只清方块不清数据，残留数据会让 tick 的恢复守卫把作物复原，出现「水冲不走」的死循环。
+     * 流體沖刷（水流沖走作物、岩漿燒燬等）：被流體頂替的作物按非玩家破壞處理（掉成品/種子 + 清數據）。
+     * 在事件階段（流體尚未流入）提前破壞並清數據，原版的流體破壞掉落便不會再發生，避免雙重掉落；
+     * 若只清方塊不清數據，殘留數據會讓 tick 的恢復守衞把作物復原，出現「水衝不走」的死循環。
      */
     @EventHandler(ignoreCancelled = true)
     public void onLiquidFlow(BlockFromToEvent e) {
-        // 绝大多数流体步进的目标是空气，先按材质短路再查数据
+        // 絕大多數流體步進的目標是空氣，先按材質短路再查數據
         if (e.getToBlock().getType().isAir()) return;
         cleanupCrop(e.getToBlock());
     }
 
-    /** 活塞推动：被推方块自身、其上方（支撑被推走）及推入目的地若有作物，按非玩家破坏处理。 */
+    /** 活塞推動：被推方塊自身、其上方（支撐被推走）及推入目的地若有作物，按非玩家破壞處理。 */
     @EventHandler(ignoreCancelled = true)
     public void onPistonExtend(BlockPistonExtendEvent e) {
         BlockFace dir = e.getDirection();
         for (Block b : e.getBlocks()) {
             cleanupPistonPath(b, dir);
         }
-        // 活塞头正前方：被顶替的作物（不可移动的作物不会出现在 getBlocks 里）
+        // 活塞頭正前方：被頂替的作物（不可移動的作物不會出現在 getBlocks 裏）
         cleanupPistonPath(e.getBlock().getRelative(dir), dir);
     }
 
-    /** 活塞拉动：被拉方块自身、其上方（支撑被拉走）及拉入目的地若有作物，按非玩家破坏处理。 */
+    /** 活塞拉動：被拉方塊自身、其上方（支撐被拉走）及拉入目的地若有作物，按非玩家破壞處理。 */
     @EventHandler(ignoreCancelled = true)
     public void onPistonRetract(BlockPistonRetractEvent e) {
         BlockFace dir = e.getDirection();
         for (Block b : e.getBlocks()) {
             cleanupPistonPath(b, dir);
         }
-        // 活塞头位置：粘在头上的不可移动作物被拉断
+        // 活塞頭位置：粘在頭上的不可移動作物被拉斷
         cleanupPistonPath(e.getBlock().getRelative(dir.getOppositeFace()), dir);
     }
 
-    /** 检查活塞推/拉路径上的一个位置及其上下文，破坏其中的作物并清数据。 */
+    /** 檢查活塞推/拉路徑上的一個位置及其上下文，破壞其中的作物並清數據。 */
     private static void cleanupPistonPath(Block b, BlockFace dir) {
-        cleanupCrop(b);                            // 作物被直接推/拉（原版破坏但不移动）
-        cleanupCrop(b.getRelative(BlockFace.UP));  // 支撑方块被移走，上方作物失去支撑
-        cleanupCrop(b.getRelative(dir));           // 目的地已有作物，被推入/拉入顶替
+        cleanupCrop(b);                            // 作物被直接推/拉（原版破壞但不移動）
+        cleanupCrop(b.getRelative(BlockFace.UP));  // 支撐方塊被移走，上方作物失去支撐
+        cleanupCrop(b.getRelative(dir));           // 目的地已有作物，被推入/拉入頂替
     }
 
-    /** 火烧作物：按非玩家破坏处理并清数据。 */
+    /** 火燒作物：按非玩家破壞處理並清數據。 */
     @EventHandler(ignoreCancelled = true)
     public void onBlockBurn(BlockBurnEvent e) {
         cleanupCrop(e.getBlock());
     }
 
-    /** 耕地被踩踏成泥土：上方作物失去支撑，联动破坏并清数据。 */
+    /** 耕地被踩踏成泥土：上方作物失去支撐，聯動破壞並清數據。 */
     @EventHandler(ignoreCancelled = true)
     public void onEntityChangeBlock(EntityChangeBlockEvent e) {
         Block b = e.getBlock();
-        // 方块被实体直接顶替（如铁砧/坠落方块砸中作物位置）：按非玩家破坏处理
+        // 方塊被實體直接頂替（如鐵砧/墜落方塊砸中作物位置）：按非玩家破壞處理
         SlimefunItem sf = BlockStorage.check(b);
         if (sf instanceof CropBlock crop) {
             breakCrop(b, crop);
             return;
         }
         if (b.getType() != Material.FARMLAND) return;
-        // 耕地被踩踏成泥土：上方作物失去支撑，联动破坏并清数据
+        // 耕地被踩踏成泥土：上方作物失去支撐，聯動破壞並清數據
         Block above = b.getRelative(BlockFace.UP);
         SlimefunItem aboveSf = BlockStorage.check(above);
         if (aboveSf instanceof CropBlock crop) {
@@ -157,16 +157,16 @@ public final class CropListener implements Listener {
     }
 
     /**
-     * 原版生长拦截：限高作物（配置 maxAge 低于原版上限，如瓜茎 maxAge=6 < 原版 7，防原版结果实）
-     * 长到配置成熟年龄后取消原版生长事件——随机刻生长与骨粉催熟均走 BlockGrowEvent，
-     * 作物停留在成熟阶段，无需 tick 轮询回退生长进度。
-     * 附加：限高茎旁生成的原版果实（历史遗留满龄茎的掉落路径）一并取消，防刷原版西瓜/南瓜。
+     * 原版生長攔截：限高作物（配置 maxAge 低於原版上限，如瓜莖 maxAge=6 < 原版 7，防原版結果實）
+     * 長到配置成熟年齡後取消原版生長事件——隨機刻生長與骨粉催熟均走 BlockGrowEvent，
+     * 作物停留在成熟階段，無需 tick 輪詢回退生長進度。
+     * 附加：限高莖旁生成的原版果實（歷史遺留滿齡莖的掉落路徑）一併取消，防刷原版西瓜/南瓜。
      */
     @EventHandler(ignoreCancelled = true)
     public void onGrow(BlockGrowEvent e) {
         Block b = e.getBlock();
-        // 紫颂作物：原版随机刻的枯萎分支（无法生长时原地变 age=5 枯花）走 BlockGrowEvent，
-        // 一律取消——紫颂生长/枯萎完全由插件定时推进控制（生成分支走 BlockSpreadEvent，见 onSpread）。
+        // 紫頌作物：原版隨機刻的枯萎分支（無法生長時原地變 age=5 枯花）走 BlockGrowEvent，
+        // 一律取消——紫頌生長/枯萎完全由插件定時推進控制（生成分支走 BlockSpreadEvent，見 onSpread）。
         if (b.getType() == Material.CHORUS_FLOWER) {
             SlimefunItem sf0 = BlockStorage.check(b);
             if (sf0 instanceof CropBlock) {
@@ -184,7 +184,7 @@ public final class CropListener implements Listener {
                 }
             }
         }
-        // 果实生成事件（block=结果位，newState=瓜）：相邻存在限高茎时取消
+        // 果實生成事件（block=結果位，newState=瓜）：相鄰存在限高莖時取消
         Material newStateType = e.getNewState().getType();
         if (newStateType == Material.MELON || newStateType == Material.PUMPKIN) {
             for (BlockFace f : new BlockFace[]{BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST}) {
@@ -199,13 +199,13 @@ public final class CropListener implements Listener {
         }
     }
 
-    /** 破坏作物主格：掉成品/种子、清数据、清除 2 格高作物的上格残留。 */
+    /** 破壞作物主格：掉成品/種子、清數據、清除 2 格高作物的上格殘留。 */
     private static void breakCrop(Block b, CropBlock crop) {
-        // 先按当前方块状态判定成熟并掉落（此时两格齐全、age 可读）。
-        // 顺序与物理都关键：
-        //  · 若先移除 2 格高作物的上格，原版邻块更新会把主格判为无法存活而按原版战利品破坏
-        //    （泄漏瓶子草等原版物品），且主格变 AIR 后成熟判定失效、只会掉 1 个种子；
-        //  · 移除两格时关闭物理（applyPhysics=false），另一半不会被原版邻块更新带掉落破坏。
+        // 先按當前方塊狀態判定成熟並掉落（此時兩格齊全、age 可讀）。
+        // 順序與物理都關鍵：
+        //  · 若先移除 2 格高作物的上格，原版鄰塊更新會把主格判為無法存活而按原版戰利品破壞
+        //    （泄漏瓶子草等原版物品），且主格變 AIR 後成熟判定失效、只會掉 1 個種子；
+        //  · 移除兩格時關閉物理（applyPhysics=false），另一半不會被原版鄰塊更新帶掉落破壞。
         crop.onBreak(b);
         Block up = b.getRelative(BlockFace.UP);
         if (up.getType() == b.getType()) {
@@ -216,8 +216,8 @@ public final class CropListener implements Listener {
     }
 
     private static void cleanupAdjacent(Block exploded) {
-        cleanupCrop(exploded.getRelative(BlockFace.UP));    // 支撑被炸
-        // 2 格高上格被炸（上下同材质才联动；爆炸波及作物上方普通方块时不误杀下方作物）
+        cleanupCrop(exploded.getRelative(BlockFace.UP));    // 支撐被炸
+        // 2 格高上格被炸（上下同材質才聯動；爆炸波及作物上方普通方塊時不誤殺下方作物）
         Block down = exploded.getRelative(BlockFace.DOWN);
         if (down.getType() == exploded.getType()) {
             cleanupCrop(down);
@@ -225,10 +225,10 @@ public final class CropListener implements Listener {
     }
 
     /**
-     * 原版紫颂生长源头拦截（性能与视觉双收益）：紫颂花随机刻的移动式生长（上方/水平生成新花）
-     * 走 BlockSpreadEvent（CraftBukkit 补丁 handleBlockSpreadEvent），且基座「变梗」的 setBlock
-     * 只在事件未被取消时才执行——在此取消即让原版什么都不做，杜绝「原版生长 → 插件 tick 还原」
-     * 的闪回与每株两轮的方块更新开销。注意 BlockGrowEvent 拦不住该分支（它不是 Grow 事件）。
+     * 原版紫頌生長源頭攔截（性能與視覺雙收益）：紫頌花隨機刻的移動式生長（上方/水平生成新花）
+     * 走 BlockSpreadEvent（CraftBukkit 補丁 handleBlockSpreadEvent），且基座「變梗」的 setBlock
+     * 只在事件未被取消時才執行——在此取消即讓原版什麼都不做，杜絕「原版生長 → 插件 tick 還原」
+     * 的閃回與每株兩輪的方塊更新開銷。注意 BlockGrowEvent 攔不住該分支（它不是 Grow 事件）。
      */
     @EventHandler(ignoreCancelled = true)
     public void onSpread(BlockSpreadEvent e) {

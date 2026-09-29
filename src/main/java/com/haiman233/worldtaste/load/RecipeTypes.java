@@ -8,7 +8,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-/** 加载 recipe_types.yml 自定义配方类型，并提供 recipe_type 字符串解析。 */
+/** 加載 recipe_types.yml 自定義配方類型，並提供 recipe_type 字符串解析。 */
 public final class RecipeTypes {
 
     private RecipeTypes() {}
@@ -22,20 +22,20 @@ public final class RecipeTypes {
             try {
                 ItemStack display = Read.item(s, false);
                 if (display == null) {
-                    WT.log("recipe_types " + key + ": 无图标，跳过");
+                    WT.log("recipe_types " + key + ": 無圖標，跳過");
                     continue;
                 }
                 RecipeType rt = new RecipeType(new NamespacedKey(WT.plugin, key.toLowerCase(Locale.ROOT)), display);
                 WT.recipeTypes.put(key.toUpperCase(Locale.ROOT), rt);
                 ok++;
             } catch (Exception e) {
-                WT.log("recipe_types " + key + " 失败: " + e);
+                WT.log("recipe_types " + key + " 失敗: " + e);
             }
         }
-        WT.plugin.getLogger().info("recipe_types.yml: 注册 " + ok);
+        WT.plugin.getLogger().info("recipe_types.yml: 註冊 " + ok);
     }
 
-    /** 解析 recipe_type 字符串：先查自定义，再映射标准常量，最后回退 NULL。 */
+    /** 解析 recipe_type 字符串：先查自定義，再映射標準常量，最後回退 NULL。 */
     public static RecipeType resolve(String name) {
         if (name == null) return RecipeType.NULL;
         String u = name.toUpperCase(Locale.ROOT);
@@ -66,7 +66,7 @@ public final class RecipeTypes {
             case "GOLD_PAN": return RecipeType.GOLD_PAN;
             case "HEATED_PRESSURE_CHAMBER": return RecipeType.HEATED_PRESSURE_CHAMBER;
             default:
-                WT.log("未知 recipe_type: " + name + "，回退为 NULL");
+                WT.log("未知 recipe_type: " + name + "，回退為 NULL");
                 return RecipeType.NULL;
         }
     }

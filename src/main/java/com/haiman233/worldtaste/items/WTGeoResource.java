@@ -7,7 +7,7 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 import org.bukkit.inventory.ItemStack;
 
-/** GEO 资源（geo_resources.yml）：注册后可被 GEO 采掘机产出、GEO 扫描仪探测。 */
+/** GEO 資源（geo_resources.yml）：註冊後可被 GEO 採掘機產出、GEO 掃描儀探測。 */
 public class WTGeoResource implements GEOResource {
 
     private final NamespacedKey key;

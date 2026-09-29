@@ -12,46 +12,46 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- * 酒窖多方块结构展示页（对齐文明复兴的多方块结构展示）：三层 3×3 网格
- * （顶层 / 中层 / 底层，y 轴从下到上），格子显示对应方块与名称，
- * 中层中心的空气格以灰色标识。返回键回到酒窖管理器页面。
+ * 酒窖多方塊結構展示頁（對齊文明覆興的多方塊結構展示）：三層 3×3 網格
+ * （頂層 / 中層 / 底層，y 軸從下到上），格子顯示對應方塊與名稱，
+ * 中層中心的空氣格以灰色標識。返回鍵回到酒窖管理器頁面。
  */
 public final class CellarStructureMenu {
 
     private CellarStructureMenu() {}
 
-    /** 打开结构展示页：cellar 为来源酒窖管理器方块（返回键直接回到该页面）。 */
+    /** 打開結構展示頁：cellar 為來源酒窖管理器方塊（返回鍵直接回到該頁面）。 */
     public static void open(Player p, Block cellar) {
-        ChestMenu menu = new ChestMenu(ChatColor.GOLD + "酒窖管理器 " + ChatColor.GRAY + "· 多方块结构");
+        ChestMenu menu = new ChestMenu(ChatColor.GOLD + "酒窖管理器 " + ChatColor.GRAY + "· 多方塊結構");
         menu.setEmptySlotsClickable(false);
         menu.setPlayerInventoryClickable(true);
         for (int i = 0; i < 54; i++) {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        // 三个 3×3 网格：列 0-2 / 3-5 / 6-8，行 2-4（每列一格子组）
-        // 顶层（行 2-4 的第一组）
+        // 三個 3×3 網格：列 0-2 / 3-5 / 6-8，行 2-4（每列一格子組）
+        // 頂層（行 2-4 的第一組）
         layer(menu, 0, new String[][]{
                 {"橡木木板", "OAK_PLANKS"}, {"橡木原木", "OAK_LOG"}, {"橡木木板", "OAK_PLANKS"},
                 {"橡木原木", "OAK_LOG"}, {"橡木原木", "OAK_LOG"}, {"橡木原木", "OAK_LOG"},
                 {"橡木木板", "OAK_PLANKS"}, {"橡木原木", "OAK_LOG"}, {"橡木木板", "OAK_PLANKS"}});
-        // 中层
+        // 中層
         layer(menu, 1, new String[][]{
                 {"橡木原木", "OAK_LOG"}, {"橡木木板", "OAK_PLANKS"}, {"橡木原木", "OAK_LOG"},
-                {"橡木木板", "OAK_PLANKS"}, {"空气", null}, {"橡木木板", "OAK_PLANKS"},
+                {"橡木木板", "OAK_PLANKS"}, {"空氣", null}, {"橡木木板", "OAK_PLANKS"},
                 {"橡木原木", "OAK_LOG"}, {"酒窖管理器", "BREWING_STAND"}, {"温度控制器", "WAXED_COPPER_BLOCK"}});
-        // 底层（与顶层相同）
+        // 底層（與頂層相同）
         layer(menu, 2, new String[][]{
                 {"橡木木板", "OAK_PLANKS"}, {"橡木原木", "OAK_LOG"}, {"橡木木板", "OAK_PLANKS"},
                 {"橡木原木", "OAK_LOG"}, {"橡木原木", "OAK_LOG"}, {"橡木原木", "OAK_LOG"},
                 {"橡木木板", "OAK_PLANKS"}, {"橡木原木", "OAK_LOG"}, {"橡木木板", "OAK_PLANKS"}});
 
-        // 层标签
-        menu.addItem(1, label(Material.OAK_PLANKS, "顶层（y=+1）"), ChestMenuUtils.getEmptyClickHandler());
-        menu.addItem(4, label(Material.BREWING_STAND, "中层（y=0）"), ChestMenuUtils.getEmptyClickHandler());
-        menu.addItem(7, label(Material.OAK_PLANKS, "底层（y=-1）"), ChestMenuUtils.getEmptyClickHandler());
+        // 層標籤
+        menu.addItem(1, label(Material.OAK_PLANKS, "頂層（y=+1）"), ChestMenuUtils.getEmptyClickHandler());
+        menu.addItem(4, label(Material.BREWING_STAND, "中層（y=0）"), ChestMenuUtils.getEmptyClickHandler());
+        menu.addItem(7, label(Material.OAK_PLANKS, "底層（y=-1）"), ChestMenuUtils.getEmptyClickHandler());
 
-        // 返回：直接回到来源酒窖页面（子页面打开时酒窖会话已结束，不能用会话表反查）
+        // 返回：直接回到來源酒窖頁面（子頁面打開時酒窖會話已結束，不能用會話表反查）
         menu.addItem(49, back(), (pl, s, cur, action) -> {
             if (cellar != null && me.mrCookieSlime.Slimefun.api.BlockStorage.check(cellar)
                     instanceof WineCellarManager) {
@@ -64,7 +64,7 @@ public final class CellarStructureMenu {
         menu.open(p);
     }
 
-    /** 在指定 3×3 网格组（group=0/1/2，对应列 0-2/3-5/6-8，行 2-4）绘制一层结构。 */
+    /** 在指定 3×3 網格組（group=0/1/2，對應列 0-2/3-5/6-8，行 2-4）繪製一層結構。 */
     private static void layer(ChestMenu menu, int group, String[][] cells) {
         int baseCol = group * 3;
         for (int row = 0; row < 3; row++) {

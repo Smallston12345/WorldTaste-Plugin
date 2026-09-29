@@ -12,7 +12,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-/** 加载 mb_machines.yml → {@link WTMultiBlockMachine}。 */
+/** 加載 mb_machines.yml → {@link WTMultiBlockMachine}。 */
 public final class MultiBlockLoader {
 
     private MultiBlockLoader() {}
@@ -25,17 +25,17 @@ public final class MultiBlockLoader {
             if (s == null) continue;
             try {
                 ItemGroup g = WT.group(s.getString("item_group"));
-                if (g == null) { MissingItems.record("物品组缺失:" + s.getString("item_group")); skip++; continue; }
+                if (g == null) { MissingItems.record("物品組缺失:" + s.getString("item_group")); skip++; continue; }
                 if (WTConfig.blockItem(s.getString("item_group"), id)) { skip++; continue; }
                 ItemStack display = WT.preload.get(id.toUpperCase(java.util.Locale.ROOT));
-                if (display == null) { MissingItems.record("无展示物品:" + id); skip++; continue; }
+                if (display == null) { MissingItems.record("無展示物品:" + id); skip++; continue; }
                 SlimefunItemStack sfis = new SlimefunItemStack(id, display);
                 RecipeType rt = RecipeTypes.resolve(s.getString("recipe_type", "NULL"));
                 ItemStack[] structure = Read.recipe(s.getConfigurationSection("recipe"), 9);
                 int work = s.getInt("work", 5);
-                // 校验 work 槽位：越界或该槽未填方块会在右键时抛 AIOOBE/NPE
+                // 校驗 work 槽位：越界或該槽未填方塊會在右鍵時拋 AIOOBE/NPE
                 if (work < 1 || work > 9 || structure[work - 1] == null) {
-                    WT.log(id + ": work 槽位无效（work=" + work + "，需在 1..9 且对应结构槽非空），跳过");
+                    WT.log(id + ": work 槽位無效（work=" + work + "，需在 1..9 且對應結構槽非空），跳過");
                     skip++;
                     continue;
                 }
@@ -45,11 +45,11 @@ public final class MultiBlockLoader {
                 m.register(WT.plugin);
                 ok++;
             } catch (Exception e) {
-                WT.log("mb_machines.yml " + id + " 注册失败: " + e);
+                WT.log("mb_machines.yml " + id + " 註冊失敗: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info("mb_machines.yml: 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info("mb_machines.yml: 註冊 " + ok + ", 跳過 " + skip);
     }
 
     static Map<ItemStack[], ItemStack> readMbRecipes(ConfigurationSection recipesSec) {
@@ -59,11 +59,11 @@ public final class MultiBlockLoader {
             ConfigurationSection r = recipesSec.getConfigurationSection(name);
             if (r == null) continue;
             try {
-                ItemStack[] input = Read.recipe(r.getConfigurationSection("input"), 9); // 与发射器 9 槽对齐
+                ItemStack[] input = Read.recipe(r.getConfigurationSection("input"), 9); // 與發射器 9 槽對齊
                 ItemStack output = Read.item(r.getConfigurationSection("output"), true);
                 if (output != null) out.put(input, output);
             } catch (Exception e) {
-                WT.log("多方块配方 " + name + " 解析失败: " + e);
+                WT.log("多方塊配方 " + name + " 解析失敗: " + e);
             }
         }
         return out;
@@ -74,7 +74,7 @@ public final class MultiBlockLoader {
         try {
             return SoundEffect.valueOf(name.trim());
         } catch (Exception e) {
-            WT.log("未知 SoundEffect: " + name + "（已忽略声音）");
+            WT.log("未知 SoundEffect: " + name + "（已忽略聲音）");
             return null;
         }
     }

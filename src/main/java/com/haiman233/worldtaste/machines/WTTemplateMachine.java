@@ -13,14 +13,14 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 模板机器（template_machines.yml）：在 templateSlot 放入对应模板物品后，仅匹配该模板下的配方。
- * 不放模板则不合成；模板物品不被消耗。
+ * 模板機器（template_machines.yml）：在 templateSlot 放入對應模板物品後，僅匹配該模板下的配方。
+ * 不放模板則不合成；模板物品不被消耗。
  */
 public class WTTemplateMachine extends WTRecipeMachine {
 
     private final int templateSlot;
     private final Map<String, List<WTRecipe>> byTemplate;
-    /** 模板堆叠数放大产出（对齐 RSC moreOutputIfMoreTemplates：产出 amount *= 模板数量）。 */
+    /** 模板堆疊數放大產出（對齊 RSC moreOutputIfMoreTemplates：產出 amount *= 模板數量）。 */
     private final boolean moreOutputIfMoreTemplates;
 
     public WTTemplateMachine(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe,
@@ -32,8 +32,8 @@ public class WTTemplateMachine extends WTRecipeMachine {
         this.templateSlot = templateSlot;
         this.byTemplate = byTemplate;
         this.moreOutputIfMoreTemplates = moreOutputIfMoreTemplates;
-        // super() 末尾重建 preset 时本类字段 templateSlot 尚未赋值（读到 0），
-        // 导致真正的模板槽被背景封死。字段就绪后再重建一次 preset。
+        // super() 末尾重建 preset 時本類字段 templateSlot 尚未賦值（讀到 0），
+        // 導致真正的模板槽被背景封死。字段就緒後再重建一次 preset。
         createPreset(this, getInventoryTitle(), this::constructMenu);
     }
 
@@ -58,7 +58,7 @@ public class WTTemplateMachine extends WTRecipeMachine {
             super.pushRecipeOutputs(b, inv, r);
             return;
         }
-        // 对齐 RSC CustomTemplateMachine:274-275：产出数量乘以当前模板堆叠数（模板不被消耗，堆叠持续放大）。
+        // 對齊 RSC CustomTemplateMachine:274-275：產出數量乘以當前模板堆疊數（模板不被消耗，堆疊持續放大）。
         ItemStack tpl = inv.getItemInSlot(templateSlot);
         int mult = (tpl != null && tpl.getType() != org.bukkit.Material.AIR) ? Math.max(1, tpl.getAmount()) : 1;
         r.pushOutputs(inv, getOutputSlots(), mult);

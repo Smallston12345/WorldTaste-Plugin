@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 酒窖配方（cellar.yml 定义，CellarLoader 加载）。
+ * 酒窖配方（cellar.yml 定義，CellarLoader 加載）。
  *
- * <p>匹配为<b>按材料份数</b>（原料数量）：池内各原料的总份数（每单位果汁按其组成折算材料数，
- * 如 1 单位甜浆果汁 = 3 份甜浆果）与配方 ingredient 数量成<b>整数倍比例</b>（k 倍）时匹配，
- * 产出池内全部果汁单位数（= 配方投入果汁单位数 × k）。产物可为酒水（aging=true，可进入
- * 陈化模式增长酒精度）或副产物（aging=false，无酒精度）。</p>
+ * <p>匹配為<b>按材料份數</b>（原料數量）：池內各原料的總份數（每單位果汁按其組成折算材料數，
+ * 如 1 單位甜漿果汁 = 3 份甜漿果）與配方 ingredient 數量成<b>整數倍比例</b>（k 倍）時匹配，
+ * 產出池內全部果汁單位數（= 配方投入果汁單位數 × k）。產物可為酒水（aging=true，可進入
+ * 陳化模式增長酒精度）或副產物（aging=false，無酒精度）。</p>
  */
 public final class CellarRecipe {
 
     private static final Map<String, CellarRecipe> RECIPES = new LinkedHashMap<>();
 
-    /** 比例匹配结果。 */
+    /** 比例匹配結果。 */
     public static final class MatchResult {
         public final CellarRecipe recipe;
         public final int multiplier;
@@ -31,13 +31,13 @@ public final class CellarRecipe {
     }
 
     public final String key;
-    /** 投入物：ref(mc:XXX/sf:XXX) → 该原料的总份数（材料数量）。 */
+    /** 投入物：ref(mc:XXX/sf:XXX) → 該原料的總份數（材料數量）。 */
     public final Map<String, Integer> ingredientRefs;
-    /** 投入总单位数。 */
+    /** 投入總單位數。 */
     public final int totalInput;
-    /** 是否允许陈酿（true = 产物含酒精，可陈化增长；false = 副产物，无酒精度）。 */
+    /** 是否允許陳釀（true = 產物含酒精，可陳化增長；false = 副產物，無酒精度）。 */
     public final boolean aging;
-    /** 单位产物模板。 */
+    /** 單位產物模板。 */
     public final ItemStack result;
 
     public CellarRecipe(String key, Map<String, Integer> ingredientRefs, boolean aging, ItemStack result) {
@@ -67,9 +67,9 @@ public final class CellarRecipe {
     }
 
     /**
-     * 按材料份数匹配：portions 为池内各原料的总份数（ref → 每单位果汁组成 × 单位数，
-     * 支持分数），与配方 ingredient 数量成整数倍（k≥1）比例时匹配；多个候选取倍率最小者。
-     * 清水不参与（无原料 ref）。
+     * 按材料份數匹配：portions 為池內各原料的總份數（ref → 每單位果汁組成 × 單位數，
+     * 支持分數），與配方 ingredient 數量成整數倍（k≥1）比例時匹配；多個候選取倍率最小者。
+     * 清水不參與（無原料 ref）。
      */
     public static MatchResult match(Map<String, Double> portions) {
         MatchResult best = null;

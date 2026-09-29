@@ -7,8 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 
 /**
- * 评估物品段的 register.conditions（对齐 RSC YamlReader.checkForRegistration）。
- * 支持：hasplugin/!hasplugin、itemexist/!itemexist、version op x.y、config.*（忽略，视为通过）。
+ * 評估物品段的 register.conditions（對齊 RSC YamlReader.checkForRegistration）。
+ * 支持：hasplugin/!hasplugin、itemexist/!itemexist、version op x.y、config.*（忽略，視為通過）。
  */
 public final class RegisterConditions {
 
@@ -23,7 +23,7 @@ public final class RegisterConditions {
             String c = raw.trim();
             if (c.isEmpty()) continue;
             if (!eval(c)) {
-                if (reg.getBoolean("warn", false)) WT.log("注册条件不满足，跳过: " + c);
+                if (reg.getBoolean("warn", false)) WT.log("註冊條件不滿足，跳過: " + c);
                 return false;
             }
         }
@@ -45,7 +45,7 @@ public final class RegisterConditions {
             if (parts.length == 2) return compareVersion(parts[0], parts[1]);
             return true;
         }
-        if (c.startsWith("config.")) return true; // 依赖附属自定义配置，视为通过
+        if (c.startsWith("config.")) return true; // 依賴附屬自定義配置，視為通過
         return true;
     }
 

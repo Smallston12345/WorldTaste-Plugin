@@ -15,16 +15,16 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-/** 加载 groups.yml：nested / sub / button / seasonal / locked / normal。 */
+/** 加載 groups.yml：nested / sub / button / seasonal / locked / normal。 */
 public final class GroupLoader {
 
     private GroupLoader() {}
 
     public static void load() {
         YamlConfiguration y = Yaml.loadResource(WT.plugin, "groups.yml");
-        // 先注册 nested 根组，再注册子组（SubItemGroup 构造需要父 NestedItemGroup）
-        // 逐条 try/catch 故障隔离：registerNested 内 Read.item(PlayerHead/Skin) 或组构造/注册
-        // 可能对单条坏数据抛异常；若无隔离会中止整个 GroupLoader，其后所有物品因「物品组缺失」被跳过。
+        // 先註冊 nested 根組，再註冊子組（SubItemGroup 構造需要父 NestedItemGroup）
+        // 逐條 try/catch 故障隔離：registerNested 內 Read.item(PlayerHead/Skin) 或組構造/註冊
+        // 可能對單條壞數據拋異常；若無隔離會中止整個 GroupLoader，其後所有物品因「物品組缺失」被跳過。
         for (String key : y.getKeys(false)) {
             try {
                 ConfigurationSection s = y.getConfigurationSection(key);
@@ -32,7 +32,7 @@ public final class GroupLoader {
                 String type = s.getString("type", "normal").toLowerCase(Locale.ROOT);
                 if (type.equals("nested") || type.equals("parent")) registerNested(key, s);
             } catch (Exception e) {
-                WT.log("groups " + key + " 注册失败，跳过: " + e);
+                WT.log("groups " + key + " 註冊失敗，跳過: " + e);
             }
         }
         int ok = WT.groups.size();
@@ -44,16 +44,16 @@ public final class GroupLoader {
                 if (type.equals("nested") || type.equals("parent")) continue;
                 registerChild(key, s, type);
             } catch (Exception e) {
-                WT.log("groups " + key + " 注册失败，跳过: " + e);
+                WT.log("groups " + key + " 註冊失敗，跳過: " + e);
             }
         }
-        WT.plugin.getLogger().info("groups.yml: 注册 " + (WT.groups.size() - ok) + " 子组，共 " + WT.groups.size());
+        WT.plugin.getLogger().info("groups.yml: 註冊 " + (WT.groups.size() - ok) + " 子組，共 " + WT.groups.size());
     }
 
     private static void registerNested(String key, ConfigurationSection s) {
         ItemStack display = WTConfig.applyDisabledSuffix(key, Read.item(s.getConfigurationSection("item"), false));
         if (display == null) {
-            WT.log("groups " + key + ": 无展示物品");
+            WT.log("groups " + key + ": 無展示物品");
             return;
         }
         int tier = s.getInt("tier", 3);
@@ -63,10 +63,10 @@ public final class GroupLoader {
     }
 
     private static void registerChild(String key, ConfigurationSection s, String type) {
-        // 玩法关闭的分组（如酿造工艺）按钮保留，仅在名称后追加「已禁用」
+        // 玩法關閉的分組（如釀造工藝）按鈕保留，僅在名稱後追加「已禁用」
         ItemStack display = WTConfig.applyDisabledSuffix(key, Read.item(s.getConfigurationSection("item"), false));
         if (display == null) {
-            WT.log("groups " + key + ": 无展示物品");
+            WT.log("groups " + key + ": 無展示物品");
             return;
         }
         int tier = s.getInt("tier", 3);
@@ -79,9 +79,9 @@ public final class GroupLoader {
                 break;
             }
             case "button": {
-                // 装饰分隔板/标签（RSC 中 actions: none 的对应物）：注册为 DecorativeSubGroup——
-                // 展示为普通原版玻璃板（无名字/lore）；原版指南点击无反应；
-                // JEG 指南点击由 JegGuideListener 取消 ItemGroupButtonClickEvent，同样无反应
+                // 裝飾分隔板/標籤（RSC 中 actions: none 的對應物）：註冊為 DecorativeSubGroup——
+                // 展示為普通原版玻璃板（無名字/lore）；原版指南點擊無反應；
+                // JEG 指南點擊由 JegGuideListener 取消 ItemGroupButtonClickEvent，同樣無反應
                 String parentId = s.getString("parent");
                 ItemGroup parent = parentId == null ? null : WT.groups.get(parentId.toLowerCase(Locale.ROOT));
                 if (parent instanceof NestedItemGroup nested) {
@@ -89,7 +89,7 @@ public final class GroupLoader {
                     g.register(WT.plugin);
                     WT.groups.put(key.toLowerCase(Locale.ROOT), g);
                 }
-                // 无嵌套父组的 button：纯装饰无承载，直接忽略（注册为普通组会混入指南主菜单）
+                // 無嵌套父組的 button：純裝飾無承載，直接忽略（註冊為普通組會混入指南主菜單）
                 break;
             }
             case "sub":
@@ -101,7 +101,7 @@ public final class GroupLoader {
                     g.register(WT.plugin);
                     WT.groups.put(key.toLowerCase(Locale.ROOT), g);
                 } else {
-                    // 无 nested 父组：退化为普通组
+                    // 無 nested 父組：退化為普通組
                     ItemGroup g = new ItemGroup(nsKey(key), display, tier);
                     g.register(WT.plugin);
                     WT.groups.put(key.toLowerCase(Locale.ROOT), g);

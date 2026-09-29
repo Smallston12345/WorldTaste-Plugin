@@ -15,45 +15,45 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 /**
- * 榨汁盆配方展示菜单（布局对齐需求图，菜单代码参考终焉厨锅大配方展示）：
+ * 榨汁盆配方展示菜單（佈局對齊需求圖，菜單代碼參考終焉廚鍋大配方展示）：
  * <ul>
- *   <li>固定配方页：背景为粘液 UI，绿/黄玻璃板装饰；红色区展示投入材料（多数量直接
- *       体现在物品堆叠数上），右侧产出并标注产出份数；底排铁砧=榨汁方式（踩踏/砸击）、
- *       重锤=所需次数（数量即次数）、附魔金苹果=混合材料页入口、门=返回指南、
- *       箭矢=翻页（左键下一页、右键上一页）；</li>
- *   <li>混合材料页：粉玻璃板描边，首排中间为「这些都能榨汁哦」附魔金苹果标签，
- *       其余空位铺可混合材料，底排门/箭矢同上。</li>
+ *   <li>固定配方頁：背景為粘液 UI，綠/黃玻璃板裝飾；紅色區展示投入材料（多數量直接
+ *       體現在物品堆疊數上），右側產出並標註產出份數；底排鐵砧=榨汁方式（踩踏/砸擊）、
+ *       重錘=所需次數（數量即次數）、附魔金蘋果=混合材料頁入口、門=返回指南、
+ *       箭矢=翻頁（左鍵下一頁、右鍵上一頁）；</li>
+ *   <li>混合材料頁：粉玻璃板描邊，首排中間為「這些都能榨汁哦」附魔金蘋果標籤，
+ *       其餘空位鋪可混合材料，底排門/箭矢同上。</li>
  * </ul>
  */
 public final class JuicerMenu {
 
-    /** 固定配方页槽位。 */
-    private static final int[] INGREDIENT_SLOTS = {20, 21, 22, 29, 30, 31}; // 红色区
-    private static final int SLOT_OUTPUT = 34;   // 右侧产出
-    private static final int SLOT_TYPE = 47;     // 榨汁方式（踩踏/铁砧）
-    private static final int SLOT_COUNT = 49;    // 重锤：所需次数
-    private static final int SLOT_BACK = 52;     // 门：返回配方列表
-    private static final int SLOT_PAGE = 53;     // 箭矢：翻页
+    /** 固定配方頁槽位。 */
+    private static final int[] INGREDIENT_SLOTS = {20, 21, 22, 29, 30, 31}; // 紅色區
+    private static final int SLOT_OUTPUT = 34;   // 右側產出
+    private static final int SLOT_TYPE = 47;     // 榨汁方式（踩踏/鐵砧）
+    private static final int SLOT_COUNT = 49;    // 重錘：所需次數
+    private static final int SLOT_BACK = 52;     // 門：返回配方列表
+    private static final int SLOT_PAGE = 53;     // 箭矢：翻頁
 
-    /** 配方列表页槽位：0~44 成品、45 返回指南、49 混合材料入口、53 翻页。 */
+    /** 配方列表頁槽位：0~44 成品、45 返回指南、49 混合材料入口、53 翻頁。 */
     private static final int SLOT_LIST_BACK = 45;
     private static final int SLOT_LIST_MIX = 49;
     private static final int SLOT_LIST_PAGE = 53;
     private static final int LIST_PAGE_SIZE = 45;
 
-    /** 混合材料页槽位。 */
-    private static final int SLOT_MIX_LABEL = 4;  // 首排中间标签（顶排上移一格，替换粉玻璃板）
-    private static final int MIX_PAGE_SIZE = 28;  // 每页材料数（内部空位）
+    /** 混合材料頁槽位。 */
+    private static final int SLOT_MIX_LABEL = 4;  // 首排中間標籤（頂排上移一格，替換粉玻璃板）
+    private static final int MIX_PAGE_SIZE = 28;  // 每頁材料數（內部空位）
 
-    /** 重锤图标：MACE 为 1.21+ 新增材质，旧版本服务端无此材质，回退铁砧（榨汁方式之一为铁砧砸击）。 */
+    /** 重錘圖標：MACE 為 1.21+ 新增材質，舊版本服務端無此材質，回退鐵砧（榨汁方式之一為鐵砧砸擊）。 */
     private static final Material COUNT_ICON =
             Material.matchMaterial("MACE") != null ? Material.matchMaterial("MACE") : Material.ANVIL;
 
     private JuicerMenu() {}
 
     /**
-     * 榨汁盆自身配方概览页（JEG 指南点击榨汁盆时替代默认展示）：标准 3x3 展示其合成配方
-     * （当前未配置则留空），右下角金苹果按钮进入配方展示页。
+     * 榨汁盆自身配方概覽頁（JEG 指南點擊榨汁盆時替代默認展示）：標準 3x3 展示其合成配方
+     * （當前未配置則留空），右下角金蘋果按鈕進入配方展示頁。
      */
     public static void openBasinOverview(Player p) {
         ChestMenu menu = baseMenu(ChatColor.GOLD + "榨汁盆 " + ChatColor.GRAY + "· 自身配方");
@@ -77,24 +77,24 @@ public final class JuicerMenu {
             if (nm != null) {
                 nm.setDisplayName(ChatColor.YELLOW + "自身配方待定");
                 List<String> lore = new ArrayList<>();
-                lore.add(ChatColor.GRAY + "该机器暂未配置合成配方");
+                lore.add(ChatColor.GRAY + "該機器暫未配置合成配方");
                 nm.setLore(lore);
                 none.setItemMeta(nm);
             }
             menu.addItem(13, none, ChestMenuUtils.getEmptyClickHandler());
         }
-        // 机器图标 + 产物位
+        // 機器圖標 + 產物位
         ItemStack icon = basin.getItem().clone();
         ItemMeta im = icon.getItemMeta();
         if (im != null) {
             List<String> lore = im.getLore() == null ? new ArrayList<>() : new ArrayList<>(im.getLore());
             lore.add("");
-            lore.add(ChatColor.DARK_GRAY + "机器本体");
+            lore.add(ChatColor.DARK_GRAY + "機器本體");
             im.setLore(lore);
             icon.setItemMeta(im);
         }
         menu.addItem(16, icon, ChestMenuUtils.getEmptyClickHandler());
-        // 返回指南 / 右下角书本进入配方列表
+        // 返回指南 / 右下角書本進入配方列表
         menu.addItem(35, backItem(), (pl, s, cursor, action) -> {
             JegHook.openGuide(pl);
             return false;
@@ -106,7 +106,7 @@ public final class JuicerMenu {
         menu.open(p);
     }
 
-    /** 金苹果入口按钮（带 PDC 标记，指南注入与概览页共用）。 */
+    /** 金蘋果入口按鈕（帶 PDC 標記，指南注入與概覽頁共用）。 */
     public static ItemStack entryButton() {
         ItemStack it = new ItemStack(Material.GOLDEN_APPLE);
         ItemMeta meta = it.getItemMeta();
@@ -120,8 +120,8 @@ public final class JuicerMenu {
     }
 
     /**
-     * 配方列表页：0~44 展示全部配方成品（45 个/页），点击成品进入对应配方详情；
-     * 45 返回指南，49 混合材料页入口（配置了 mix 段时），53 翻页（左键下一页/右键上一页）。
+     * 配方列表頁：0~44 展示全部配方成品（45 個/頁），點擊成品進入對應配方詳情；
+     * 45 返回指南，49 混合材料頁入口（配置了 mix 段時），53 翻頁（左鍵下一頁/右鍵上一頁）。
      */
     public static void openRecipeList(Player p, int page) {
         List<JuicerRecipe> recipes = JuicerRecipe.all();
@@ -160,21 +160,21 @@ public final class JuicerMenu {
         menu.open(p);
     }
 
-    /** 配方列表条目：成品 + 点击提示。 */
+    /** 配方列表條目：成品 + 點擊提示。 */
     private static ItemStack listEntry(JuicerRecipe r) {
         ItemStack it = r.result.clone();
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
             List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
             lore.add("");
-            lore.add(ChatColor.YELLOW + "点击查看配方详情");
+            lore.add(ChatColor.YELLOW + "點擊查看配方詳情");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 固定配方页：每页展示一个配方，箭矢翻页。 */
+    /** 固定配方頁：每頁展示一個配方，箭矢翻頁。 */
     public static void openRecipes(Player p, int index) {
         List<JuicerRecipe> recipes = JuicerRecipe.all();
         if (recipes.isEmpty()) {
@@ -188,7 +188,7 @@ public final class JuicerMenu {
                 + "· 配方 " + (idx + 1) + "/" + recipes.size());
         fillRecipeDeco(menu);
 
-        // 红色区：投入材料（数量体现为物品堆叠数）
+        // 紅色區：投入材料（數量體現為物品堆疊數）
         int i = 0;
         for (Map.Entry<String, Integer> en : r.ingredientRefs.entrySet()) {
             if (i >= INGREDIENT_SLOTS.length) break;
@@ -196,13 +196,13 @@ public final class JuicerMenu {
                     ChestMenuUtils.getEmptyClickHandler());
             i++;
         }
-        // 右侧产出：标注产出份数
+        // 右側產出：標註產出份數
         menu.addItem(SLOT_OUTPUT, describeOutput(r), ChestMenuUtils.getEmptyClickHandler());
-        // 榨汁方式 + 所需次数
+        // 榨汁方式 + 所需次數
         menu.addItem(SLOT_TYPE, r.playerType && r.anvilType ? typeBoth()
                 : r.anvilType ? typeAnvil() : typeStomp(), ChestMenuUtils.getEmptyClickHandler());
         menu.addItem(SLOT_COUNT, countItem(r.progress), ChestMenuUtils.getEmptyClickHandler());
-        // 返回配方列表 + 翻页
+        // 返回配方列表 + 翻頁
         menu.addItem(SLOT_BACK, backToListItem(), (pl, s, cursor, action) -> {
             openRecipeList(pl, 0);
             return false;
@@ -214,7 +214,7 @@ public final class JuicerMenu {
         menu.open(p);
     }
 
-    /** 混合材料页：粉框 + 标签 + 可混合材料（翻页）。 */
+    /** 混合材料頁：粉框 + 標籤 + 可混合材料（翻頁）。 */
     public static void openMix(Player p, int index) {
         List<ItemStack> mats = new ArrayList<>();
         if (JuicerRecipe.mix != null) {
@@ -238,16 +238,16 @@ public final class JuicerMenu {
                 + "· 混合材料 " + (idx + 1) + "/" + pages);
         fillPinkDeco(menu);
 
-        // 首排中间：标签
+        // 首排中間：標籤
         ItemStack label = new ItemStack(Material.ENCHANTED_GOLDEN_APPLE);
         ItemMeta lm = label.getItemMeta();
         if (lm != null) {
-            lm.setDisplayName(Colors.c("&e这&b些&2都&a能&6榨&d汁&e哦"));
+            lm.setDisplayName(Colors.c("&e這&b些&2都&a能&6榨&d汁&e哦"));
             label.setItemMeta(lm);
         }
         menu.addItem(SLOT_MIX_LABEL, label, ChestMenuUtils.getEmptyClickHandler());
 
-        // 内部空位：可混合材料（每页 27 个）
+        // 內部空位：可混合材料（每頁 27 個）
         int[] slots = interiorSlots();
         for (int i = 0; i < MIX_PAGE_SIZE; i++) {
             int pageIdx = idx * MIX_PAGE_SIZE + i;
@@ -266,7 +266,7 @@ public final class JuicerMenu {
         menu.open(p);
     }
 
-    /** 内部材料槽位（行 1-4 × 列 1-7）。 */
+    /** 內部材料槽位（行 1-4 × 列 1-7）。 */
     private static int[] interiorSlots() {
         int[] slots = new int[MIX_PAGE_SIZE];
         int i = 0;
@@ -281,14 +281,14 @@ public final class JuicerMenu {
     private static ChestMenu baseMenu(String title) {
         ChestMenu menu = new ChestMenu(title);
         menu.setEmptySlotsClickable(false);
-        menu.setPlayerInventoryClickable(true); // 允许拿取背包内物品
+        menu.setPlayerInventoryClickable(true); // 允許拿取揹包內物品
         for (int i = 0; i < 54; i++) {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
         return menu;
     }
 
-    /** 固定配方页装饰：绿/黄玻璃板环绕红色配方区（对齐需求图）。 */
+    /** 固定配方頁裝飾：綠/黃玻璃板環繞紅色配方區（對齊需求圖）。 */
     private static void fillRecipeDeco(ChestMenu menu) {
         pane(menu, 10, Material.YELLOW_STAINED_GLASS_PANE);
         pane(menu, 11, Material.GREEN_STAINED_GLASS_PANE);
@@ -312,10 +312,10 @@ public final class JuicerMenu {
         pane(menu, 41, Material.GREEN_STAINED_GLASS_PANE);
     }
 
-    /** 混合材料页装饰：粉玻璃板描边。 */
+    /** 混合材料頁裝飾：粉玻璃板描邊。 */
     private static void fillPinkDeco(ChestMenu menu) {
         for (int col = 0; col < 9; col++) {
-            if (col == SLOT_MIX_LABEL) continue; // 顶排中间由标签占据
+            if (col == SLOT_MIX_LABEL) continue; // 頂排中間由標籤佔據
             pane(menu, col, Material.PINK_STAINED_GLASS_PANE);
             pane(menu, 45 + col, Material.PINK_STAINED_GLASS_PANE);
         }
@@ -335,7 +335,7 @@ public final class JuicerMenu {
         menu.addItem(slot, it, ChestMenuUtils.getEmptyClickHandler());
     }
 
-    /** 投入材料：数量体现为堆叠数并写明。 */
+    /** 投入材料：數量體現為堆疊數並寫明。 */
     private static ItemStack describeIngredient(String ref, int count) {
         ItemStack it = JuicerRecipe.refToItem(ref);
         it.setAmount(Math.min(64, Math.max(1, count)));
@@ -343,36 +343,36 @@ public final class JuicerMenu {
         if (meta != null) {
             List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
             lore.add("");
-            lore.add(ChatColor.GRAY + "投入数量: " + ChatColor.YELLOW + count);
+            lore.add(ChatColor.GRAY + "投入數量: " + ChatColor.YELLOW + count);
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 产出：lore 标注榨好后可接取的份数。 */
+    /** 產出：lore 標註榨好後可接取的份數。 */
     private static ItemStack describeOutput(JuicerRecipe r) {
         ItemStack it = r.result.clone();
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
             List<String> lore = meta.getLore() == null ? new ArrayList<>() : new ArrayList<>(meta.getLore());
             lore.add("");
-            lore.add(ChatColor.GRAY + "产出份数: " + ChatColor.YELLOW + r.yield + " 份");
-            lore.add(ChatColor.GRAY + "瓶子每次接取 1 份，桶需满盆一次接完");
+            lore.add(ChatColor.GRAY + "產出份數: " + ChatColor.YELLOW + r.yield + " 份");
+            lore.add(ChatColor.GRAY + "瓶子每次接取 1 份，桶需滿盆一次接完");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 榨汁方式：玩家踩踏（跳跃）或铁砧砸击。 */
+    /** 榨汁方式：玩家踩踏（跳躍）或鐵砧砸擊。 */
     private static ItemStack typeStomp() {
         ItemStack it = new ItemStack(Material.LEATHER_BOOTS);
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
             meta.setDisplayName(ChatColor.GREEN + "榨汁方式: 玩家踩踏");
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "站在盆内跳跃踩踏（每次 +1）");
+            lore.add(ChatColor.GRAY + "站在盆內跳躍踩踏（每次 +1）");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
@@ -383,39 +383,39 @@ public final class JuicerMenu {
         ItemStack it = new ItemStack(Material.ANVIL);
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ChatColor.RED + "榨汁方式: 铁砧砸击");
+            meta.setDisplayName(ChatColor.RED + "榨汁方式: 鐵砧砸擊");
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "铁砧砸在盆顶（每次 +4）");
+            lore.add(ChatColor.GRAY + "鐵砧砸在盆頂（每次 +4）");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 双压榨方式：踩踏与铁砧砸击均可（铁砧图标 + 双行说明）。 */
+    /** 雙壓榨方式：踩踏與鐵砧砸擊均可（鐵砧圖標 + 雙行説明）。 */
     private static ItemStack typeBoth() {
         ItemStack it = new ItemStack(Material.ANVIL);
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ChatColor.GOLD + "榨汁方式: 踩踏 / 铁砧砸击");
+            meta.setDisplayName(ChatColor.GOLD + "榨汁方式: 踩踏 / 鐵砧砸擊");
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "站在盆内跳跃踩踏（每次 +1）");
-            lore.add(ChatColor.GRAY + "或铁砧砸在盆顶（每次 +4）");
+            lore.add(ChatColor.GRAY + "站在盆內跳躍踩踏（每次 +1）");
+            lore.add(ChatColor.GRAY + "或鐵砧砸在盆頂（每次 +4）");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
         return it;
     }
 
-    /** 重锤：数量即所需榨汁次数。 */
+    /** 重錘：數量即所需榨汁次數。 */
     private static ItemStack countItem(int progress) {
         ItemStack it = new ItemStack(COUNT_ICON);
         it.setAmount(Math.min(64, Math.max(1, progress)));
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ChatColor.YELLOW + "所需次数");
+            meta.setDisplayName(ChatColor.YELLOW + "所需次數");
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "踩踏/砸击 " + ChatColor.YELLOW + progress + ChatColor.GRAY + " 次");
+            lore.add(ChatColor.GRAY + "踩踏/砸擊 " + ChatColor.YELLOW + progress + ChatColor.GRAY + " 次");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
@@ -430,7 +430,7 @@ public final class JuicerMenu {
             List<String> lore = new ArrayList<>();
             lore.add(ChatColor.GRAY + "查看哪些材料可以混合榨汁");
             lore.add("");
-            lore.add(ChatColor.DARK_GRAY + "点击打开");
+            lore.add(ChatColor.DARK_GRAY + "點擊打開");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }
@@ -447,7 +447,7 @@ public final class JuicerMenu {
         return it;
     }
 
-    /** 门：返回配方列表（详情页/混合材料页用）。 */
+    /** 門：返回配方列表（詳情頁/混合材料頁用）。 */
     private static ItemStack backToListItem() {
         ItemStack it = new ItemStack(Material.OAK_DOOR);
         ItemMeta meta = it.getItemMeta();
@@ -462,10 +462,10 @@ public final class JuicerMenu {
         ItemStack it = new ItemStack(Material.ARROW);
         ItemMeta meta = it.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName(ChatColor.YELLOW + "翻页");
+            meta.setDisplayName(ChatColor.YELLOW + "翻頁");
             List<String> lore = new ArrayList<>();
-            lore.add(ChatColor.GRAY + "左键：下一页");
-            lore.add(ChatColor.GRAY + "右键：上一页");
+            lore.add(ChatColor.GRAY + "左鍵：下一頁");
+            lore.add(ChatColor.GRAY + "右鍵：上一頁");
             meta.setLore(lore);
             it.setItemMeta(meta);
         }

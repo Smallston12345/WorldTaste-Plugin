@@ -6,21 +6,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * 尘世百味 WorldTaste —— 独立 Slimefun 附属插件主类。
+ * 塵世百味 WorldTaste —— 獨立 Slimefun 附屬插件主類。
  *
- * <p>由原 RSC 脚本版改写而来：内容仍来自同一组 YAML（已打包进 jar），但加载逻辑与原 JS 脚本
- * 行为全部以原生 Java 实现，不再依赖 RSC 及其 GraalVM 脚本引擎。</p>
+ * <p>由原 RSC 腳本版改寫而來：內容仍來自同一組 YAML（已打包進 jar），但加載邏輯與原 JS 腳本
+ * 行為全部以原生 Java 實現，不再依賴 RSC 及其 GraalVM 腳本引擎。</p>
  *
- * <p>依赖策略（与 README 的「必须 / 可选」表一致）：</p>
+ * <p>依賴策略（與 README 的「必須 / 可選」表一致）：</p>
  * <ul>
- *   <li><b>硬依赖</b>：Slimefun、Gastronomicon（美食家）、ExoticGarden（异域花园）。
- *       缺任一个则在控制台输出「缺少 xxx，WorldTaste已自动卸载！」并禁用自身，不参与加载。
- *       注意这些仍写在 plugin.yml 的 {@code softdepend} 而非 {@code depend}——若走 Bukkit 的
- *       depend 机制，插件在 onEnable 前就会被服务器拦截，自定义中文提示将永远不会出现；
- *       放在 softdepend 还能保证「存在时先于本插件加载」，使内容引用能解析到其物品。</li>
- *   <li><b>软依赖</b>：Cultivation（农耕工艺）、InfinityExpansion（无尽贪婪）、LogiTech。
- *       缺失仅输出「缺少 xxx，部分玩法可能无法加载」后继续加载。
- *       JustEnoughGuide（JEG）虽在 softdepend 中，但其缺失已有完整降级（原版指南渲染），
+ *   <li><b>硬依賴</b>：Slimefun、Gastronomicon（美食家）、ExoticGarden（異域花園）。
+ *       缺任一個則在控制枱輸出「缺少 xxx，WorldTaste已自動卸載！」並禁用自身，不參與加載。
+ *       注意這些仍寫在 plugin.yml 的 {@code softdepend} 而非 {@code depend}——若走 Bukkit 的
+ *       depend 機制，插件在 onEnable 前就會被服務器攔截，自定義中文提示將永遠不會出現；
+ *       放在 softdepend 還能保證「存在時先於本插件加載」，使內容引用能解析到其物品。</li>
+ *   <li><b>軟依賴</b>：Cultivation（農耕工藝）、InfinityExpansion（無盡貪婪）、LogiTech。
+ *       缺失僅輸出「缺少 xxx，部分玩法可能無法加載」後繼續加載。
+ *       JustEnoughGuide（JEG）雖在 softdepend 中，但其缺失已有完整降級（原版指南渲染），
  *       故不做提示。</li>
  * </ul>
  */
@@ -28,17 +28,17 @@ public final class WorldTastePlugin extends JavaPlugin implements SlimefunAddon 
 
     private static WorldTastePlugin instance;
 
-    /** 硬依赖：{插件名, 中文名}，缺任一即自动卸载。 */
+    /** 硬依賴：{插件名, 中文名}，缺任一即自動卸載。 */
     private static final String[][] HARD_DEPS = {
             {"Slimefun", "粘液科技"},
             {"Gastronomicon", "美食家"},
-            {"ExoticGarden", "异域花园"},
+            {"ExoticGarden", "異域花園"},
     };
 
-    /** 软依赖：{插件名, 中文名}，缺失仅提示后继续加载。 */
+    /** 軟依賴：{插件名, 中文名}，缺失僅提示後繼續加載。 */
     private static final String[][] SOFT_DEPS = {
-            {"Cultivation", "农耕工艺"},
-            {"InfinityExpansion", "无尽贪婪"},
+            {"Cultivation", "農耕工藝"},
+            {"InfinityExpansion", "無盡貪婪"},
             {"LogiTech", "LogiTech"},
     };
 
@@ -46,46 +46,46 @@ public final class WorldTastePlugin extends JavaPlugin implements SlimefunAddon 
     public void onEnable() {
         instance = this;
         WT.plugin = this;
-        getLogger().info("尘世百味 开始加载（独立版）...");
-        // 依赖检查前置：硬依赖缺失时不加载任何内容，直接卸载
+        getLogger().info("塵世百味 開始加載（獨立版）...");
+        // 依賴檢查前置：硬依賴缺失時不加載任何內容，直接卸載
         if (!checkDependencies()) return;
         try {
             Setup.loadAll();
-            getLogger().info("尘世百味 加载成功");
+            getLogger().info("塵世百味 加載成功");
         } catch (Throwable e) {
-            getLogger().severe("尘世百味 加载过程中出现异常: " + e);
+            getLogger().severe("塵世百味 加載過程中出現異常: " + e);
             e.printStackTrace();
         }
     }
 
     /**
-     * 启动期依赖检查。硬依赖缺失 → 输出「缺少 xxx，WorldTaste已自动卸载！」并禁用自身，
-     * 返回 false 中止加载；软依赖缺失 → 输出「缺少 xxx，部分玩法可能无法加载」后继续。
+     * 啓動期依賴檢查。硬依賴缺失 → 輸出「缺少 xxx，WorldTaste已自動卸載！」並禁用自身，
+     * 返回 false 中止加載；軟依賴缺失 → 輸出「缺少 xxx，部分玩法可能無法加載」後繼續。
      */
     private boolean checkDependencies() {
         for (String[] dep : HARD_DEPS) {
             if (Bukkit.getPluginManager().getPlugin(dep[0]) == null) {
-                getLogger().severe("缺少 " + label(dep) + "，WorldTaste已自动卸载！");
+                getLogger().severe("缺少 " + label(dep) + "，WorldTaste已自動卸載！");
                 Bukkit.getPluginManager().disablePlugin(this);
                 return false;
             }
         }
         for (String[] dep : SOFT_DEPS) {
             if (Bukkit.getPluginManager().getPlugin(dep[0]) == null) {
-                getLogger().warning("缺少 " + label(dep) + "，部分玩法可能无法加载");
+                getLogger().warning("缺少 " + label(dep) + "，部分玩法可能無法加載");
             }
         }
         return true;
     }
 
-    /** 依赖展示名：中文名与插件名相同（如 LogiTech）时只显示一处。 */
+    /** 依賴展示名：中文名與插件名相同（如 LogiTech）時只顯示一處。 */
     private static String label(String[] dep) {
         return dep[1].equalsIgnoreCase(dep[0]) ? dep[0] : dep[0] + "（" + dep[1] + "）";
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("尘世百味 已卸载");
+        getLogger().info("塵世百味 已卸載");
     }
 
     public static WorldTastePlugin getInstance() {

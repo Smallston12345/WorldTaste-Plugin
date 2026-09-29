@@ -29,50 +29,50 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 作物方块（machines.yml 中 script 为 seed/* 的物品）。
+ * 作物方塊（machines.yml 中 script 為 seed/* 的物品）。
  *
- * <p>生长进度完全采用原版机制：种子放置后由 tick 转为作物材质并归零 age，其后由原版随机刻
- * 自然生长（骨粉催熟同样生效）；成熟与否在破坏时按原版 age 是否满档判定，插件不再按时间
- * 推进生长阶段。</p>
+ * <p>生長進度完全採用原版機制：種子放置後由 tick 轉為作物材質並歸零 age，其後由原版隨機刻
+ * 自然生長（骨粉催熟同樣生效）；成熟與否在破壞時按原版 age 是否滿檔判定，插件不再按時間
+ * 推進生長階段。</p>
  *
- * <p>唯一例外是紫颂花（CHORUS_FLOWER）：原版紫颂只会"移动式"生长——每次生长把原位变成梗、
- * 在新格生成 age+1 的花，原版机制无法让紫颂花原地加龄。故对紫颂作物保留按 growMs 的定时
- * 推进（含成熟标记持久化与内存缓存，区块卸载时兜底清理）。原版随机刻的移动式生长与枯萎
- * 由 {@code CropListener} 在事件源头取消（BlockSpreadEvent / BlockGrowEvent），本类每 8 tick
- * 的上方扫描仅作兜底清理历史遗留，不再承担拦截职责（此前「原版生长 → tick 还原」会造成
- * 视觉闪回与每株两轮的方块更新开销）。</p>
+ * <p>唯一例外是紫頌花（CHORUS_FLOWER）：原版紫頌只會"移動式"生長——每次生長把原位變成梗、
+ * 在新格生成 age+1 的花，原版機制無法讓紫頌花原地加齡。故對紫頌作物保留按 growMs 的定時
+ * 推進（含成熟標記持久化與內存緩存，區塊卸載時兜底清理）。原版隨機刻的移動式生長與枯萎
+ * 由 {@code CropListener} 在事件源頭取消（BlockSpreadEvent / BlockGrowEvent），本類每 8 tick
+ * 的上方掃描僅作兜底清理歷史遺留，不再承擔攔截職責（此前「原版生長 → tick 還原」會造成
+ * 視覺閃回與每株兩輪的方塊更新開銷）。</p>
  */
 public class CropBlock extends SlimefunItem {
 
-    /** 紫颂定时生长的阶段比例表（仅 CHORUS_FLOWER 材质使用）。 */
+    /** 紫頌定時生長的階段比例表（僅 CHORUS_FLOWER 材質使用）。 */
     private static final double[] SMALL_STEPS = {1/10d, 1/6d, 1/3d, 0.5, 2/3d, 5/6d, 1d, 7/6d};
-    /** 水平四向（方向性作物附着扫描用）。 */
+    /** 水平四向（方向性作物附着掃描用）。 */
     private static final BlockFace[] HORIZONTAL_FACES = {
             BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST, BlockFace.WEST};
-    /** 紫颂定时生长的持久化键（BlockStorage，随 Slimefun 数据库落盘）：生长起点时间戳 / 成熟标记。 */
+    /** 紫頌定時生長的持久化鍵（BlockStorage，隨 Slimefun 數據庫落盤）：生長起點時間戳 / 成熟標記。 */
     private static final String KEY_START = "wt-crop-start";
     private static final String KEY_GROWN = "wt-crop-grown";
 
     private final CropCfg cfg;
-    /** 预算的生长阈值 growMs*SMALL_STEPS[i]（不变量，double 保精确语义）。构造期一次计算，仅紫颂作物使用。 */
+    /** 預算的生長閾值 growMs*SMALL_STEPS[i]（不變量，double 保精確語義）。構造期一次計算，僅紫頌作物使用。 */
     private final double[] growMsSteps;
-    /** 紫颂定时生长的内存状态（按位置全局共享；仅 CHORUS_FLOWER 材质读写，普通作物零状态，
-     *  age 即全部生长状态）。条目随破坏/重种/方块移除清除，并在区块卸载时兜底清理
-     *  （{@link ChorusStateCleanup}），防止被外部手段移除的作物永久残留。tick 与破坏事件均在
-     *  主线程，无需并发容器。 */
+    /** 紫頌定時生長的內存狀態（按位置全局共享；僅 CHORUS_FLOWER 材質讀寫，普通作物零狀態，
+     *  age 即全部生長狀態）。條目隨破壞/重種/方塊移除清除，並在區塊卸載時兜底清理
+     *  （{@link ChorusStateCleanup}），防止被外部手段移除的作物永久殘留。tick 與破壞事件均在
+     *  主線程，無需併發容器。 */
     private static final Map<Location, Long> lastUse = new HashMap<>();
     private static final Set<Location> grown = new HashSet<>();
-    /** 方块当前阶段缓存：仅阶段变化时才写方块，避免每 tick getState()/setBlockData() 的对象开销（spark 热点优化）。 */
+    /** 方塊當前階段緩存：僅階段變化時才寫方塊，避免每 tick getState()/setBlockData() 的對象開銷（spark 熱點優化）。 */
     private static final Map<Location, Integer> stage = new HashMap<>();
-    /** 原版生长年龄上限压回值：仅当配置 maxAge 低于原版上限时 ≥0（如瓜茎 maxAge=6 < 原版 7）。
-     *  此类作物长到该年龄后由 {@code CropListener} 取消原版生长事件（随机刻/骨粉均走 BlockGrowEvent），
-     *  使其停留在成熟阶段、不再触发原版满龄行为（茎结果实）；
-     *  -1 表示无限制（绝大多数作物 maxAge=原版上限，零额外开销）。 */
+    /** 原版生長年齡上限壓回值：僅當配置 maxAge 低於原版上限時 ≥0（如瓜莖 maxAge=6 < 原版 7）。
+     *  此類作物長到該年齡後由 {@code CropListener} 取消原版生長事件（隨機刻/骨粉均走 BlockGrowEvent），
+     *  使其停留在成熟階段、不再觸發原版滿齡行為（莖結果實）；
+     *  -1 表示無限制（絕大多數作物 maxAge=原版上限，零額外開銷）。 */
     private final int clampMax;
-    /** 配置 maxAge 低于原版上限的作物材质集合（BlockGrowEvent 拦截的材质级预筛）。
-     *  加载期单线程填充、运行期只读，无需并发容器。 */
+    /** 配置 maxAge 低於原版上限的作物材質集合（BlockGrowEvent 攔截的材質級預篩）。
+     *  加載期單線程填充、運行期只讀，無需併發容器。 */
     private static final java.util.Set<Material> CLAMPED_MATERIALS = java.util.EnumSet.noneOf(Material.class);
-    /** 作物方块是否带方向（如 COCOA 需附着在原木侧面），构造期由材质 BlockData 判定。 */
+    /** 作物方塊是否帶方向（如 COCOA 需附着在原木側面），構造期由材質 BlockData 判定。 */
     private final boolean directionalCrop;
 
     public CropBlock(ItemGroup group, SlimefunItemStack item, RecipeType rt, ItemStack[] recipe, CropCfg cfg) {
@@ -88,12 +88,12 @@ public class CropBlock extends SlimefunItem {
             if (data instanceof Ageable a) {
                 if (cfg.maxAge < a.getMaximumAge()) computedClamp = Math.max(0, cfg.maxAge);
             } else {
-                // 原版生长要求材质可加龄（Ageable）：非 Ageable 材质的作物永远无法成熟，加载期给出告警
-                com.haiman233.worldtaste.WT.log("作物 " + getId() + " 的材质 " + cfg.material
-                        + " 不支持原版生长（非 Ageable），该作物将无法成熟");
+                // 原版生長要求材質可加齡（Ageable）：非 Ageable 材質的作物永遠無法成熟，加載期給出告警
+                com.haiman233.worldtaste.WT.log("作物 " + getId() + " 的材質 " + cfg.material
+                        + " 不支持原版生長（非 Ageable），該作物將無法成熟");
             }
         } catch (Throwable ignored) {
-            // 异常材质（如 air）交由运行期 type 守卫兜底
+            // 異常材質（如 air）交由運行期 type 守衞兜底
         }
         this.clampMax = computedClamp;
         this.directionalCrop = directional;
@@ -102,32 +102,32 @@ public class CropBlock extends SlimefunItem {
         }
     }
 
-    /** 是否为紫颂作物（唯一需要定时推进生长的材质）。 */
+    /** 是否為紫頌作物（唯一需要定時推進生長的材質）。 */
     private boolean isChorus() {
         return cfg.material == Material.CHORUS_FLOWER;
     }
 
-    /** 作物方块是否带方向（如 COCOA 需附着在原木侧面）。 */
+    /** 作物方塊是否帶方向（如 COCOA 需附着在原木側面）。 */
     public boolean isDirectionalCrop() {
         return directionalCrop;
     }
 
-    /** 原版生长年龄上限（-1=无限制）；{@code CropListener} 据此在 BlockGrowEvent 里取消越限生长。 */
+    /** 原版生長年齡上限（-1=無限制）；{@code CropListener} 據此在 BlockGrowEvent 裏取消越限生長。 */
     public int getClampMax() {
         return clampMax;
     }
 
-    /** 材质级预筛：该材质是否存在限高作物（BlockGrowEvent 高频路径的第一道廉价过滤）。 */
+    /** 材質級預篩：該材質是否存在限高作物（BlockGrowEvent 高頻路徑的第一道廉價過濾）。 */
     public static boolean isClampedMaterial(Material m) {
         return CLAMPED_MATERIALS.contains(m);
     }
 
-    /** 种植要求：显式 plantOn 优先，否则按材质推断（原版机制）；null 表示不限制。 */
+    /** 種植要求：顯式 plantOn 優先，否則按材質推斷（原版機制）；null 表示不限制。 */
     public List<Material> getPlantOn() {
         return cfg.resolvedPlantOn();
     }
 
-    /** 不由 Slimefun 框架掉落种子本身（仅由 CropListener 在成熟时掉落作物/种子，对齐原脚本）。 */
+    /** 不由 Slimefun 框架掉落種子本身（僅由 CropListener 在成熟時掉落作物/種子，對齊原腳本）。 */
     @Override
     public List<ItemStack> getDrops() {
         return java.util.Collections.emptyList();
@@ -150,13 +150,13 @@ public class CropBlock extends SlimefunItem {
         Material type = b.getType();
         boolean isSeedHead = (type == Material.PLAYER_HEAD || type == Material.PLAYER_WALL_HEAD);
         if (type != cfg.material && !isSeedHead) {
-            // 仍登记为我们的作物（玩家未破坏）时，可能是原版机制替换了方块
-            // （如紫颂随机生长/甘蔗物理变化）：恢复作物材质继续生长，避免误注销；
-            // 否则视为被移除（耕地破坏、爆炸、踩踏等），清理状态并注销，
-            // 避免幽灵 tick 把 AIR 设回作物刷原版种子。
+            // 仍登記為我們的作物（玩家未破壞）時，可能是原版機制替換了方塊
+            // （如紫頌隨機生長/甘蔗物理變化）：恢復作物材質繼續生長，避免誤註銷；
+            // 否則視為被移除（耕地破壞、爆炸、踩踏等），清理狀態並註銷，
+            // 避免幽靈 tick 把 AIR 設回作物刷原版種子。
             if (BlockStorage.hasBlockInfo(b)) {
-                // 恢复材质后按周边支撑修正方向性作物的朝向；若在该位置已无法存活
-                //（支撑被移走等），按非玩家破坏处理并清数据，避免复活 → 破坏死循环
+                // 恢復材質後按周邊支撐修正方向性作物的朝向；若在該位置已無法存活
+                //（支撐被移走等），按非玩家破壞處理並清數據，避免復活 → 破壞死循環
                 b.setType(cfg.material);
                 applyFacing(b, null);
                 if (!b.getBlockData().isSupported(b)) {
@@ -170,9 +170,9 @@ public class CropBlock extends SlimefunItem {
             }
         }
         if (isSeedHead) {
-            // 刚种下/重放：转为作物材质并归零 age，其后交给原版随机刻生长
+            // 剛種下/重放：轉為作物材質並歸零 age，其後交給原版隨機刻生長
             if (isChorus()) {
-                // 重置紫颂定时状态（防同位置重放秒熟）
+                // 重置紫頌定時狀態（防同位置重放秒熟）
                 Location l = b.getLocation();
                 grown.remove(l);
                 lastUse.remove(l);
@@ -187,20 +187,20 @@ public class CropBlock extends SlimefunItem {
             tickChorus(b);
             return;
         }
-        // 普通作物：生长完全交给原版随机刻（含骨粉催熟），无 tick 逻辑。
-        // maxAge 低于原版上限的限高作物（如瓜茎）由 CropListener 的 BlockGrowEvent 拦截在
-        // 成熟年龄上，无需 tick 轮询回退生长进度。
+        // 普通作物：生長完全交給原版隨機刻（含骨粉催熟），無 tick 邏輯。
+        // maxAge 低於原版上限的限高作物（如瓜莖）由 CropListener 的 BlockGrowEvent 攔截在
+        // 成熟年齡上，無需 tick 輪詢回退生長進度。
     }
 
-    /** 紫颂作物定时生长（原版无法让紫颂花原地加龄，见类注释）。 */
+    /** 紫頌作物定時生長（原版無法讓紫頌花原地加齡，見類註釋）。 */
     private void tickChorus(Block b) {
-        // 原版生长已在 CropListener 事件源头取消（Spread/Grow），tick 无需任何兜底扫描。
+        // 原版生長已在 CropListener 事件源頭取消（Spread/Grow），tick 無需任何兜底掃描。
         Location l = b.getLocation();
         if (grown.contains(l)) return;
         long now = System.currentTimeMillis();
         Long last = lastUse.get(l);
         if (last == null) {
-            // 内存状态缺失（重启/新放置）：从持久化恢复；成熟标记优先，避免重新计时
+            // 內存狀態缺失（重啓/新放置）：從持久化恢復；成熟標記優先，避免重新計時
             if (BlockStorage.getLocationInfo(l, KEY_GROWN) != null) {
                 grown.add(l);
                 return;
@@ -231,8 +231,8 @@ public class CropBlock extends SlimefunItem {
             if (target == cfg.maxAge) {
                 grown.add(l);
                 BlockStorage.addBlockInfo(b, KEY_GROWN, "1");
-                // 成熟外观 = 原版枯萎紫颂花（CHORUS_FLOWER age=5 贴图即枯萎态）：
-                // 强制写一次（stage 缓存可能在重放/恢复时与方块实际 age 脱节）
+                // 成熟外觀 = 原版枯萎紫頌花（CHORUS_FLOWER age=5 貼圖即枯萎態）：
+                // 強制寫一次（stage 緩存可能在重放/恢復時與方塊實際 age 脱節）
                 setStage(b, cfg.maxAge);
             }
         }
@@ -240,14 +240,14 @@ public class CropBlock extends SlimefunItem {
 
     private void setStage(Block b, int age) {
         if (b.getType() != cfg.material) {
-            // 种子头 → 作物方块转换：先记录种子头放置时的附着方向，转换后按其设置朝向
-            // （如 COCOA 的 facing 须指向附着的原木），否则作物会因附着失效被原版反复破坏
+            // 種子頭 → 作物方塊轉換：先記錄種子頭放置時的附着方向，轉換後按其設置朝向
+            // （如 COCOA 的 facing 須指向附着的原木），否則作物會因附着失效被原版反覆破壞
             BlockFace support = seedSupportFace(b);
             b.setType(cfg.material);
             applyFacing(b, support);
             if (!b.getBlockData().isSupported(b)) {
-                // 转换后在该位置无法存活（方向性作物四周无附着支撑、地面作物悬空等）：
-                // 清数据并退还种子，避免「转换 → 原版破坏 → tick 复活」的无限循环
+                // 轉換後在該位置無法存活（方向性作物四周無附着支撐、地面作物懸空等）：
+                // 清數據並退還種子，避免「轉換 → 原版破壞 → tick 復活」的無限循環
                 discardUnsupportable(b);
                 return;
             }
@@ -263,7 +263,7 @@ public class CropBlock extends SlimefunItem {
         }
     }
 
-    /** 种子头（玩家头）的附着方向：墙式头朝外放置，附着面在其朝向的反方向；地面式头无附着信息，返回 null。 */
+    /** 種子頭（玩家頭）的附着方向：牆式頭朝外放置，附着面在其朝向的反方向；地面式頭無附着信息，返回 null。 */
     private static BlockFace seedSupportFace(Block b) {
         if (b.getBlockData() instanceof Directional dir) {
             return dir.getFacing().getOppositeFace();
@@ -272,9 +272,9 @@ public class CropBlock extends SlimefunItem {
     }
 
     /**
-     * 方向性作物（如 COCOA，facing 须指向附着的原木）转换/恢复后设置朝向：
-     * 优先用种子头记录的附着方向，缺信息或指向非支撑方块时按 plantOn 水平扫描兜底。
-     * 非方向性作物或无附着限制的作物直接跳过。
+     * 方向性作物（如 COCOA，facing 須指向附着的原木）轉換/恢復後設置朝向：
+     * 優先用種子頭記錄的附着方向，缺信息或指向非支撐方塊時按 plantOn 水平掃描兜底。
+     * 非方向性作物或無附着限制的作物直接跳過。
      */
     private void applyFacing(Block b, BlockFace support) {
         if (!directionalCrop || !(b.getBlockData() instanceof Directional dir)) return;
@@ -295,13 +295,13 @@ public class CropBlock extends SlimefunItem {
         }
     }
 
-    /** 作物在当前位置无法存活（悬空/无附着支撑）：清数据并退还 1 个种子，避免「复活 → 原版破坏」死循环。 */
+    /** 作物在當前位置無法存活（懸空/無附着支撐）：清數據並退還 1 個種子，避免「復活 → 原版破壞」死循環。 */
     private void discardUnsupportable(Block b) {
         purge(b.getLocation());
         BlockStorage.clearBlockInfo(b);
         dropSeed(b, 1, 1.0, java.util.concurrent.ThreadLocalRandom.current());
-        // 与 CropListener.breakCrop 一致：先上格后主格、关闭物理移除，
-        // 防止另一半被原版邻块更新按原版战利品破坏（泄漏瓶子草等原版物品）
+        // 與 CropListener.breakCrop 一致：先上格後主格、關閉物理移除，
+        // 防止另一半被原版鄰塊更新按原版戰利品破壞（泄漏瓶子草等原版物品）
         Block up = b.getRelative(BlockFace.UP);
         if (up.getType() == b.getType()) {
             up.setType(Material.AIR, false);
@@ -309,7 +309,7 @@ public class CropBlock extends SlimefunItem {
         b.setType(Material.AIR, false);
     }
 
-    /** 作物是否成熟：原版 age 达到 min(配置 maxAge, 原版上限)。生长与骨粉催熟均由原版写 age，破坏时以此判定。 */
+    /** 作物是否成熟：原版 age 達到 min(配置 maxAge, 原版上限)。生長與骨粉催熟均由原版寫 age，破壞時以此判定。 */
     private boolean isNaturallyMature(Block b) {
         if (b.getType() != cfg.material) return false;
         BlockState st = b.getState();
@@ -319,7 +319,7 @@ public class CropBlock extends SlimefunItem {
         return false;
     }
 
-    /** 阶段缓存写入：目标年龄与缓存一致时跳过方块写操作（spark 热点优化，行为不变）。 */
+    /** 階段緩存寫入：目標年齡與緩存一致時跳過方塊寫操作（spark 熱點優化，行為不變）。 */
     private void setStageIfChanged(Location l, Block b, int age) {
         Integer cur = stage.get(l);
         if (cur != null && cur.intValue() == age) return;
@@ -327,29 +327,29 @@ public class CropBlock extends SlimefunItem {
         stage.put(l, age);
     }
 
-    /** 破坏时调用：成熟（原版 age 满档，或紫颂定时成熟标记）则掉落作物/种子，否则掉 1 个种子。返回是否处理过。 */
+    /** 破壞時調用：成熟（原版 age 滿檔，或紫頌定時成熟標記）則掉落作物/種子，否則掉 1 個種子。返回是否處理過。 */
     public boolean onBreak(Block b) {
         Location l = b.getLocation();
         boolean wasGrown = isNaturallyMature(b);
         if (isChorus()) {
-            // 成熟标记兜底：紫颂基座可能被原版"移动式生长"重置过 age，以标记为准
+            // 成熟標記兜底：紫頌基座可能被原版"移動式生長"重置過 age，以標記為準
             wasGrown = grown.remove(l) || wasGrown;
             lastUse.remove(l);
             stage.remove(l);
         }
-        // 与项目其余随机逻辑一致使用 ThreadLocalRandom（免分配；破坏事件在主线程）
+        // 與項目其餘隨機邏輯一致使用 ThreadLocalRandom（免分配；破壞事件在主線程）
         java.util.Random rnd = java.util.concurrent.ThreadLocalRandom.current();
         if (!wasGrown) {
-            // 未成熟破坏：必掉 1 个对应种子（cropId 缺失时从掉落表回退找含 SEED 的项）
+            // 未成熟破壞：必掉 1 個對應種子（cropId 缺失時從掉落表回退找含 SEED 的項）
             dropSeed(b, 1, 1.0, rnd);
             return false;
         }
         List<CropDrop> drops = cfg.drops;
         if (cfg.weighted && !drops.isEmpty()) {
-            // 对齐 FishingListener.select 的健壮加权选择：
-            //   · total<=0（权重全非正的脏数据）时不产出，避免 rnd.nextDouble()*total 为负后逻辑错乱；
-            //   · 兜底选末项，保证 total>0 时浮点边界/末项权重为 0 仍至少产出一个掉落（原实现循环走完会什么都不掉）。
-            // R8：total 改用 CropCfg.weightTotal（load 期预算），消除每次收获对 drops 的求和（O(n)→O(1)，对齐 R4）。
+            // 對齊 FishingListener.select 的健壯加權選擇：
+            //   · total<=0（權重全非正的髒數據）時不產出，避免 rnd.nextDouble()*total 為負後邏輯錯亂；
+            //   · 兜底選末項，保證 total>0 時浮點邊界/末項權重為 0 仍至少產出一個掉落（原實現循環走完會什麼都不掉）。
+            // R8：total 改用 CropCfg.weightTotal（load 期預算），消除每次收穫對 drops 的求和（O(n)→O(1)，對齊 R4）。
             double total = cfg.weightTotal;
             if (total <= 0) return true;
             double r = rnd.nextDouble() * total;
@@ -364,7 +364,7 @@ public class CropBlock extends SlimefunItem {
                 if (rnd.nextDouble() < d.chance) dropItem(b, d.id);
             }
         }
-        // 成熟破坏：原有掉落不变，额外按 seedDropChance 概率掉 1..seedDropMax 个种子
+        // 成熟破壞：原有掉落不變，額外按 seedDropChance 概率掉 1..seedDropMax 個種子
         dropSeed(b, 1 + rnd.nextInt(Math.max(1, cfg.seedDropMax)), cfg.seedDropChance, rnd);
         return true;
     }
@@ -376,7 +376,7 @@ public class CropBlock extends SlimefunItem {
         else {
             Material m = Material.matchMaterial(id);
             if (m == null) {
-                com.haiman233.worldtaste.WT.log("作物 " + getId() + " 的掉落物无法解析: " + id);
+                com.haiman233.worldtaste.WT.log("作物 " + getId() + " 的掉落物無法解析: " + id);
                 return;
             }
             stack = new ItemStack(m);
@@ -384,7 +384,7 @@ public class CropBlock extends SlimefunItem {
         b.getWorld().dropItemNaturally(b.getLocation(), stack.clone());
     }
 
-    /** 掉落作物种子：cropId 优先，缺失时从掉落表回退找含 SEED 的项；chance&lt;1 时按概率判定。 */
+    /** 掉落作物種子：cropId 優先，缺失時從掉落表回退找含 SEED 的項；chance&lt;1 時按概率判定。 */
     private void dropSeed(Block b, int count, double chance, java.util.Random rnd) {
         if (chance < 1.0 && rnd.nextDouble() >= chance) return;
         String seedId = cfg.cropId;
@@ -405,7 +405,7 @@ public class CropBlock extends SlimefunItem {
         b.getWorld().dropItemNaturally(b.getLocation(), stack);
     }
 
-    /** 清理一个位置的全部紫颂定时状态。 */
+    /** 清理一個位置的全部紫頌定時狀態。 */
     private static void purge(Location l) {
         lastUse.remove(l);
         grown.remove(l);
@@ -417,13 +417,13 @@ public class CropBlock extends SlimefunItem {
     }
 
     /**
-     * 区块卸载兜底清理：在区块未加载期间被外部手段（WorldEdit、/fill、跨区块爆炸等）移除的
-     * 紫颂作物不会再被 tick（也就不会走清理路径），其内存条目会在区块卸载时在此清除，
-     * 避免按位置累积泄漏。普通作物零状态，无需清理。
+     * 區塊卸載兜底清理：在區塊未加載期間被外部手段（WorldEdit、/fill、跨區塊爆炸等）移除的
+     * 紫頌作物不會再被 tick（也就不會走清理路徑），其內存條目會在區塊卸載時在此清除，
+     * 避免按位置累積泄漏。普通作物零狀態，無需清理。
      */
     public static final class ChorusStateCleanup implements Listener {
 
-        /** 单例（状态为 CropBlock 的静态表，经静态方法清理）。 */
+        /** 單例（狀態為 CropBlock 的靜態表，經靜態方法清理）。 */
         public static final ChorusStateCleanup INSTANCE = new ChorusStateCleanup();
 
         private ChorusStateCleanup() {}

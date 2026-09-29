@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.inventory.ItemStack;
 
-/** 菜单定义（来自 menus.yml）：标题/尺寸/装饰槽位/进度槽。纯数据，由机器在 constructMenu 中使用。 */
+/** 菜單定義（來自 menus.yml）：標題/尺寸/裝飾槽位/進度槽。純數據，由機器在 constructMenu 中使用。 */
 public final class MenuDef {
 
     public final String id;

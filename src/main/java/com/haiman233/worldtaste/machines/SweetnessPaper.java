@@ -14,33 +14,33 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 /**
- * 甜度试纸（items.yml 定义物品本体与配方，本类只挂载检测行为）：
- * 主手拿果汁/饮品（带糖分 PDC），副手持试纸，右键空气/方块后副手消耗一张试纸，
- * 在聊天栏输出当前手持饮品的糖分值。
+ * 甜度試紙（items.yml 定義物品本體與配方，本類只掛載檢測行為）：
+ * 主手拿果汁/飲品（帶糖分 PDC），副手持試紙，右鍵空氣/方塊後副手消耗一張試紙，
+ * 在聊天欄輸出當前手持飲品的糖分值。
  *
- * <p>判定依据为 {@link JuicerRecipe#KEY_ITEM_SUGAR}——榨汁盆瓶装/桶装产物与酒窖
- * 成品均写入该 PDC；无糖分数据的物品不触发检测（不消耗试纸）。右键时取消事件，
- * 避免药水果汁被原版饮用流程吞掉。物品识别按 Slimefun id
- * （{@link #ID}，items.yml 注册），不依赖物品类。</p>
+ * <p>判定依據為 {@link JuicerRecipe#KEY_ITEM_SUGAR}——榨汁盆瓶裝/桶裝產物與酒窖
+ * 成品均寫入該 PDC；無糖分數據的物品不觸發檢測（不消耗試紙）。右鍵時取消事件，
+ * 避免藥水果汁被原版飲用流程吞掉。物品識別按 Slimefun id
+ * （{@link #ID}，items.yml 註冊），不依賴物品類。</p>
  */
 public final class SweetnessPaper {
 
-    /** 物品 id（items.yml 中的键，检测行为绑定与此）。 */
+    /** 物品 id（items.yml 中的鍵，檢測行為綁定與此）。 */
     public static final String ID = "WT_SWEET_PAPER";
 
     private SweetnessPaper() {}
 
-    /** 挂载检测监听（Setup 调用；物品本体由 items.yml 注册，配方在 items.yml 中配置）。 */
+    /** 掛載檢測監聽（Setup 調用；物品本體由 items.yml 註冊，配方在 items.yml 中配置）。 */
     public static void register() {
         SlimefunItem item = SlimefunItem.getById(ID);
         if (item == null) {
-            WT.log("甜度试纸 " + ID + " 未在 items.yml 中注册，检测功能未启用");
+            WT.log("甜度試紙 " + ID + " 未在 items.yml 中註冊，檢測功能未啓用");
             return;
         }
         Bukkit.getPluginManager().registerEvents(new DetectListener(), WT.plugin);
     }
 
-    /** 读取饮品的糖分 PDC（未写入糖分数据的物品返回 null = 不触发检测）。 */
+    /** 讀取飲品的糖分 PDC（未寫入糖分數據的物品返回 null = 不觸發檢測）。 */
     private static Integer readSugar(ItemStack it) {
         if (it == null || !it.hasItemMeta()) return null;
         return it.getItemMeta().getPersistentDataContainer()
@@ -61,15 +61,15 @@ public final class SweetnessPaper {
             ItemStack off = p.getInventory().getItemInOffHand();
             SlimefunItem paper = SlimefunItem.getByItem(off);
             if (paper == null || !ID.equals(paper.getId())) return;
-            // 取消原版交互（果汁多为药水材质，防止右键时被喝掉）
+            // 取消原版交互（果汁多為藥水材質，防止右鍵時被喝掉）
             e.setCancelled(true);
             if (off.getAmount() > 1) off.setAmount(off.getAmount() - 1);
             else p.getInventory().setItemInOffHand(null);
             p.getWorld().playSound(p.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_CHIME, 1f, 1.4f);
             if (sugar <= 0) {
-                p.sendMessage("§e甜度检测：§7当前饮品几乎不含糖分。");
+                p.sendMessage("§e甜度檢測：§7當前飲品幾乎不含糖分。");
             } else {
-                p.sendMessage("§e甜度检测：§f当前饮品的糖分为 §b" + sugar + "§e 点。");
+                p.sendMessage("§e甜度檢測：§f當前飲品的糖分為 §b" + sugar + "§e 點。");
             }
         }
     }

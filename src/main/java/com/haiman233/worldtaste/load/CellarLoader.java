@@ -11,18 +11,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * 加载 cellar.yml 酒窖配方（须在 items/foods 物品注册后调用）。
+ * 加載 cellar.yml 酒窖配方（須在 items/foods 物品註冊後調用）。
  *
  * <pre>
  * options:
- *   cellar-name: true   # 酒窖命名功能开关
+ *   cellar-name: true   # 酒窖命名功能開關
  * KEY:
  *   ingredient:
- *     - APPLE:2          # 材料id:数量（id 为材质名或粘液物品 id；数量 = 该原料的总份数，
- *                        # 即榨汁盆配方的材料写法，如 1 单位甜浆果汁 = 3 份甜浆果）
+ *     - APPLE:2          # 材料id:數量（id 為材質名或粘液物品 id；數量 = 該原料的總份數，
+ *                        # 即榨汁盆配方的材料寫法，如 1 單位甜漿果汁 = 3 份甜漿果）
  *     - SWEET_BERRIES:1
- *   aging: true          # 是否允许陈酿（true=产物含酒精可陈化；false=副产物无酒精度）
- *   result:              # 每单位产物（item 段同构）
+ *   aging: true          # 是否允許陳釀（true=產物含酒精可陳化；false=副產物無酒精度）
+ *   result:              # 每單位產物（item 段同構）
  *     material: POTION
  *     name: '&6&l水果酒'
  *     amount: 1
@@ -32,10 +32,10 @@ public final class CellarLoader {
 
     private CellarLoader() {}
 
-    /** 酒窖命名功能开关（cellar.yml 的 options.cellar-name，缺省开启）。 */
+    /** 酒窖命名功能開關（cellar.yml 的 options.cellar-name，缺省開啓）。 */
     public static boolean cellarNameEnabled = true;
 
-    /** 测试模式开关（cellar.yml 的 options.test-mode，缺省开启）：酿造立即完成。 */
+    /** 測試模式開關（cellar.yml 的 options.test-mode，缺省開啓）：釀造立即完成。 */
     public static boolean testMode = true;
 
     public static void load() {
@@ -51,11 +51,11 @@ public final class CellarLoader {
                 if (register(key, s)) ok++;
                 else skip++;
             } catch (Exception e) {
-                WT.log("cellar.yml " + key + " 解析失败，跳过: " + e);
+                WT.log("cellar.yml " + key + " 解析失敗，跳過: " + e);
                 skip++;
             }
         }
-        WT.plugin.getLogger().info("cellar.yml: 注册 " + ok + ", 跳过 " + skip);
+        WT.plugin.getLogger().info("cellar.yml: 註冊 " + ok + ", 跳過 " + skip);
     }
 
     private static boolean register(String key, ConfigurationSection s) {
@@ -70,7 +70,7 @@ public final class CellarLoader {
                     count = Integer.parseInt(v.substring(idx + 1).trim());
                     v = v.substring(0, idx).trim();
                 } catch (NumberFormatException ignored) {
-                    // 冒号后非数字：整段视为 id
+                    // 冒號後非數字：整段視為 id
                 }
             }
             if (count < 1) count = 1;
@@ -84,13 +84,13 @@ public final class CellarLoader {
             refs.merge(ref, count, Integer::sum);
         }
         if (refs.isEmpty()) {
-            WT.log("cellar.yml " + key + ": 缺少有效 ingredient，跳过");
+            WT.log("cellar.yml " + key + ": 缺少有效 ingredient，跳過");
             return false;
         }
         boolean aging = s.getBoolean("aging", true);
         ItemStack result = Read.item(s.getConfigurationSection("result"), true);
         if (result == null) {
-            WT.log("cellar.yml " + key + ": result 无效，跳过");
+            WT.log("cellar.yml " + key + ": result 無效，跳過");
             return false;
         }
         CellarRecipe.register(new CellarRecipe(key, refs, aging, result));
